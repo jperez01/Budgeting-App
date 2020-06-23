@@ -1,0 +1,31 @@
+.account {
+    min-width: 265px;
+    padding: 10px;
+    background-image: url('https://image.ibb.co/bVnMrc/g3095.png'),
+    linear-gradient(to right bottom, blue,  lightblue);
+    border-radius: 10px;
+    box-shadow: 10px 10px 25px -22px rgba(0,0,0,0.75);
+}
+.account-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.balance {
+    font-family: 'Sofia Pro Light';
+    font-size: 30px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+.info-group {
+    margin-right: 50px;
+}
+.info-title {
+    margin: 10px 0px;
+    font-family: 'Sofia Pro Light';
+}
+
+.info-content {
+    margin: 5px 0px;
+    font-family: 'Sofia Pro Regular';
+}

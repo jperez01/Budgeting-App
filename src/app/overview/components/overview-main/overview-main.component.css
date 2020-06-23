@@ -1,0 +1,8 @@
+.overview-grid {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-template-rows: 30% 30% 30%;
+    column-gap: 30px;
+    row-gap: 30px;
+    margin-left: 20px;
+}

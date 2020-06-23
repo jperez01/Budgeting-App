@@ -11,3 +11,67 @@
     font-family: 'Sofia Pro Light';
     src: url('assets/fonts/SofiaProLight.otf');
 }
+
+.item-image {
+    height: 50px;
+    width: 50px;
+    margin-right: 20px;
+}
+
+.item-name {
+    font-family: 'Sofia Pro Light';
+    font-size: 16px;
+}
+.item-cost {
+    margin: auto;
+    margin-right: 10px;
+    font-size: 16px;
+    font-family: 'Sofia Pro Regular';
+}
+
+.list-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.list-all {
+    margin: auto;
+    margin-right: 20px;
+    font-family: 'Sofia Pro Light';
+}
+
+.list-name {
+    font-family: 'Sofia Pro Light';
+    font-size: 24px;
+    margin: 20px;
+    margin-bottom: 10px;
+}
+
+.graph-title {
+    font-family: 'Sofia Pro Light';
+    font-size: 20px;
+    margin-top: 0px;
+}
+
+.page-title {
+    font-family: 'Sofia Pro Light';
+    font-size: 32px;
+    margin: 10px 0px;
+}
+
+.gray-background {
+    background-color: #f4f7fc;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 260px;
+    height: 100%;
+    width: fill;
+}
+
+.white-box {
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: 10px 10px 15px -22px rgba(0,0,0,0.75);
+}

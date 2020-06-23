@@ -1,5 +1,21 @@
-<nav>
-    <a routerLink="/overview" routerLinkActive=""> Dashboard </a>
-    <a routerLink="/transactions" routerLinkActive=""> Transactions </a>
-    <a routerLink="/settings" routerLinkActive=""> Settings </a>
+<nav [ngClass]="'links'">
+    <div [ngClass]="'links-group'">
+        <a [ngClass]="'dashboard-link'" routerLink="/overview" routerLinkActive=""> 
+            <i [ngClass]="'pic'" class="fas fa-home"></i>
+            <a [ngClass]="'link'"> Dashboard </a>
+        </a>
+        <a [ngClass]="'dashboard-link'" routerLink="/transactions" routerLinkActive=""> 
+            <i [ngClass]="'pic'" class="fas fa-money-check-alt"></i>
+            <a [ngClass]="'link'"> Transactions </a>
+        </a>
+        <a [ngClass]="'dashboard-link'" routerLink="/settings" routerLinkActive=""> 
+            <i [ngClass]="'pic'" class="fas fa-cogs"></i>
+            <a [ngClass]="'link'">Settings </a>
+        </a>
+    </div>
+
+    <div [ngClass]="'links-group'">
+        <h4 [ngClass]="'title'"> Accounts </h4>
+        <app-header-account *ngFor="let account of accounts" [account]="account"></app-header-account>
+    </div>
 </nav>

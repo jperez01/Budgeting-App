@@ -1,0 +1,14 @@
+<div [ngClass]="'gray-background'">
+    <h4 [ngClass]="'page-title'"> Overview </h4>
+    <div [ngClass]="'overview-grid'">
+        <app-ov-accounts [ngClass]="'white-box'"></app-ov-accounts>
+        <app-ov-budget [ngClass]="'white-box'"></app-ov-budget>
+        <app-calendar [ngClass]="'white-box'"></app-calendar>
+        <app-transaction-list [ngClass]="'white-box'"></app-transaction-list>
+        <div>
+            <app-ov-revenue [ngClass]="'white-box'"></app-ov-revenue>
+            <app-ov-expenses [ngClass]="'white-box'"></app-ov-expenses>
+        </div>
+        <app-ov-categories [ngClass]="'white-box'"></app-ov-categories>
+    </div>
+</div>

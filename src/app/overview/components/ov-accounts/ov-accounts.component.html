@@ -1,0 +1,9 @@
+<div [ngClass]="'list-header'">
+    <h4 [ngClass]="'list-name'"> Accounts </h4>
+    <h4 [ngClass]="'list-all'"> See All </h4>
+</div>
+<div [ngClass]="'accounts-dashboard'">
+    <img (click)="MoveAccountsBackward()" src="https://i.ibb.co/chp2p6F/Chevron-left.png" alt="Chevron-left" [ngClass]="'cursor-icon'"/>
+    <app-ov-account [account]="currentAccount"></app-ov-account>
+    <img (click)="MoveAccountsForward()" src="https://i.ibb.co/DRtWZHY/Chevron-Right.png" alt="Chevron-Right" [ngClass]="'cursor-icon'"/>
+</div>

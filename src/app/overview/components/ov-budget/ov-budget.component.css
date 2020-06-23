@@ -1,0 +1,36 @@
+.budget-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.budget-elem {
+    font-family: 'Sofia Pro Regular';
+    font-size: 18px;
+    margin: 5px 0px;
+}
+
+.budget-amount {
+    text-align: center;
+    font-family: 'Sofia Pro Light';
+    font-size: 30px;
+    margin-bottom: 5px;
+    margin-top: 0px;
+}
+
+.budget-title {
+    font-family: 'Sofia Pro Light';
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.budget-label {
+    margin: 0px;
+    font-family: 'Sofia Pro Light';
+    font-size: 14px;
+    color: #a5a9b3;
+    text-align: center;
+}
+
+.budget-cluster {
+    margin: auto;
+}

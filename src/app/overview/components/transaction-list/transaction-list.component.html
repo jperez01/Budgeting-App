@@ -1,0 +1,8 @@
+<div [ngClass]="'trans-list'">
+    <div [ngClass]="'list-header'">
+        <h4 [ngClass]="'list-name'"> Transaction History </h4>
+        <h4 [ngClass]="'list-all'"> See All </h4>
+    </div>
+    <app-transaction-item *ngFor="let transaction of transactions" [transaction]="transaction">
+    </app-transaction-item>
+</div>

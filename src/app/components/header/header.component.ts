@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  accounts;
   constructor() { }
 
   ngOnInit(): void {
+    this.accounts = [
+      {
+        name: 'American Express',
+        balance: 1000
+      },
+      {
+        name: 'John Savings',
+        balance: -1000
+      }
+    ]
   }
 
 }

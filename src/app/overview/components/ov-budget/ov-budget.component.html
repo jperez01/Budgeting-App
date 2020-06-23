@@ -1,0 +1,15 @@
+<h4 [ngClass]="'list-name'"> Budget </h4>
+<div>
+    <h4 [ngClass]="'budget-amount'"> {{budget}} </h4>
+    <p [ngClass]="'budget-label'"> Spent </p>
+</div>
+<div [ngClass]="'budget-info'">
+    <div [ngClass]="'budget-cluster'">
+        <p [ngClass]="'budget-elem'"> {{limit}} </p>
+        <p [ngClass]="'budget-label'"> Monthly Limit </p>
+    </div>
+    <div [ngClass]="'budget-cluster'">
+        <p [ngClass]="'budget-elem'"> {{remaining}} </p>
+        <p [ngClass]="'budget-label'"> Remaining </p>
+    </div>
+</div>

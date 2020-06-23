@@ -1,0 +1,16 @@
+<div [ngClass]="'account'">
+    <div>
+        <h4 [ngClass]="'info-content'"> Balance </h4>
+        <h4 [ngClass]="'balance'"> {{balance}} </h4>
+    </div>
+    <div [ngClass]="'account-info'">
+        <div [ngClass]="'info-group'">
+            <h4 [ngClass]="'info-title'"> Name </h4>
+            <h4 [ngClass]="'info-content'"> {{account.name}} </h4>
+        </div>
+        <div>
+            <h4 [ngClass]="'info-title'"> Type </h4>
+            <h4 [ngClass]="'info-content'"> {{account.type}} </h4>
+        </div>
+    </div>
+</div>
