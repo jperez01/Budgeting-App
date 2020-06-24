@@ -12,15 +12,9 @@
 .budget-amount {
     text-align: center;
     font-family: 'Sofia Pro Light';
-    font-size: 30px;
+    font-size: 22px;
     margin-bottom: 5px;
     margin-top: 0px;
-}
-
-.budget-title {
-    font-family: 'Sofia Pro Light';
-    font-size: 24px;
-    margin-bottom: 15px;
 }
 
 .budget-label {
@@ -33,4 +27,21 @@
 
 .budget-cluster {
     margin: auto;
+}
+
+.chart {
+    height: 170px;
+    width: 340px;
+    margin: auto;
+}
+
+.chart-info {
+    position: absolute;
+    top: 35%;
+    width: 100%;
+}
+
+.relative {
+    position: relative;
+    height: 180px;
 }

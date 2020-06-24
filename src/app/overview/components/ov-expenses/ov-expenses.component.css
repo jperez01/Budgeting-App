@@ -1,4 +1,8 @@
 .rev-chart {
-    width: 90%;
-    margin: auto;
+    width: 100%;
+}
+
+.ov-graph {
+    height: 50%;
+    margin: 10px 20px;
 }

@@ -1,9 +1,9 @@
 .rev-chart {
-    width: 90%;
-    margin: auto;
+    width: 100%;
+    margin: 0px 10px;
 }
 
 .ov-graph {
-    height: 100%;
-    margin-bottom: 10px;
+    height: 50%;
+    margin: 10px 20px;
 }

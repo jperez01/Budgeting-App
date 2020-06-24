@@ -28,6 +28,22 @@ export class TransactionListComponent implements OnInit {
         amount: 10,
         taken: false,
         date: 'February 15, 2019'
+      },
+      {
+        id: 2,
+        name: "McDonalds",
+        picurl: "",
+        amount: 10,
+        taken: false,
+        date: 'February 15, 2019'
+      },
+      {
+        id: 2,
+        name: "McDonalds",
+        picurl: "",
+        amount: 10,
+        taken: false,
+        date: 'February 15, 2019'
       }
     ]
   }
