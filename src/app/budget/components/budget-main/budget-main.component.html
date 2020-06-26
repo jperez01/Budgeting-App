@@ -1,0 +1,10 @@
+<div [ngClass]="'gray-background'">
+    <div>
+        <p> {{current_month}}</p>
+        <p> {{current_year}}</p>
+    </div>
+    <div [ngClass]="'budget-info'">
+        <app-group-list [ngClass]="'list'"></app-group-list>
+        <app-budget-info></app-budget-info>
+    </div>
+</div>

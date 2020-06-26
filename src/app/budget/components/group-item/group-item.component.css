@@ -1,0 +1,19 @@
+.group-item {
+    display: flex;
+    border-bottom: 1px solid #b6bec2;
+}
+
+.group-name {
+    width: 35%;
+    font-family: 'Sofia Pro Light';
+    font-size: 18px;
+    margin: 12px 0px;
+}
+
+.group-amount {
+    width: 20%;
+    font-family: 'Sofia Pro Light';
+    font-size: 18px;
+    text-align: end;
+    margin: 12px 0px;
+}

@@ -1,0 +1,8 @@
+.budget-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.list {
+    width: 60%;
+}

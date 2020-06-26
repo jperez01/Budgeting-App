@@ -20,21 +20,12 @@ export class OvExpensesComponent implements OnInit {
               label: 'Revenue',
               data: [12, 19, 3, 5, 2, 3, 20],
               backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
+                  'rgba(255, 99, 132, 0.2)'
               ],
               borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
+                  'rgba(255, 99, 132, 1)'
               ],
+              pointBorderColor: 'rgba(255, 99, 132, 1)',
               borderWidth: 2
           }]
       },
@@ -51,6 +42,9 @@ export class OvExpensesComponent implements OnInit {
               xAxes: [{
                 ticks: {
                   fontFamily: "'Sofia Pro Light"
+                },
+                gridLines: {
+                  display: false
                 }
               }]
           },
@@ -58,7 +52,21 @@ export class OvExpensesComponent implements OnInit {
             display: false
           },
           tooltips: {
-            enabled: false
+            bodyFontFamily: 'Sofia Pro Regular',
+            bodyFontSize: 16,
+            backgroundColor: 'rgba(235, 30, 74, 0.5)',
+            callbacks: {
+              title: function() {
+                return '';
+              },
+              label: function(tooltipItem, data) {
+                return '$' + data['datasets'][0]['data'][tooltipItem['index']];
+              }
+            },
+            displayColors: false
+          },
+          layout: {
+            padding: 5
           }
       }
   });

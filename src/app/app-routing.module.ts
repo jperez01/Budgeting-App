@@ -9,6 +9,10 @@ const routes: Routes = [
     loadChildren: () => import('./overview/overview.module').then(m => m.OverviewModule)
   },
   {
+    path: 'budget',
+    loadChildren: () => import('./budget/budget.module').then(m => m.BudgetModule)
+  },
+  {
     path: '',
     redirectTo: '',
     pathMatch: 'full'

@@ -1,0 +1,52 @@
+.group-box {
+    background-color: white;
+    box-shadow: 0 1px 3px 0 rgba(31,36,38,.1);
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    border-radius: .8rem;
+    padding: 24px 24px 4px 24px;
+}
+
+.group-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.group-name {
+    width: 35%;
+    font-family: 'Sofia Pro Regular';
+    color: #69757a;
+    font-size: 18px;
+    margin: 0;
+}
+
+.group-amount {
+    padding: auto;
+    width: 20%;
+    line-height: 28px;
+    text-align: end;
+    font-family: 'Sofia Pro Light';
+    color: #8e999e;
+    font-size: 16px;
+    margin: 0;
+}
+
+.add-item {
+    color: #0091d9;
+    font-family: 'Sofia Pro Light';
+    cursor: pointer;
+    width: 35%;
+    line-height: 28px;
+}
+
+.add-item:hover {
+    color: #006fa6;
+}
+
+.total-value {
+    font-family: 'Sofia Pro Light';
+    font-size: 18px;
+    width: 20%;
+    text-align: end;
+}

@@ -1,0 +1,15 @@
+<div [ngClass]="'group-box'">
+    <div [ngClass]="'group-info'">
+        <p [ngClass]="'group-name'">{{group.title}}</p>
+        <p [ngClass]="'group-amount'">Budgeted</p>
+        <p [ngClass]="'group-amount'">Used</p>
+        <p [ngClass]="'group-amount'">Available</p>
+    </div>
+    <app-group-item *ngFor="let item of items" [item]="item"></app-group-item>
+    <div [ngClass]="'group-info'">
+        <p [ngClass]="'add-item'"> Add Item </p>
+        <p [ngClass]="'total-value'"> 100 </p>
+        <p [ngClass]="'total-value'"> 100</p>
+        <p [ngClass]="'total-value'"> 100 </p>
+    </div>
+</div>
