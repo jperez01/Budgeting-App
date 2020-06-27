@@ -1,7 +1,16 @@
 <div [ngClass]="'gray-background'">
-    <div>
-        <p> {{current_month}}</p>
-        <p> {{current_year}}</p>
+    <div [ngClass]="'budget-header'">
+        <div [ngClass]="'budget-header-summary'">
+            <p [ngClass]="'budget-month'"> {{current_month}}</p>
+            <p [ngClass]="'budget-year'"> {{current_year}}</p>
+        </div>
+        <div [ngClass]="'budget-header-summary-2'">
+            <p [ngClass]="'budget-header-money'"> {{'$' + total_budget}} </p>
+            <p *ngIf="sign; else showOpposite" [ngClass]="'budget-header-amount'"> Over Budget </p>
+            <ng-template #showOpposite>
+                <p [ngClass]="'budget-header-amount'"> Under Budget </p>
+            </ng-template>
+        </div>
     </div>
     <div [ngClass]="'budget-info'">
         <app-group-list [ngClass]="'list'"></app-group-list>

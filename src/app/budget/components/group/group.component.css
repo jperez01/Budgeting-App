@@ -15,7 +15,7 @@
 
 .group-name {
     width: 35%;
-    font-family: 'Sofia Pro Regular';
+    font-family: 'Proxima Nova Bold';
     color: #69757a;
     font-size: 18px;
     margin: 0;
@@ -26,7 +26,7 @@
     width: 20%;
     line-height: 28px;
     text-align: end;
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Medium';
     color: #8e999e;
     font-size: 16px;
     margin: 0;
@@ -34,7 +34,7 @@
 
 .add-item {
     color: #0091d9;
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova SemiBold';
     cursor: pointer;
     width: 35%;
     line-height: 28px;
@@ -45,7 +45,7 @@
 }
 
 .total-value {
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Medium';
     font-size: 18px;
     width: 20%;
     text-align: end;

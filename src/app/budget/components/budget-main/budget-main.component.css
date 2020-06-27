@@ -3,6 +3,59 @@
     flex-direction: row;
 }
 
+.budget-month {
+    font-family: 'Proxima Nova Bold';
+    font-size: 32px;
+    color: #495257;
+    line-height: 29px;
+    margin-right: 10px;
+    margin: 20px 5px 5px 5px;
+}
+
+.budget-year {
+    font-family: 'Proxima Nova Light';
+    font-size: 32px;
+    letter-spacing: 2px;
+    color: #69757a;
+    line-height: 29px;
+    margin: 20px 5px 5px 5px;
+}
+
+.budget-header {
+    width: 60%;
+}
+
+.budget-header-summary {
+    display: flex;
+    justify-content: center;
+    margin: 0px 24px;
+}
+
+.budget-header-summary-2 {
+    display: flex;
+    justify-content: center;
+    margin: 0px 24px;
+    border-bottom: 1px solid #b6bec2;
+}
+
+.budget-header-money {
+    font-family: 'Proxima Nova SemiBold';
+    font-size: 20px;
+    letter-spacing: .5px;
+    line-height: 28px;
+    color: #e64b40;
+    margin: 10px 2.5px;
+}
+
+.budget-header-amount {
+    font-family: 'Proxima Nova SemiBold';
+    font-size: 20px;
+    color: #69757a;
+    line-height: 28px;
+    margin-left: 5px;
+    margin: 10px 2.5px;
+}
+
 .list {
     width: 60%;
 }

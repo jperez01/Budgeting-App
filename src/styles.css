@@ -12,6 +12,31 @@
     src: url('assets/fonts/SofiaProLight.otf');
 }
 
+@font-face {
+    font-family: 'Proxima Nova Light';
+    src: url('assets/fonts/proxima-nova-light-webfont.ttf');
+}
+
+@font-face {
+    font-family: 'Proxima Nova Regular';
+    src: url('assets/fonts/proxima-nova-regular-webfont.ttf');
+}
+
+@font-face {
+    font-family: 'Proxima Nova Medium';
+    src: url('assets/fonts/ProximaNova-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'Proxima Nova SemiBold';
+    src: url('assets/fonts/proxima-nova-semibold-webfont.ttf');
+}
+
+@font-face {
+    font-family: 'Proxima Nova Bold';
+    src: url('assets/fonts/proxima-nova-bold-webfont.ttf');
+}
+
 .item-image {
     height: 50px;
     width: 50px;

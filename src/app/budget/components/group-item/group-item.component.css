@@ -5,15 +5,17 @@
 
 .group-name {
     width: 35%;
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Medium';
     font-size: 18px;
     margin: 12px 0px;
+    color: rgb(51, 58, 61);
 }
 
 .group-amount {
     width: 20%;
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Medium';
     font-size: 18px;
     text-align: end;
     margin: 12px 0px;
+    color: rgb(51, 58, 61);
 }
