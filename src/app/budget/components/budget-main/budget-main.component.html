@@ -13,7 +13,7 @@
         </div>
     </div>
     <div [ngClass]="'budget-info'">
-        <app-group-list [ngClass]="'list'"></app-group-list>
-        <app-budget-info></app-budget-info>
+        <app-group-list [ngClass]="'list'" [groups]="groups"></app-group-list>
+        <app-budget-info [ngClass]="'info'" [groups]="groups"></app-budget-info>
     </div>
 </div>

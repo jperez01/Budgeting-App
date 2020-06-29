@@ -1,0 +1,87 @@
+.relative {
+    position: relative;
+}
+
+.chart-info {
+    position: absolute;
+    top: 37%;
+    width: 100%;
+    text-align: center;
+}
+
+.chart-label {
+    font-family: 'Proxima Nova Light';
+    font-size: 19px;
+    margin: 0;
+    color: #69757a;
+    margin-bottom: 2px;
+}
+
+.chart-amount {
+    font-family: 'Proxima Nova Regular';
+    font-size: 24px;
+    margin: 0;
+}
+
+.category {
+    width: 30%;
+    font-family: 'Proxima Nova Medium';
+    color: #69757a;
+    font-size: 19px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0px 2px;
+    border-radius: 3px;
+    outline: none;
+}
+
+.category:hover {
+    background-color: #48ce65;
+}
+
+.category:focus {
+    background-color: #48ce65;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    padding-bottom: 3px;
+    border-bottom: 2px solid rgb(213, 217, 219);
+}
+
+.group {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    padding: 0px 8px;
+    margin: auto;
+    margin-top: 2px;
+    border-bottom: 1px solid rgb(213, 217, 219);
+}
+
+.group-numbers {
+    display: flex;
+    align-self: flex-end;
+    margin: auto;
+    margin-right: 0px;
+}
+
+.group-title {
+    font-family: 'Proxima Nova SemiBold';
+    font-size: 15px;
+    color: #48ce65;
+}
+
+.group-total {
+    font-family: 'Proxima Nova Medium';
+    font-size: 14px;
+}
+
+.group-percentage {
+    font-family: 'Proxima Nova Medium';
+    font-size: 14px;
+    margin-left: 10px;
+}
