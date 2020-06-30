@@ -1,2 +1,1 @@
-<app-group *ngFor="let group of groups" [group]="group" [ngClass]="'list'">
-</app-group>
+<app-group *ngFor="let group of groups; let i= index" [group]="group" [ngClass]="'list'" [groupIndex]="i"></app-group>

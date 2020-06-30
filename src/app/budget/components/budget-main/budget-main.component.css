@@ -58,8 +58,14 @@
 
 .list {
     width: 60%;
+    display: flex;
+    flex-direction: column;
 }
 
 .info {
     width: 400px;
+}
+
+.group {
+    width: 100%;
 }

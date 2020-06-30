@@ -2,14 +2,15 @@
     <div [ngClass]="'group-info'">
         <p [ngClass]="'group-name'">{{group.title}}</p>
         <p [ngClass]="'group-amount'">Budgeted</p>
-        <p [ngClass]="'group-amount'">Used</p>
+        <p [ngClass]="'group-amount'">Received</p>
         <p [ngClass]="'group-amount'">Available</p>
     </div>
-    <app-group-item *ngFor="let item of items" [item]="item"></app-group-item>
+    <app-group-item  (changedValue)="sendValueUp($event)" *ngFor="let item of items; let i = index"
+        [item]="item" [groupName]="group.title" [itemIndex]="i" [groupIndex]="groupIndex"></app-group-item>
     <div [ngClass]="'group-info'">
         <p [ngClass]="'add-item'"> Add Item </p>
-        <p [ngClass]="'total-value'"> 100 </p>
-        <p [ngClass]="'total-value'"> 100</p>
-        <p [ngClass]="'total-value'"> 100 </p>
+        <p [ngClass]="'total-value'"> {{group.total_budgeted}} </p>
+        <p [ngClass]="'total-value'"> {{group.total_received}}</p>
+        <p [ngClass]="'total-value'"> {{group.total_budgeted - group.total_received}} </p>
     </div>
 </div>

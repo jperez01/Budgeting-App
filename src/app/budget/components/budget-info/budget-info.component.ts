@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges} from '@angular/core';
 import * as Chart from 'chart.js';
 
 @Component({
@@ -12,6 +12,7 @@ export class BudgetInfoComponent implements OnInit {
   whole_received:number;
   whole_available:number;
   current_number:number;
+  current_type:string;
   graph_labels:string[];
   graph_values:number[];
   budgeted:boolean;
@@ -27,9 +28,31 @@ export class BudgetInfoComponent implements OnInit {
     this.budgeted = true;
     this.available = false;
     this.received = false;
+    this.current_type = 'budgeted';
+  }
+
+  ngOnChanges(changes: any): void {
+    this.graph_values = [];
+    if (this.current_type.localeCompare('budgeted') == 0) {
+      this.whole_budgeted = 0;
+      this.groups.forEach(group => {
+        this.whole_budgeted += group.total_budgeted;
+        this.graph_values.push(group.total_budgeted);
+      });
+      this.current_number = this.whole_budgeted;
+    } else if (this.current_type.localeCompare('received') == 0) {
+      this.whole_received = 0;
+      this.groups.forEach(group => {
+        this.whole_received += group.total_received;
+        this.graph_values.push(group.total_budgeted);
+      });
+      this.current_number = this.whole_received;
+    }
+    this.createGraph();
   }
 
   ngOnInit(): void {
+    this.graph_values = [];
     this.groups.forEach(group => {
       this.whole_budgeted += group.total_budgeted;
       this.whole_received += group.total_received;
@@ -38,33 +61,20 @@ export class BudgetInfoComponent implements OnInit {
     });
     this.whole_available = this.whole_budgeted - this.whole_received;
     this.current_number = this.whole_budgeted;
-    var myChart = new Chart('GroupsChart', {
-      type: 'pie',
-      data: {
-        labels: this.graph_labels,
-        datasets: [{
-          label: "Groups",
-          backgroundColor: ["red", "green"],
-          data: this.graph_values,
-        }]
-    },
-    options: {
-      cutoutPercentage: 80,
-      legend: {
-        display: false
-      }
-    }
-    });
+    this.createGraph();
   }
 
   changeToBudgeted():void {
+    this.graph_values = [];
     this.groups.forEach(group => {
       this.graph_values.push(group.total_budgeted);
     });
+    this.current_type = 'budgeted';
     this.current_number = this.whole_budgeted;
     this.budgeted = true;
     this.available = false;
     this.received = false;
+    this.createGraph();
   }
 
   changeToReceived():void {
@@ -73,26 +83,11 @@ export class BudgetInfoComponent implements OnInit {
       this.graph_values.push(group.total_received);
     });
     this.current_number = this.whole_received;
+    this.current_type = 'received';
     this.budgeted = false;
     this.available = false;
     this.received = true;
-    var myChart = new Chart('GroupsChart', {
-      type: 'pie',
-      data: {
-        labels: this.graph_labels,
-        datasets: [{
-          label: "Groups",
-          backgroundColor: ["red", "green"],
-          data: this.graph_values,
-        }]
-    },
-    options: {
-      cutoutPercentage: 80,
-      legend: {
-        display: false
-      }
-    }
-    });
+    this.createGraph();
   }
 
   changeToAvailable():void {
@@ -101,9 +96,14 @@ export class BudgetInfoComponent implements OnInit {
       this.graph_values.push(group.total_budgeted + group.total_received);
     });
     this.current_number = this.whole_budgeted + this.whole_received;
+    this.current_type = 'available';
     this.budgeted = false;
     this.available = true;
     this.received = false;
+    this.createGraph();
+  }
+
+  createGraph(): void {
     var myChart = new Chart('GroupsChart', {
       type: 'pie',
       data: {

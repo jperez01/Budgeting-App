@@ -23,6 +23,13 @@
     margin: 7px 0px;
     padding-right: 3px;
     margin-left: 2px;
+    border: none;
+    outline: none;
+}
+
+.group-amount:focus {
+    border: 1px solid #0091d9;
+    color: #0091d9;
 }
 
 .group-amount:hover {

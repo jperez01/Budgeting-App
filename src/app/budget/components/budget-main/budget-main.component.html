@@ -13,7 +13,10 @@
         </div>
     </div>
     <div [ngClass]="'budget-info'">
-        <app-group-list [ngClass]="'list'" [groups]="groups"></app-group-list>
+        <div [ngClass]="'list'">
+            <app-group (valueBubble)="updateBudgetInfo($event)" *ngFor="let group of groups; let i = index" [group]="group" [ngClass]="'group'" [groupIndex]="i">
+            </app-group>
+        </div>
         <app-budget-info [ngClass]="'info'" [groups]="groups"></app-budget-info>
     </div>
 </div>

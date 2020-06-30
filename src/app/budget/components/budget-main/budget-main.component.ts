@@ -12,7 +12,7 @@ export class BudgetMainComponent implements OnInit {
   info:DateInfo;
   sign:boolean;
   total_budget:number;
-  groups;
+  groups:any;
   constructor() { }
 
   ngOnInit(): void {
@@ -64,4 +64,22 @@ export class BudgetMainComponent implements OnInit {
     ];
   }
 
+  updateBudgetInfo(info: any): void {
+    let items = this.groups[info.groupIndex].items[info.itemIndex][info.name] = parseFloat(info.newValue);
+    this.updateGroupTotal(info.groupIndex);
+    this.groups = this.groups.slice();
+  }
+
+  updateGroupTotal(index: number): void {
+    let group = this.groups[index];
+    let items = group.items;
+    let newTotalBudget = 0;
+    let newTotalReceived = 0;
+    items.forEach(item => {
+      newTotalBudget += item.budgeted;
+      newTotalReceived += item.received;
+    });
+    group.total_budgeted = newTotalBudget;
+    group.total_received = newTotalReceived;
+  }
 }
