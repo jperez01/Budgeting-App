@@ -14,8 +14,20 @@
     </div>
     <div [ngClass]="'budget-info'">
         <div [ngClass]="'list'">
-            <app-group (valueBubble)="updateBudgetInfo($event)" *ngFor="let group of groups; let i = index" [group]="group" [ngClass]="'group'" [groupIndex]="i">
+            <app-group (addGroupItem)="addItem($event)" (valueBubble)="updateBudgetInfo($event)" *ngFor="let group of groups; let i = index" [group]="group" [ngClass]="'group'" [groupIndex]="i">
             </app-group>
+            <div *ngIf="!addingGroup" [ngClass]="'group-box'">
+                <p [ngClass]="'add-group'" (click)="addingGroup = !addingGroup"> Add Group</p>
+            </div>
+            <div *ngIf="addingGroup" [ngClass]="'group-box'">
+                <div [ngClass]="'group-info'">
+                    <input [ngClass]="'item-name'" value="Default" (blur)="collectGroupName($event)">
+                    <p [ngClass]="'group-amount'">Budgeted</p>
+                    <p [ngClass]="'group-amount'">Received</p>
+                    <p [ngClass]="'group-amount'">Available</p>
+                </div>
+                <p [ngClass]="'add-group2'" (click)="addGroup()"> Confirm</p>
+            </div>
         </div>
         <app-budget-info [ngClass]="'info'" [groups]="groups"></app-budget-info>
     </div>

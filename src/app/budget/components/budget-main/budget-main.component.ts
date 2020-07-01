@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import DateInfo from '../../../shared/date/dateInfo';
+import { ThemeService } from 'ng2-charts';
 
 @Component({
   selector: 'app-budget-main',
@@ -13,9 +14,13 @@ export class BudgetMainComponent implements OnInit {
   sign:boolean;
   total_budget:number;
   groups:any;
+  addingGroup:boolean;
+  newName:string;
   constructor() { }
 
   ngOnInit(): void {
+    this.newName = undefined;
+    this.addingGroup = false;
     this.info = new DateInfo();
     this.current_month = this.info.getMonthAsString();
     this.current_year = this.info.getYear();
@@ -65,7 +70,19 @@ export class BudgetMainComponent implements OnInit {
   }
 
   updateBudgetInfo(info: any): void {
-    let items = this.groups[info.groupIndex].items[info.itemIndex][info.name] = parseFloat(info.newValue);
+    console.log(info.groupIndex);
+    this.groups[info.groupIndex].items[info.itemIndex][info.name] = parseFloat(info.newValue);
+    this.updateGroupTotal(info.groupIndex);
+    this.groups = this.groups.slice();
+  }
+
+  addItem(info: any): void {
+    let newItem = {
+      name: info.name,
+      budgeted: parseFloat(info.budgeted),
+      received: parseFloat(info.received)
+    };
+    this.groups[info.groupIndex].items.push(newItem);
     this.updateGroupTotal(info.groupIndex);
     this.groups = this.groups.slice();
   }
@@ -81,5 +98,27 @@ export class BudgetMainComponent implements OnInit {
     });
     group.total_budgeted = newTotalBudget;
     group.total_received = newTotalReceived;
+  }
+
+  collectGroupName(event: any): void {
+    if (event.target.value.localeCompare('') !== 0 && event.target.value.localeCompare('Default') !== 0) {
+      this.newName = event.target.value;
+    } else {
+      this.newName = undefined;
+    }
+  }
+
+  addGroup(): void {
+    if (this.newName !== undefined) {
+      let newGroup = {
+        title: this.newName,
+        items: [],
+        total_budgeted: 0.00,
+        total_received: 0.00
+      }
+      this.groups.push(newGroup);
+      this.newName = undefined;
+      this.addingGroup = false;
+    }
   }
 }

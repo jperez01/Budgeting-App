@@ -52,3 +52,56 @@
     text-align: end;
     margin-left: 5px;
 }
+
+.item-amount {
+    width: 20%;
+    font-family: 'Proxima Nova Medium';
+    font-size: 18px;
+    text-align: end;
+    margin: 12px 0px;
+    color: rgb(51, 58, 61);
+    border-radius: 5px;
+    padding: 5px 0px;
+    margin: 7px 0px;
+    padding-right: 3px;
+    margin-left: 2px;
+    border: none;
+    outline: none;
+}
+
+.item-amount:focus {
+    border: 1px solid #0091d9;
+    color: #0091d9;
+}
+
+.item-amount:hover {
+    background-color: #f5f7f8;
+}
+
+.item-name {
+    width: 30%;
+    font-family: 'Proxima Nova Medium';
+    font-size: 18px;
+    text-align: start;
+    color: rgb(51, 58, 61);
+    border-radius: 5px;
+    padding: 5px 0px;
+    margin: 7px 0px;
+    padding-right: 3px;
+    margin-right: 5%;
+    outline: none;
+    border: none;
+}
+
+.item-name:focus {
+    border: 1px solid #0091d9;
+    color: #0091d9;
+}
+
+.item-name:hover {
+    background-color: #f5f7f8;
+}
+
+.item {
+    border-bottom: 1px solid #b6bec2;
+}
