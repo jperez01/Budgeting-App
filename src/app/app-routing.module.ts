@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./budget/budget.module').then(m => m.BudgetModule)
   },
   {
+    path: 'transactions',
+    loadChildren: () => import('./transactions/transactions.module').then(m => m.TransactionsModule)
+  },
+  {
     path: '',
     redirectTo: '',
     pathMatch: 'full'

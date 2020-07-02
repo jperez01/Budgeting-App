@@ -25,7 +25,6 @@ export class BudgetMainComponent implements OnInit {
     this.current_month = this.info.getMonthAsString();
     this.current_year = this.info.getYear();
     this.sign = false;
-    this.total_budget = 1000;
     this.groups = [
       {
         title: 'Food',
@@ -67,12 +66,14 @@ export class BudgetMainComponent implements OnInit {
         total_received: 400
       }
     ];
+    this.calculateTotalBudget();
   }
 
   updateBudgetInfo(info: any): void {
     console.log(info.groupIndex);
     this.groups[info.groupIndex].items[info.itemIndex][info.name] = parseFloat(info.newValue);
     this.updateGroupTotal(info.groupIndex);
+    this.calculateTotalBudget();
     this.groups = this.groups.slice();
   }
 
@@ -84,6 +85,7 @@ export class BudgetMainComponent implements OnInit {
     };
     this.groups[info.groupIndex].items.push(newItem);
     this.updateGroupTotal(info.groupIndex);
+    this.calculateTotalBudget();
     this.groups = this.groups.slice();
   }
 
@@ -120,5 +122,15 @@ export class BudgetMainComponent implements OnInit {
       this.newName = undefined;
       this.addingGroup = false;
     }
+  }
+
+  calculateTotalBudget(): void {
+    let budgeted_total = 0;
+    let received_total = 0;
+    this.groups.forEach(group => {
+      budgeted_total += group.total_budgeted;
+      received_total += group.total_received;
+    });
+    this.total_budget = budgeted_total - received_total;
   }
 }

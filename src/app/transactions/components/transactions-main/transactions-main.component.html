@@ -1,0 +1,25 @@
+<div [ngClass]="'gray-background'">
+    <div [ngClass]="'transactions-header'">
+        <h4 [ngClass]="'transactions-title'"> All Transactions </h4>
+        <div [ngClass]="'transactions-availablebalance'">
+            <p [ngClass]="'transactions-total'"> Value</p>
+            <p [ngClass]="'transactions-available'"> Available Total Balance </p>
+        </div>
+    </div>
+    <div [ngClass]="'transactions-list-actions'">
+        <p [ngClass]="'action-button'"> Add Transaction </p>
+        <p [ngClass]="'action-button'"> Filter </p>
+        <input [ngClass]="'action-search'" placeholder="Search">
+    </div>
+    <div [ngClass]="'transactions-list'">
+        <div [ngClass]="'transactions-list-header'">
+            <p [ngClass]="'list-account'"> Account </p>
+            <p [ngClass]="'list-account'"> Date </p>
+            <p [ngClass]="'list-category'"> Category </p>
+            <p [ngClass]="'list-description'"> Description </p>
+            <p [ngClass]="'list-account'"> Outflow </p>
+            <p [ngClass]="'list-account'"> Inflow </p>
+        </div>
+        <app-transaction-item *ngFor="let item of transactions" [item]="item"></app-transaction-item>
+    </div>
+</div>
