@@ -7,7 +7,7 @@
         </div>
     </div>
     <div [ngClass]="'transactions-list-actions'">
-        <p [ngClass]="'action-button'"> Add Transaction </p>
+        <p (click)="addingTransaction = !addingTransaction" [ngClass]="'action-button'"> Add Transaction </p>
         <p [ngClass]="'action-button'"> Filter </p>
         <input [ngClass]="'action-search'" placeholder="Search">
     </div>
@@ -20,6 +20,21 @@
             <p [ngClass]="'list-account'"> Outflow </p>
             <p [ngClass]="'list-account'"> Inflow </p>
         </div>
+        <div *ngIf="addingTransaction" [ngClass]="'new-item-full'">
+            <div [ngClass]="'new-item'">
+                <input [ngClass]="'item-input'" value='Account' (change)="collectAccount($event)">
+                <input [ngClass]="'item-input'" value='06/20/01' (change)="collectDate($event)">
+                <input [ngClass]="'item-category'" value='Category' (change)="collectCategory($event)">
+                <input [ngClass]="'item-description'" value='Description' (change)="collectDescription($event)">
+                <input [ngClass]="'item-input'" value='0.00' (change)="collectOutflow($event)">
+                <input [ngClass]="'item-input'" value='0.00' (change)="collectInflow($event)">
+            </div>
+            <div [ngClass]="'new-item-buttons'">
+                <button [ngClass]="'new-item-button'" (click)="addNewTransaction()"> Save </button>
+                <button [ngClass]="'new-item-button'" (click)="addingTransaction = !addingTransaction"> Cancel </button>
+            </div>
+        </div>
         <app-transaction-item *ngFor="let item of transactions" [item]="item"></app-transaction-item>
+        <p (click)="addingTransaction = !addingTransaction" [ngClass]="'action-button'" [ngStyle]="{'padding-left': '24px'}"> Add Transaction </p>
     </div>
 </div>

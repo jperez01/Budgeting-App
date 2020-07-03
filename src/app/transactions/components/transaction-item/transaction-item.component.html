@@ -1,8 +1,25 @@
-<div [ngClass]="'item'">
-    <input [ngClass]="'item-input'" value={{item.account}}>
-    <input [ngClass]="'item-input'" value={{date_string}}>
-    <input [ngClass]="'item-category'" value={{item.category}}>
-    <input [ngClass]="'item-description'" value={{item.description}}>
-    <input [ngClass]="'item-input'" value={{outflow}}>
-    <input [ngClass]="'item-input'" value={{inflow}}>
+<div *ngIf="!changingValue" [ngClass]="'item-background'" (click)="changeStyle()" [ngStyle]="{'background-color': background}">
+    <div [ngClass]="'item'">
+        <input [ngClass]="'item-input'" value={{item.account}} (change)="collectAccount($event)">
+        <input [ngClass]="'item-input'" value={{date_string}} (change)="collectDate($event)">
+        <input [ngClass]="'item-category'" value={{item.category}} (change)="collectCategory($event)">
+        <input [ngClass]="'item-description'" value={{item.description}} (change)="collectDescription($event)">
+        <input [ngClass]="'item-input'" value={{outflow}} (change)="collectOutflow($event)">
+        <input [ngClass]="'item-input'" value={{inflow}} (change)="collectInflow($event)">
+    </div>
+    <div [ngClass]="'border-line'" [ngStyle]="{'border-bottom': line}"></div>
+</div>
+<div *ngIf="changingValue" [ngClass]="'item-background'" [ngStyle]="{'background-color': background}">
+    <div [ngClass]="'item'">
+        <input [ngClass]="'item-input'" value={{item.account}} (change)="collectAccount($event)">
+        <input [ngClass]="'item-input'" value={{date_string}} (change)="collectDate($event)">
+        <input [ngClass]="'item-category'" value={{item.category}} (change)="collectCategory($event)">
+        <input [ngClass]="'item-description'" value={{item.description}} (change)="collectDescription($event)">
+        <input [ngClass]="'item-input'" value={{outflow}} (change)="collectOutflow($event)">
+        <input [ngClass]="'item-input'" value={{inflow}} (change)="collectInflow($event)">
+    </div>
+    <div [ngClass]="'new-item-buttons'">
+        <button [ngClass]="'new-item-button'" (click)="confirmChanges()"> Save </button>
+        <button [ngClass]="'new-item-button'" (click)="cancelChange()"> Cancel </button>
+    </div>
 </div>

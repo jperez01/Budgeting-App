@@ -1,9 +1,23 @@
+.border-line {
+    border-bottom: 1px solid #b6bec2;
+    margin: 0px 24px;
+}
 .item {
     height: 30px;
-    border-bottom: 1px solid #b6bec2;
     display: flex;
     padding: 8px 0px;
+    margin: 0px 24px;
+    pointer-events: none;
 }
+
+.item-background {
+    pointer-events: none;
+}
+
+.item-background:hover {
+    background-color: #0091d946;
+}
+
 .item-input {
     width: 13%;
     font-family: 'Proxima Nova Medium';
@@ -14,6 +28,7 @@
     outline: none;
     margin-right: 1%;
     padding: 0px .5%;
+    pointer-events: auto;
 }
 
 .item-input:hover {
@@ -34,6 +49,7 @@
     border: none;
     border-radius: 5px;
     outline: none;
+    pointer-events: auto;
 }
 
 .item-description:hover {
@@ -46,6 +62,7 @@
 }
 
 .item-category {
+    pointer-events: auto;
     width: 18%;
     font-family: 'Proxima Nova Medium';
     font-size: 18px;
@@ -63,4 +80,30 @@
 .item-category:focus {
     border: 1px solid #0091d9;
     color: #0091d9;
+}
+
+.new-item-buttons {
+    height: 20px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0px 24px;
+    padding: 0px 10px 8px 0px;
+    pointer-events: auto;
+}
+
+.new-item-button {
+    font-family: 'Proxima Nova SemiBold';
+    font-size: 16px;
+    color: white;
+    background-color: rgb(0, 156, 194);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    padding: 0px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.new-item-button:hover {
+    background-color: rgb(1, 110, 138);
 }
