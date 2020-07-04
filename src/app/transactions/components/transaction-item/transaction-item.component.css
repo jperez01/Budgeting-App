@@ -18,6 +18,21 @@
     background-color: #0091d946;
 }
 
+.item-account {
+    width: 13%;
+    font-family: 'Proxima Nova Medium';
+    font-size: 18px;
+    padding: 0px 5px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    padding: 0px .5%;
+    pointer-events: auto;
+    line-height: 30px;
+    margin: 0 1% 0 0;
+    background-color: white;
+}
+
 .item-input {
     width: 13%;
     font-family: 'Proxima Nova Medium';

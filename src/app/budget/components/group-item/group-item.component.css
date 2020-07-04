@@ -1,22 +1,17 @@
+.border-line {
+    border-bottom: 1px solid #b6bec2;
+    margin: 0;
+}
+
 .group-item {
     display: flex;
-    border-bottom: 1px solid #b6bec2;
+    pointer-events: none;
 }
 
 .group-name {
     width: 35%;
     font-family: 'Proxima Nova Medium';
     font-size: 18px;
-    margin: 12px 0px;
-    color: rgb(51, 58, 61);
-}
-
-.group-amount {
-    width: 20%;
-    font-family: 'Proxima Nova Medium';
-    font-size: 18px;
-    text-align: end;
-    margin: 12px 0px;
     color: rgb(51, 58, 61);
     border-radius: 5px;
     padding: 5px 0px;
@@ -25,6 +20,36 @@
     margin-left: 2px;
     border: none;
     outline: none;
+    pointer-events: auto;
+    background-color: white;
+    border: 1px solid white;
+}
+
+.group-name:focus {
+    border: 1px solid #0091d9;
+    color: #0091d9;
+}
+
+.group-name:hover {
+    background-color: #f5f7f8;
+}
+
+.group-amount {
+    width: 18%;
+    font-family: 'Proxima Nova Medium';
+    font-size: 18px;
+    text-align: end;
+    color: rgb(51, 58, 61);
+    border-radius: 5px;
+    padding: 5px 0px;
+    margin: 7px 0px;
+    padding-right: 3px;
+    margin-left: 2%;
+    border: none;
+    outline: none;
+    pointer-events: auto;
+    background-color: white;
+    border: 1px solid white;
 }
 
 .group-amount:focus {
@@ -34,4 +59,39 @@
 
 .group-amount:hover {
     background-color: #f5f7f8;
+}
+
+.item-background {
+    pointer-events: none;
+    padding: 0px 24px;
+}
+
+.item-background:hover {
+    background-color: #0091d946;
+}
+
+.new-item-buttons {
+    height: 20px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0px 5px;
+    padding: 0px 10px 8px 0px;
+    pointer-events: auto;
+}
+
+.new-item-button {
+    font-family: 'Proxima Nova SemiBold';
+    font-size: 16px;
+    color: white;
+    background-color: rgb(0, 156, 194);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    padding: 0px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.new-item-button:hover {
+    background-color: rgb(1, 110, 138);
 }

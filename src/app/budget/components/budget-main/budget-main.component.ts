@@ -71,7 +71,7 @@ export class BudgetMainComponent implements OnInit {
 
   updateBudgetInfo(info: any): void {
     console.log(info.groupIndex);
-    this.groups[info.groupIndex].items[info.itemIndex][info.name] = parseFloat(info.newValue);
+    this.groups[info.groupIndex].items[info.itemIndex] = info.item;
     this.updateGroupTotal(info.groupIndex);
     this.calculateTotalBudget();
     this.groups = this.groups.slice();

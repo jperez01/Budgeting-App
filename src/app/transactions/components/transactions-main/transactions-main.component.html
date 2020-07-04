@@ -1,8 +1,8 @@
 <div [ngClass]="'gray-background'">
     <div [ngClass]="'transactions-header'">
-        <h4 [ngClass]="'transactions-title'"> All Transactions </h4>
+        <h4 [ngClass]="'transactions-title'"> {{name}} Transactions </h4>
         <div [ngClass]="'transactions-availablebalance'">
-            <p [ngClass]="'transactions-total'"> Value</p>
+            <p [ngClass]="'transactions-total'"> {{formatMoney(total_balance)}}</p>
             <p [ngClass]="'transactions-available'"> Available Total Balance </p>
         </div>
     </div>
@@ -34,7 +34,8 @@
                 <button [ngClass]="'new-item-button'" (click)="addingTransaction = !addingTransaction"> Cancel </button>
             </div>
         </div>
-        <app-transaction-item *ngFor="let item of transactions" [item]="item"></app-transaction-item>
+        <app-transaction-item *ngFor="let item of filtered_transactions; let i = index" [item]="item" [index]="i" [filtered]="filtered" (sendTransaction)="changeTransaction($event)">
+        </app-transaction-item>
         <p (click)="addingTransaction = !addingTransaction" [ngClass]="'action-button'" [ngStyle]="{'padding-left': '24px'}"> Add Transaction </p>
     </div>
 </div>

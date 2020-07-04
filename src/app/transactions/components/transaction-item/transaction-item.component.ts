@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-transaction-item',
@@ -7,6 +7,9 @@ import { Component, OnInit, Input} from '@angular/core';
 })
 export class TransactionItemComponent implements OnInit {
   @Input() item:any;
+  @Input() index:any;
+  @Input() filtered:boolean;
+  @Output() sendTransaction: EventEmitter<any> = new EventEmitter<any>();
   date_string:string;
   outflow:number;
   inflow:number;
@@ -50,6 +53,11 @@ export class TransactionItemComponent implements OnInit {
           outflow: Number(this.newOutflow),
           inflow: Number(this.newInflow)
         }
+        let sentObject = {
+          transaction: newTransaction,
+          index: this.index
+        }
+        this.sendTransaction.emit(sentObject);
         this.newAccount = this.item.account;
         this.newCategory = this.item.category;
         this.newDate = this.item.date;
@@ -69,16 +77,20 @@ export class TransactionItemComponent implements OnInit {
       }
   }
 
+  formatMoney(value: any): string {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+  }
+
   cancelChange(): void {
     this.changingValue = false;
     this.background = '';
     this.line = '1px solid #b6bec2';
   }
+
   changeStyle(): void {
       this.background = '#0091d946';
       this.line = 'none';
       this.changingValue = true;
-      console.log('Outer');
   }
 
   getFormattedDate(date: Date): string {

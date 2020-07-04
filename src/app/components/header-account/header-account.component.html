@@ -1,4 +1,4 @@
 <div [ngClass]="'account'">
-    <a [ngClass]="'name'" routerLink="/transactions" routerLinkActive=""> {{account.name}} </a>
+    <a [ngClass]="'name'" routerLink="/transactions/{{account.name}}" routerLinkActive=""> {{account.name}} </a>
     <h4 [ngClass]="'balance'" [ngStyle]="{color: mycolor}"> {{balance}} </h4>
 </div>

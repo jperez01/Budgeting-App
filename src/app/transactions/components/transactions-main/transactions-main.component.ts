@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-transactions-main',
@@ -6,25 +7,42 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transactions-main.component.css']
 })
 export class TransactionsMainComponent implements OnInit {
-  transactions:Object[];
+  name:string;
+  filtered_transactions:any[];
+  transactions:any[];
+  accounts:any[];
   addingTransaction:boolean;
+  filtered:boolean;
   newAccount:string;
   newDate:string;
   newCategory:string;
   newDescription:string;
   newInflow:number;
   newOutflow:number;
-  constructor() {
+  total_balance:number;
+
+  constructor(private route: ActivatedRoute) {
     this.newAccount = undefined;
     this.newDate = undefined;
     this.newCategory = undefined;
     this.newDescription = undefined;
     this.newInflow = undefined;
     this.newOutflow = undefined;
+    this.filtered_transactions = [];
   }
 
   ngOnInit(): void {
     this.addingTransaction = false;
+    this.accounts = [
+      {
+        name: 'American Express',
+        balance: 200
+      },
+      {
+        name: 'John Savings',
+        balance: 1000
+      }
+    ]
     this.transactions = [
       {
         account: 'John Savings',
@@ -50,7 +68,51 @@ export class TransactionsMainComponent implements OnInit {
         outflow: 0.00,
         inflow: 1000.00
       },
-    ]
+    ];
+    this.route.params.subscribe(paramsId => {
+      this.name = paramsId.id;
+      if (this.name.localeCompare('All') !== 0) {
+        this.filtered_transactions = [];
+        this.filterTransactions();
+        this.filtered = true;
+      } else {
+        this.filtered_transactions = this.transactions;
+        this.filtered = false;
+      }
+      this.calculateTotalBalance();
+    })
+  }
+
+  filterTransactions(): void {
+    this.transactions.forEach(transaction => {
+      if (transaction.account.localeCompare(this.name) === 0) {
+        this.filtered_transactions.push(transaction);
+      }
+    });
+  }
+
+  formatMoney(value: any): string {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+  }
+
+  calculateTotalBalance(): void {
+    if (this.name.localeCompare('All') === 0) {
+      let total = 0;
+      this.accounts.forEach(account => {
+        total += account.balance;
+      })
+      this.total_balance = total;
+    } else {
+      this.accounts.forEach(account => {
+        if (account.name.localeCompare(this.name) === 0) {
+          this.total_balance = account.balance;
+        }
+      })
+    }
+  }
+
+  changeTransaction(info: any): void {
+    this.transactions[info.index] = info.transaction;
   }
 
   addNewTransaction(): void {
@@ -64,7 +126,7 @@ export class TransactionsMainComponent implements OnInit {
           outflow: Number(this.newOutflow),
           inflow: Number(this.newInflow)
         }
-        this.transactions.push(newTransaction);
+        this.transactions.unshift(newTransaction);
         this.addingTransaction = false;
         this.newAccount = undefined;
         this.newCategory = undefined;

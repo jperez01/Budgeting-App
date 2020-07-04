@@ -11,34 +11,74 @@ export class GroupItemComponent implements OnInit {
   @Input() groupIndex:any;
   @Input() itemIndex:any;
   @Output() changedValue: EventEmitter<any> = new EventEmitter<any>();
+  changingValue:boolean;
   available:number;
-  budgetedClicked:boolean;
-  usedClicked:boolean;
+  name:string;
+  budgeted:any;
+  received:any;
   storedValue:any;
+  background:string;
+  oldItem:any;
 
-  constructor() { 
-    this.usedClicked = false;
-    this.budgetedClicked = false;
+  constructor() {
+    this.changingValue = false;
   }
 
   ngOnInit(): void {
+    this.budgeted = this.item.budgeted
+    this.received = this.item.received;
+    this.name = this.item.name;
     this.available = this.item.budgeted - this.item.received;
+    this.background = '#0091d946';
+    this.oldItem = null;
+  }
+
+  changeStyle(): void {
+    this.changingValue = true;
+    this.oldItem = {
+      name: this.name,
+      budgeted: this.budgeted,
+      received: this.received
+    }
   }
 
   sendValue(event: any): void {
-    if (this.storedValue.localeCompare(event.target.value) !== 0) {
+      let newItem = {
+        name: this.name,
+        budgeted: parseFloat(this.budgeted),
+        received: parseFloat(this.received)
+      }
       let info = {
         itemIndex: this.itemIndex,
-        newValue: event.target.value,
         groupIndex: this.groupIndex,
-        name: event.srcElement.id
+        item: newItem
       };
       this.changedValue.emit(info);
-    }
-    this.available += event.target.value - this.storedValue;
+      this.available = this.budgeted - this.received;
   }
 
-  storeUsedValue(event: any): void {
-    this.storedValue = event.target.value;
+  collectName(event: any): void {
+    if (event.target.value.localeCompare('') !== 0) {
+      this.name = event.target.value;
+    }
+  }
+
+  collectBudgeted(event: any): void {
+    if (event.target.value.localeCompare('') !== 0) {
+      this.budgeted = event.target.value;
+    }
+  }
+
+  collectReceived(event: any): void {
+    if (event.target.value.localeCompare('') !== 0) {
+      this.received = event.target.value;
+    }
+  }
+
+  cancelChanges(): void {
+    this.changingValue = false;
+    this.name = this.oldItem.name;
+    this.budgeted = this.oldItem.budgeted;
+    this.received = this.oldItem.received;
   }
 }

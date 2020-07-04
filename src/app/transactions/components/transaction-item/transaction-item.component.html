@@ -1,17 +1,19 @@
-<div *ngIf="!changingValue" [ngClass]="'item-background'" (click)="changeStyle()" [ngStyle]="{'background-color': background}">
+<div *ngIf="!changingValue" [ngClass]="'item-background'" (click)="changeStyle()">
     <div [ngClass]="'item'">
-        <input [ngClass]="'item-input'" value={{item.account}} (change)="collectAccount($event)">
+        <input *ngIf="!filtered"  [ngClass]="'item-input'" value={{item.account}} (change)="collectAccount($event)">
+        <p *ngIf="filtered"  [ngClass]="'item-account'">{{item.account}}</p>
         <input [ngClass]="'item-input'" value={{date_string}} (change)="collectDate($event)">
         <input [ngClass]="'item-category'" value={{item.category}} (change)="collectCategory($event)">
         <input [ngClass]="'item-description'" value={{item.description}} (change)="collectDescription($event)">
-        <input [ngClass]="'item-input'" value={{outflow}} (change)="collectOutflow($event)">
-        <input [ngClass]="'item-input'" value={{inflow}} (change)="collectInflow($event)">
+        <input [ngClass]="'item-input'" value={{formatMoney(outflow)}} (change)="collectOutflow($event)">
+        <input [ngClass]="'item-input'" value={{formatMoney(inflow)}} (change)="collectInflow($event)">
     </div>
     <div [ngClass]="'border-line'" [ngStyle]="{'border-bottom': line}"></div>
 </div>
 <div *ngIf="changingValue" [ngClass]="'item-background'" [ngStyle]="{'background-color': background}">
     <div [ngClass]="'item'">
-        <input [ngClass]="'item-input'" value={{item.account}} (change)="collectAccount($event)">
+        <input *ngIf="!filtered"  [ngClass]="'item-input'" value={{item.account}} (change)="collectAccount($event)">
+        <p *ngIf="filtered"  [ngClass]="'item-account'">{{item.account}}</p>
         <input [ngClass]="'item-input'" value={{date_string}} (change)="collectDate($event)">
         <input [ngClass]="'item-category'" value={{item.category}} (change)="collectCategory($event)">
         <input [ngClass]="'item-description'" value={{item.description}} (change)="collectDescription($event)">

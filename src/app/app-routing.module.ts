@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./budget/budget.module').then(m => m.BudgetModule)
   },
   {
-    path: 'transactions',
+    path: 'transactions/:id',
     loadChildren: () => import('./transactions/transactions.module').then(m => m.TransactionsModule)
   },
   {

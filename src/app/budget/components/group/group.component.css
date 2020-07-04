@@ -5,12 +5,13 @@
     flex-direction: column;
     margin: 20px;
     border-radius: .8rem;
-    padding: 24px 24px 4px 24px;
+    padding: 24px 0px 4px 0px;
 }
 
 .group-info {
     display: flex;
     flex-direction: row;
+    padding: 0px 24px;
 }
 
 .group-name {
