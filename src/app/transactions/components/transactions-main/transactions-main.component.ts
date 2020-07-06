@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BudgetingInfoService } from '../../../state/budgeting-info.service';
 
 @Component({
   selector: 'app-transactions-main',
@@ -8,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TransactionsMainComponent implements OnInit {
   name:string;
+  observable$;
   filtered_transactions:any[];
   transactions:any[];
   accounts:any[];
@@ -21,7 +23,7 @@ export class TransactionsMainComponent implements OnInit {
   newOutflow:number;
   total_balance:number;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private infoService:BudgetingInfoService) {
     this.newAccount = undefined;
     this.newDate = undefined;
     this.newCategory = undefined;
@@ -33,42 +35,8 @@ export class TransactionsMainComponent implements OnInit {
 
   ngOnInit(): void {
     this.addingTransaction = false;
-    this.accounts = [
-      {
-        name: 'American Express',
-        balance: 200
-      },
-      {
-        name: 'John Savings',
-        balance: 1000
-      }
-    ]
-    this.transactions = [
-      {
-        account: 'John Savings',
-        date: new Date(),
-        category: 'Food',
-        description: 'First Transaction',
-        outflow: 10.20,
-        inflow: 0.00
-      },
-      {
-        account: 'American Express',
-        date: new Date(),
-        category: 'Debts',
-        description: 'Second Transaction',
-        outflow: 500.00,
-        inflow: 0.00
-      },
-      {
-        account: 'John Savings',
-        date: new Date(),
-        category: 'Savings',
-        description: 'Third Transaction',
-        outflow: 0.00,
-        inflow: 1000.00
-      },
-    ];
+    this.transactions = this.infoService.getTransactions();
+    this.accounts = this.infoService.getAccounts();
     this.route.params.subscribe(paramsId => {
       this.name = paramsId.id;
       if (this.name.localeCompare('All') !== 0) {
@@ -84,6 +52,7 @@ export class TransactionsMainComponent implements OnInit {
   }
 
   filterTransactions(): void {
+    this.filtered_transactions = [];
     this.transactions.forEach(transaction => {
       if (transaction.account.localeCompare(this.name) === 0) {
         this.filtered_transactions.push(transaction);
@@ -113,6 +82,8 @@ export class TransactionsMainComponent implements OnInit {
 
   changeTransaction(info: any): void {
     this.transactions[info.index] = info.transaction;
+    this.infoService.setTransactions(this.transactions);
+    this.filterTransactions();
   }
 
   addNewTransaction(): void {
@@ -127,6 +98,7 @@ export class TransactionsMainComponent implements OnInit {
           inflow: Number(this.newInflow)
         }
         this.transactions.unshift(newTransaction);
+        this.infoService.setTransactions(this.transactions);
         this.addingTransaction = false;
         this.newAccount = undefined;
         this.newCategory = undefined;
@@ -142,6 +114,7 @@ export class TransactionsMainComponent implements OnInit {
         console.log(this.newInflow);
         console.log(typeof this.newOutflow);
       }
+      this.filterTransactions();
   }
 
   collectAccount(event: any): void {

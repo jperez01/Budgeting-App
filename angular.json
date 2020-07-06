@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "budgeting"
+    }
+  },
+  "defaultProject": "budgeting",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

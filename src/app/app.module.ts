@@ -10,6 +10,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { Settings } from './components/settings/settings.component';
 import { HeaderAccountComponent } from './components/header-account/header-account.component';
+import { StoreModule } from '@ngrx/store';
+import { infoReducer } from './state/info.reducer';
+import { reducer } from './reducers/index';
 
 
 @NgModule({
@@ -25,7 +28,8 @@ import { HeaderAccountComponent } from './components/header-account/header-accou
     BrowserAnimationsModule,
     ChartsModule,
     OverviewModule,
-    TransactionsModule
+    TransactionsModule,
+    StoreModule.forRoot({info: reducer})
   ],
   providers: [],
   bootstrap: [AppComponent]
