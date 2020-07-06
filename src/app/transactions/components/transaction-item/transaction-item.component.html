@@ -12,10 +12,18 @@
 </div>
 <div *ngIf="changingValue" [ngClass]="'item-background'" [ngStyle]="{'background-color': background}">
     <div [ngClass]="'item'">
-        <input *ngIf="!filtered"  [ngClass]="'item-input'" value={{item.account}} (change)="collectAccount($event)">
+        <select (change)="collectAccount($event)" *ngIf="!filtered" [ngClass]="'item-dropdown'">
+            <option label="Default" [value]="'default'">Default</option>
+            <option *ngFor="let account of accountNames; let i = index" [value]="i + ' ' + account">{{account}}</option>
+        </select>
         <p *ngIf="filtered"  [ngClass]="'item-account'">{{item.account}}</p>
         <input [ngClass]="'item-input'" value={{date_string}} (change)="collectDate($event)">
-        <input [ngClass]="'item-category'" value={{item.category}} (change)="collectCategory($event)">
+        <select [ngClass]="'category-dropdown'" (change)="collectCategory($event)">
+            <option label="Default" [value]="'default'">Default</option>
+            <optgroup *ngFor="let group of budgetNames;let i = index" label="{{group.title}}">
+                <option *ngFor="let item of group.items; let in = index" label="{{item}}" [value]="in + ',' + i + ' '+ item">{{item}}</option>
+            </optgroup>
+        </select>
         <input [ngClass]="'item-description'" value={{item.description}} (change)="collectDescription($event)">
         <input [ngClass]="'item-input'" value={{outflow}} (change)="collectOutflow($event)">
         <input [ngClass]="'item-input'" value={{inflow}} (change)="collectInflow($event)">

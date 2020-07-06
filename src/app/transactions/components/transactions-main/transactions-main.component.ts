@@ -52,12 +52,16 @@ export class TransactionsMainComponent implements OnInit {
   }
 
   filterTransactions(): void {
-    this.filtered_transactions = [];
-    this.transactions.forEach(transaction => {
-      if (transaction.account.localeCompare(this.name) === 0) {
-        this.filtered_transactions.push(transaction);
-      }
-    });
+    if (this.name.localeCompare('All') === 0) {
+      this.filtered_transactions = this.transactions;
+    } else {
+      this.filtered_transactions = [];
+      this.transactions.forEach(transaction => {
+        if (transaction.account.localeCompare(this.name) === 0) {
+          this.filtered_transactions.push(transaction);
+        }
+      });
+    }
   }
 
   formatMoney(value: any): string {
@@ -81,8 +85,18 @@ export class TransactionsMainComponent implements OnInit {
   }
 
   changeTransaction(info: any): void {
+    console.log(info);
     this.transactions[info.index] = info.transaction;
     this.infoService.setTransactions(this.transactions);
+    if (info.accountIndex !== null) {
+      let accIndex = Number(info.accountIndex);
+      this.infoService.changeAccountInfo(accIndex, info.difference);
+    }
+    if (info.itemIndex !== null && info.groupIndex !== null) {
+      let itmIndex = Number(info.itemIndex);
+      let grpIndex = Number(info.groupIndex);
+      this.infoService.changeBudgetInfo(grpIndex, itmIndex, info.difference);
+    }
     this.filterTransactions();
   }
 

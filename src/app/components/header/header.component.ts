@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BudgetingInfoService } from '../../state/budgeting-info.service';
 
 @Component({
   selector: 'app-header',
@@ -7,19 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   accounts;
-  constructor() { }
+  constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
-    this.accounts = [
-      {
-        name: 'American Express',
-        balance: 1000
-      },
-      {
-        name: 'John Savings',
-        balance: -1000
-      }
-    ]
+    this.accounts = this.infoService.getAccounts();
+    setInterval(() => {
+      this.accounts = this.infoService.getAccounts();
+    }, 500);
   }
 
 }

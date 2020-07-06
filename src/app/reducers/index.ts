@@ -127,7 +127,7 @@ export const selectTransactions = createSelector(
 
 export const selectAccounts = createSelector(
   selectFeature,
-  (state: State) => state.accounts
+  (state: State) => initialState.accounts
 );
 
 export const selectBudget = createSelector(

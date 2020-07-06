@@ -2,6 +2,24 @@
     border-bottom: 1px solid #b6bec2;
     margin: 0px 24px;
 }
+
+.item-dropdown {
+    pointer-events: auto;
+    font-family: 'Proxima Nova Medium';
+    font-size: 18px;
+    border-radius: 5px;
+    width: 14%;
+    margin: 0 1% 0 0;
+}
+
+.category-dropdown {
+    width: 19%;
+    margin: 0 1% 0 0;
+    pointer-events: auto;
+    font-family: 'Proxima Nova Medium';
+    font-size: 18px;
+    border-radius: 5px;
+}
 .item {
     height: 30px;
     display: flex;

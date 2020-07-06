@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { BudgetingInfoService } from '../../../state/budgeting-info.service';
 
 @Component({
   selector: 'app-transaction-item',
@@ -23,8 +24,13 @@ export class TransactionItemComponent implements OnInit {
   newDescription:string;
   newInflow:number;
   newOutflow:number;
+  groupIndex:number;
+  itemIndex:number;
+  accountIndex:number;
   styleChange:any;
-  constructor() { }
+  budgetNames:any[];
+  accountNames:any[];
+  constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
     this.sentItem = false;
@@ -40,11 +46,17 @@ export class TransactionItemComponent implements OnInit {
     this.newInflow = this.inflow;
     this.newOutflow = this.outflow;
     this.newDescription = this.item.description;
+    this.budgetNames = this.infoService.getBudgetNames();
+    this.accountNames = this.infoService.getAccountNames();
+    this.itemIndex = null;
+    this.accountIndex = null;
+    this.groupIndex = null;
   }
 
   confirmChanges(): void {
     if (this.newAccount !== undefined && this.newCategory !== undefined && this.newDate !== undefined
-      && this.newDescription !== undefined && this.newInflow !== undefined && this.newOutflow !== undefined) {
+      && this.newDescription !== undefined && this.newInflow !== undefined && this.newOutflow !== undefined
+      && this.itemIndex !== undefined && this.accountIndex !== undefined && this.groupIndex !== undefined) {
         let newTransaction = {
           account: this.newAccount,
           date: new Date(this.newDate),
@@ -53,9 +65,16 @@ export class TransactionItemComponent implements OnInit {
           outflow: Number(this.newOutflow),
           inflow: Number(this.newInflow)
         }
+        let newDiff = newTransaction.inflow - newTransaction.outflow;
+        let oldDiff = this.inflow - this.outflow;
+        let totalDiff = newDiff - oldDiff;
         let sentObject = {
           transaction: newTransaction,
-          index: this.index
+          index: this.index,
+          itemIndex: this.itemIndex,
+          groupIndex: this.groupIndex,
+          accountIndex: this.accountIndex,
+          difference: totalDiff
         }
         this.sendTransaction.emit(sentObject);
         this.newAccount = this.item.account;
@@ -73,7 +92,6 @@ export class TransactionItemComponent implements OnInit {
         console.log(this.newDate);
         console.log(this.newOutflow);
         console.log(this.newInflow);
-        console.log(typeof this.newOutflow);
       }
   }
 
@@ -106,10 +124,19 @@ export class TransactionItemComponent implements OnInit {
   }
 
   collectAccount(event: any): void {
-    if (event.target.value.localeCompare('') !== 0) {
-      this.newAccount = event.target.value;
+    if (event.target.value.localeCompare('default') !== 0) {
+      let str = event.target.value;
+      let account = str.substring(str.indexOf(' '));
+      if (account.localeCompare('') !== 0) {
+        this.newAccount = account;
+        this.accountIndex = str.substring(0, str.indexOf(' '));
+      } else {
+        this.newAccount = undefined;
+        this.accountIndex = undefined;
+      }
     } else {
-      this.newAccount = undefined;
+      this.newAccount = this.newAccount;
+      this.accountIndex = null;
     }
   }
 
@@ -122,10 +149,22 @@ export class TransactionItemComponent implements OnInit {
   }
 
   collectCategory(event: any): void {
-    if (event.target.value.localeCompare('') !== 0) {
-      this.newCategory = event.target.value;
+    if (event.target.value.localeCompare('default') === 0) {
+      this.groupIndex = null;
+      this.itemIndex = null;
+      this.newCategory = this.newCategory;
     } else {
-      this.newCategory = undefined;
+      let str = event.target.value;
+      let category = str.substring(str.indexOf(' '));
+      if (category.localeCompare('') !== 0) {
+        this.groupIndex = str.substring(1 + str.indexOf(','), str.indexOf(' '));
+        this.itemIndex = str.substring(0, str.indexOf(','));
+        this.newCategory = category;
+      } else {
+        this.newCategory = undefined;
+        this.itemIndex = undefined;
+        this.groupIndex = undefined;
+      }
     }
   }
 

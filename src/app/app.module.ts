@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 
+import { BudgetingInfoService } from './state/budgeting-info.service';
 import { OverviewModule } from './overview/overview.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,7 +32,7 @@ import { reducer } from './reducers/index';
     TransactionsModule,
     StoreModule.forRoot({info: reducer})
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [BudgetingInfoService],
+  bootstrap: [AppComponent, BudgetingInfoService]
 })
 export class AppModule { }
