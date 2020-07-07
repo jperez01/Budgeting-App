@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import DateInfo from '../../../shared/date/dateInfo';
-import { ThemeService } from 'ng2-charts';
+import { BudgetingInfoService } from '../../../state/budgeting-info.service';
 
 @Component({
   selector: 'app-budget-main',
@@ -16,7 +16,7 @@ export class BudgetMainComponent implements OnInit {
   groups:any;
   addingGroup:boolean;
   newName:string;
-  constructor() { }
+  constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
     this.newName = undefined;
@@ -25,47 +25,7 @@ export class BudgetMainComponent implements OnInit {
     this.current_month = this.info.getMonthAsString();
     this.current_year = this.info.getYear();
     this.sign = false;
-    this.groups = [
-      {
-        title: 'Food',
-        items: [
-          {
-            name: 'Groceries',
-            budgeted: 100,
-            received: 200
-          },
-          {
-            name: 'Dining Out',
-            budgeted: 100,
-            received: 200
-          },
-          {
-            name: 'Snacks',
-            budgeted: 300,
-            received: 200
-          }
-        ],
-        total_budgeted: 500,
-        total_received: 600
-      },
-      {
-        title: 'Debts',
-        items: [
-          {
-            name: 'Student Loan',
-            budgeted: 100,
-            received: 200
-          },
-          {
-            name: 'Mortgage',
-            budgeted: 100,
-            received: 200
-          }
-        ],
-        total_budgeted: 200,
-        total_received: 400
-      }
-    ];
+    this.groups = this.infoService.getBudget();
     this.calculateTotalBudget();
   }
 
@@ -74,6 +34,7 @@ export class BudgetMainComponent implements OnInit {
     this.groups[info.groupIndex].items[info.itemIndex] = info.item;
     this.updateGroupTotal(info.groupIndex);
     this.calculateTotalBudget();
+    this.infoService.setBudget(this.groups);
     this.groups = this.groups.slice();
   }
 
@@ -86,6 +47,7 @@ export class BudgetMainComponent implements OnInit {
     this.groups[info.groupIndex].items.push(newItem);
     this.updateGroupTotal(info.groupIndex);
     this.calculateTotalBudget();
+    this.infoService.setBudget(this.groups);
     this.groups = this.groups.slice();
   }
 
@@ -121,6 +83,7 @@ export class BudgetMainComponent implements OnInit {
       this.groups.push(newGroup);
       this.newName = undefined;
       this.addingGroup = false;
+      this.infoService.setBudget(this.groups);
     }
   }
 

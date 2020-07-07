@@ -25,6 +25,16 @@ export class GroupComponent implements OnInit {
     this.newReceived = 0.00;
   }
 
+  formatMoney(value: any): string {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+  }
+
+  cancelChanges(): void {
+    this.newBudgeted = 0.00;
+    this.addingItem = false;
+    this.newName = 'Default';
+  }
+
   bubbleValue(event: any): void {
     this.valueBubble.emit(event);
   }

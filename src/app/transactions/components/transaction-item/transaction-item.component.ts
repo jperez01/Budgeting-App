@@ -27,12 +27,16 @@ export class TransactionItemComponent implements OnInit {
   groupIndex:number;
   itemIndex:number;
   accountIndex:number;
+  oldGroupIndex:number;
+  oldItemIndex:number;
+  oldAccountIndex:number;
   styleChange:any;
   budgetNames:any[];
   accountNames:any[];
   constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
+
     this.sentItem = false;
     this.background = '';
     this.line = '1px solid #b6bec2';
@@ -51,12 +55,22 @@ export class TransactionItemComponent implements OnInit {
     this.itemIndex = null;
     this.accountIndex = null;
     this.groupIndex = null;
+    this.oldAccountIndex = null;
+    this.oldGroupIndex = null;
+    this.oldItemIndex = null;
+    console.log(this.budgetNames);
   }
 
   confirmChanges(): void {
     if (this.newAccount !== undefined && this.newCategory !== undefined && this.newDate !== undefined
       && this.newDescription !== undefined && this.newInflow !== undefined && this.newOutflow !== undefined
       && this.itemIndex !== undefined && this.accountIndex !== undefined && this.groupIndex !== undefined) {
+        if (this.itemIndex === null && this.groupIndex === null) {
+          this.collectDefaultCategory();
+        }
+        if (this.accountIndex === null) {
+          this.collectDefaultAccount();
+        }
         let newTransaction = {
           account: this.newAccount,
           date: new Date(this.newDate),
@@ -74,7 +88,12 @@ export class TransactionItemComponent implements OnInit {
           itemIndex: this.itemIndex,
           groupIndex: this.groupIndex,
           accountIndex: this.accountIndex,
-          difference: totalDiff
+          oldItemIndex: this.oldItemIndex,
+          oldGroupIndex: this.oldGroupIndex,
+          oldAccountIndex: this.oldAccountIndex,
+          difference: totalDiff,
+          oldDiff: oldDiff,
+          newDiff: newDiff
         }
         this.sendTransaction.emit(sentObject);
         this.newAccount = this.item.account;
@@ -84,8 +103,6 @@ export class TransactionItemComponent implements OnInit {
         this.newOutflow = this.outflow;
         this.newDescription = this.item.description;
         this.changingValue = false;
-        this.background = '';
-        this.line = '1px solid #b6bec2';
       } else {
         console.log(this.newAccount);
         console.log(this.newCategory);
@@ -123,6 +140,26 @@ export class TransactionItemComponent implements OnInit {
     return month + '/' + day + '/' + year;
   }
 
+  collectDefaultAccount(): void {
+    let initialIndex = 0;
+    this.accountNames.forEach(name => {
+      if (name.localeCompare(this.item.account) === 0) {
+        this.accountIndex = initialIndex;
+      }
+      initialIndex++;
+    });
+  }
+
+  collectOldAccount(): void {
+    let initialIndex = 0;
+    this.accountNames.forEach(name => {
+      if (name.localeCompare(this.item.account) === 0) {
+        this.oldAccountIndex = initialIndex;
+      }
+      initialIndex++;
+    });
+  }
+
   collectAccount(event: any): void {
     if (event.target.value.localeCompare('default') !== 0) {
       let str = event.target.value;
@@ -134,9 +171,9 @@ export class TransactionItemComponent implements OnInit {
         this.newAccount = undefined;
         this.accountIndex = undefined;
       }
+      this.collectOldAccount();
     } else {
-      this.newAccount = this.newAccount;
-      this.accountIndex = null;
+      this.collectDefaultAccount();
     }
   }
 
@@ -148,11 +185,43 @@ export class TransactionItemComponent implements OnInit {
     }
   }
 
+  collectDefaultCategory(): void {
+    let initialIndex = 0;
+    console.log(this.item.category);
+    this.budgetNames.forEach(group => {
+      group.items.forEach(item => {
+        let innerIndex = 0;
+        if (this.item.category.localeCompare(item) === 0) {
+          this.groupIndex = initialIndex;
+          this.itemIndex = innerIndex;
+        } else {
+          innerIndex++;
+        }
+      })
+      initialIndex++;
+    });
+  }
+
+  collectOldCategory(): void {
+    let initialIndex = 0;
+    console.log(this.item.category);
+    this.budgetNames.forEach(group => {
+      group.items.forEach(item => {
+        let innerIndex = 0;
+        if (this.item.category.localeCompare(item) === 0) {
+          this.oldGroupIndex = initialIndex;
+          this.oldItemIndex = innerIndex;
+        } else {
+          innerIndex++;
+        }
+      })
+      initialIndex++;
+    });
+  }
+
   collectCategory(event: any): void {
     if (event.target.value.localeCompare('default') === 0) {
-      this.groupIndex = null;
-      this.itemIndex = null;
-      this.newCategory = this.newCategory;
+      this.collectDefaultCategory();
     } else {
       let str = event.target.value;
       let category = str.substring(str.indexOf(' '));
@@ -165,6 +234,7 @@ export class TransactionItemComponent implements OnInit {
         this.itemIndex = undefined;
         this.groupIndex = undefined;
       }
+      this.collectOldCategory();
     }
   }
 

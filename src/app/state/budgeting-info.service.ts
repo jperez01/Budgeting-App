@@ -65,6 +65,8 @@ export class BudgetingInfoService {
 
   setBudget(newBudget:BudgetGroup[]) {
     this.budget = newBudget;
+    this.changeAccountNames();
+    this.changeBudgetNames();
   }
 
   setTransactions(newTransactions:Transaction[]) {
@@ -85,9 +87,55 @@ export class BudgetingInfoService {
     this.accounts[index] = newAccount;
   }
 
+  changeOldAccountInfo(index, difference) {
+    let oldAccount = this.accounts[index];
+    let newAccount = {
+      name: oldAccount.name,
+      balance: oldAccount.balance
+    }
+    newAccount.balance -= difference;
+    this.accounts[index] = newAccount;
+  }
   changeBudgetInfo(groupIndex, itemIndex, difference) {
+    let trimmedDiff = Math.round(difference * 1e2) / 1e2;
     let newBudget = this.budget[groupIndex].items[itemIndex];
-    newBudget.received += difference;
-    this.budget[groupIndex].total_received += difference;
+    newBudget.received += trimmedDiff;
+    this.budget[groupIndex].total_received += trimmedDiff;
+  }
+
+  changeOldBudgetInfo(groupIndex, itemIndex, difference) {
+    let trimmedDiff = Math.round(difference * 1e2) / 1e2;
+    let newBudget = this.budget[groupIndex].items[itemIndex];
+    newBudget.received -= trimmedDiff;
+    this.budget[groupIndex].total_received -= trimmedDiff;
+  }
+  changeBudgetNames(): void {
+    this.budgetNames = [];
+    this.budget.forEach(group => {
+      let itemsNames = [];
+      group.items.forEach(item => {
+        itemsNames.push(item.name);
+      })
+      this.budgetNames.push({
+        title: group.title,
+        items: itemsNames
+      });
+    });
+  }
+
+  changeAccountNames(): void {
+    this.accountNames = [];
+    this.accounts.forEach(account => {
+      this.accountNames.push(account.name);
+    });
+  }
+
+  changeTransactionsWithName(oldName:string, newName:string): void {
+    let comparer = new Intl.Collator();
+    this.transactions.forEach(transaction => {
+      if (comparer.compare(transaction.category, oldName) === 0) {
+        transaction.category = newName;
+      }
+    })
   }
 }

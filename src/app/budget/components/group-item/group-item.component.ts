@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { BudgetingInfoService } from '../../../state/budgeting-info.service';
 
 @Component({
   selector: 'app-group-item',
@@ -20,7 +21,7 @@ export class GroupItemComponent implements OnInit {
   background:string;
   oldItem:any;
 
-  constructor() {
+  constructor(private infoService: BudgetingInfoService) {
     this.changingValue = false;
   }
 
@@ -42,7 +43,14 @@ export class GroupItemComponent implements OnInit {
     }
   }
 
+  formatMoney(value: any): string {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+  }
+  
   sendValue(event: any): void {
+    if (this.name.localeCompare(this.item.name) !== 0) {
+      this.infoService.changeTransactionsWithName(this.item.name, this.name);
+    }
       let newItem = {
         name: this.name,
         budgeted: parseFloat(this.budgeted),
@@ -66,12 +74,6 @@ export class GroupItemComponent implements OnInit {
   collectBudgeted(event: any): void {
     if (event.target.value.localeCompare('') !== 0) {
       this.budgeted = event.target.value;
-    }
-  }
-
-  collectReceived(event: any): void {
-    if (event.target.value.localeCompare('') !== 0) {
-      this.received = event.target.value;
     }
   }
 

@@ -218,3 +218,21 @@
 .new-item-button:hover {
     background-color: rgb(1, 110, 138);
 }
+
+.new-item-dropdown {
+    pointer-events: auto;
+    font-family: 'Proxima Nova Medium';
+    font-size: 18px;
+    border-radius: 5px;
+    width: 14%;
+    margin: 0 1% 0 0;
+}
+
+.new-category-dropdown {
+    width: 19%;
+    margin: 0 1% 0 0;
+    pointer-events: auto;
+    font-family: 'Proxima Nova Medium';
+    font-size: 18px;
+    border-radius: 5px;
+}

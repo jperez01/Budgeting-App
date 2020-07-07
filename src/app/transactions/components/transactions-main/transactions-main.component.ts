@@ -22,15 +22,21 @@ export class TransactionsMainComponent implements OnInit {
   newInflow:number;
   newOutflow:number;
   total_balance:number;
+  budgetNames:any[];
+  accountNames:any[];
+  accountIndex:number;
+  groupIndex:number;
+  itemIndex:number;
 
   constructor(private route: ActivatedRoute, private infoService:BudgetingInfoService) {
-    this.newAccount = undefined;
-    this.newDate = undefined;
-    this.newCategory = undefined;
-    this.newDescription = undefined;
-    this.newInflow = undefined;
-    this.newOutflow = undefined;
+    this.newDate = '06/07/01';
+    this.newDescription = 'Description';
+    this.newInflow = 0.00;
+    this.newOutflow = 0.00;
     this.filtered_transactions = [];
+    this.groupIndex = 0;
+    this.itemIndex = 0;
+    this.accountIndex = 0;
   }
 
   ngOnInit(): void {
@@ -48,7 +54,11 @@ export class TransactionsMainComponent implements OnInit {
         this.filtered = false;
       }
       this.calculateTotalBalance();
-    })
+    });
+    this.accountNames = this.infoService.getAccountNames();
+    this.budgetNames = this.infoService.getBudgetNames();
+    this.newAccount = this.accountNames[0];
+    this.newCategory = this.budgetNames[0].items[0];
   }
 
   filterTransactions(): void {
@@ -68,6 +78,39 @@ export class TransactionsMainComponent implements OnInit {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
   }
 
+  checkForChanges(info): void {
+    if (info.accountIndex !== null) {
+      let accIndex = Number(info.accountIndex);
+      if (info.oldAccountIndex !== null) {
+        this.infoService.changeAccountInfo(accIndex, info.newDiff);
+        this.infoService.changeOldAccountInfo(info.oldAccountIndex, info.oldDiff);
+      } else {
+        this.infoService.changeAccountInfo(accIndex, info.difference);
+      }
+    }
+    if (info.itemIndex !== null && info.groupIndex !== null) {
+      let itmIndex = Number(info.itemIndex);
+      let grpIndex = Number(info.groupIndex);
+      if (info.oldGroupIndex !== null && info.oldItemIndex !== null) {
+        this.infoService.changeBudgetInfo(grpIndex, itmIndex, info.newDiff);
+        this.infoService.changeOldBudgetInfo(info.oldGroupIndex, info.oldItemIndex, info.oldDiff);
+      } else {
+        this.infoService.changeBudgetInfo(grpIndex, itmIndex, info.difference);
+      }
+    }
+  }
+
+  checkforChangesNewTrans(difference): void {
+    if (this.accountIndex !== null) {
+      let accIndex = Number(this.accountIndex);
+      this.infoService.changeAccountInfo(accIndex, difference);
+    }
+    if (this.itemIndex !== null && this.groupIndex !== null) {
+      let itmIndex = Number(this.itemIndex);
+      let grpIndex = Number(this.groupIndex);
+      this.infoService.changeBudgetInfo(grpIndex, itmIndex, difference);
+    }
+  }
   calculateTotalBalance(): void {
     if (this.name.localeCompare('All') === 0) {
       let total = 0;
@@ -84,19 +127,19 @@ export class TransactionsMainComponent implements OnInit {
     }
   }
 
+  resetNewInfo(): void {
+    this.newAccount = this.accountNames[0];
+    this.newCategory = this.budgetNames[0].items[0];
+    this.newDate = '06/21/01';
+    this.newInflow = 0.00;
+    this.newOutflow = 0.00;
+    this.newDescription = 'Description';
+  }
+
   changeTransaction(info: any): void {
-    console.log(info);
     this.transactions[info.index] = info.transaction;
     this.infoService.setTransactions(this.transactions);
-    if (info.accountIndex !== null) {
-      let accIndex = Number(info.accountIndex);
-      this.infoService.changeAccountInfo(accIndex, info.difference);
-    }
-    if (info.itemIndex !== null && info.groupIndex !== null) {
-      let itmIndex = Number(info.itemIndex);
-      let grpIndex = Number(info.groupIndex);
-      this.infoService.changeBudgetInfo(grpIndex, itmIndex, info.difference);
-    }
+    this.checkForChanges(info);
     this.filterTransactions();
   }
 
@@ -111,15 +154,12 @@ export class TransactionsMainComponent implements OnInit {
           outflow: Number(this.newOutflow),
           inflow: Number(this.newInflow)
         }
+        let difference = newTransaction.inflow - newTransaction.outflow;
+        this.checkforChangesNewTrans(difference);
         this.transactions.unshift(newTransaction);
         this.infoService.setTransactions(this.transactions);
         this.addingTransaction = false;
-        this.newAccount = undefined;
-        this.newCategory = undefined;
-        this.newDate = undefined;
-        this.newInflow = undefined;
-        this.newOutflow = undefined;
-        this.newDescription = undefined;
+        this.resetNewInfo();
       } else {
         console.log(this.newAccount);
         console.log(this.newCategory);
@@ -132,15 +172,20 @@ export class TransactionsMainComponent implements OnInit {
   }
 
   collectAccount(event: any): void {
-    if (event.target.value.localeCompare('Account') !== 0 && event.target.value.localeCompare('') !== 0) {
-      this.newAccount = event.target.value;
+    if (event.target.value.localeCompare('') !== 0) {
+      let str = event.target.value;
+      let account = str.substring(str.indexOf(' '));
+      this.newAccount = account;
+      this.accountIndex = str.substring(0, str.indexOf(' '));
+      console.log(this.newAccount);
+      console.log(this.accountIndex);
     } else {
       this.newAccount = undefined;
     }
   }
 
   collectDate(event: any): void {
-    if (event.target.value.localeCompare('06/20/01') !== 0 && event.target.value.localeCompare('') !== 0) {
+    if (event.target.value.localeCompare('') !== 0) {
       this.newDate = event.target.value;
     } else {
       this.newDate = undefined;
@@ -148,15 +193,19 @@ export class TransactionsMainComponent implements OnInit {
   }
 
   collectCategory(event: any): void {
-    if (event.target.value.localeCompare('Category') !== 0 && event.target.value.localeCompare('') !== 0) {
-      this.newCategory = event.target.value;
-    } else {
-      this.newCategory = undefined;
+    if (event.target.value.localeCompare('') !== 0) {
+      let str = event.target.value;
+      let category = str.substring(str.indexOf(' '));
+      if (category.localeCompare('') !== 0) {
+        this.groupIndex = str.substring(1 + str.indexOf(','), str.indexOf(' '));
+        this.itemIndex = str.substring(0, str.indexOf(','));
+        this.newCategory = category;
+      }
     }
   }
 
   collectDescription(event: any): void {
-    if (event.target.value.localeCompare('Description') !== 0 && event.target.value.localeCompare('') !== 0) {
+    if (event.target.value.localeCompare('') !== 0) {
       this.newDescription = event.target.value;
     } else {
       this.newDescription = undefined;

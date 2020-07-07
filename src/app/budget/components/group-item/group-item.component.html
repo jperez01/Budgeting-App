@@ -1,9 +1,9 @@
 <div *ngIf="!changingValue"  [ngClass]="'item-background'" (click)="changeStyle()">
     <div [ngClass]="'group-item'">
         <input [ngClass]="'group-name'" value={{item.name}}>
-        <input id="budgeted" (blur)="sendValue($event)" [ngClass]="'group-amount'" value={{item.budgeted}}>
-        <input id="received" (blur)="sendValue($event)" [ngClass]="'group-amount'" value={{item.received}}>
-        <p id="available" [ngClass]="'group-amount'">{{available}}</p>
+        <input id="budgeted" (blur)="sendValue($event)" [ngClass]="'group-amount'" value={{formatMoney(item.budgeted)}}>
+        <input id="received" (blur)="sendValue($event)" [ngClass]="'group-amount'" value={{formatMoney(item.received)}}>
+        <p id="available" [ngClass]="'group-amount'">{{formatMoney(available)}}</p>
     </div>
     <div [ngClass]="'border-line'"></div>
 </div>
@@ -11,8 +11,8 @@
     <div [ngClass]="'group-item'">
         <input [ngClass]="'group-name'" value="{{item.name}}" (change)="collectName($event)">
         <input (change)="collectBudgeted($event)" [ngClass]="'group-amount'" value={{item.budgeted}}>
-        <input (change)="collectReceived($event)" [ngClass]="'group-amount'" value="{{item.received}}">
-        <p id="available" [ngClass]="'group-amount'">{{available}}</p>
+        <p [ngClass]="'group-amount'">{{formatMoney(item.received)}}</p>
+        <p id="available" [ngClass]="'group-amount'">{{formatMoney(available)}}</p>
     </div>
     <div [ngClass]="'new-item-buttons'">
         <button [ngClass]="'new-item-button'" (click)="sendValue($event)"> Save </button>

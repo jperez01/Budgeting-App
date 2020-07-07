@@ -22,9 +22,15 @@
         </div>
         <div *ngIf="addingTransaction" [ngClass]="'new-item-full'">
             <div [ngClass]="'new-item'">
-                <input [ngClass]="'item-input'" value='Account' (change)="collectAccount($event)">
+                <select (change)="collectAccount($event)" *ngIf="!filtered" [ngClass]="'new-item-dropdown'">
+                    <option *ngFor="let account of accountNames; let i = index" [value]="i + ' ' + account">{{account}}</option>
+                </select>
                 <input [ngClass]="'item-input'" value='06/20/01' (change)="collectDate($event)">
-                <input [ngClass]="'item-category'" value='Category' (change)="collectCategory($event)">
+                <select [ngClass]="'new-category-dropdown'" (change)="collectCategory($event)">
+                    <optgroup *ngFor="let group of budgetNames;let i = index" label="{{group.title}}">
+                        <option *ngFor="let item of group.items; let in = index" label="{{item}}" [value]="in + ',' + i + ' '+ item">{{item}}</option>
+                    </optgroup>
+                </select>
                 <input [ngClass]="'item-description'" value='Description' (change)="collectDescription($event)">
                 <input [ngClass]="'item-input'" value='0.00' (change)="collectOutflow($event)">
                 <input [ngClass]="'item-input'" value='0.00' (change)="collectInflow($event)">
