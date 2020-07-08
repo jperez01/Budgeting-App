@@ -4,14 +4,15 @@
 }
 
 .budget-elem {
-    font-family: 'Sofia Pro Regular';
+    font-family: 'Proxima Nova Regular';
     font-size: 18px;
+    font-weight: 700;
     margin: 5px 0px;
 }
 
 .budget-amount {
     text-align: center;
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Regular';
     font-size: 22px;
     margin-bottom: 5px;
     margin-top: 0px;
@@ -19,7 +20,7 @@
 
 .budget-label {
     margin: 0px;
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Medium';
     font-size: 14px;
     color: #a5a9b3;
     text-align: center;

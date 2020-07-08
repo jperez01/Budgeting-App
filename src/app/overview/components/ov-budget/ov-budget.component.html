@@ -4,17 +4,17 @@
         <canvas id="BudgetChart"></canvas>
     </div>
     <div [ngClass]="'chart-info'">
-        <h4 [ngClass]="'budget-amount'"> {{budget}} </h4>
-        <p [ngClass]="'budget-label'"> Spent </p>
+        <h4 [ngClass]="'budget-amount'"> {{formatMoney(budgeted)}} </h4>
+        <p [ngClass]="'budget-label'"> Budgeted </p>
     </div>
 </div>
 <div [ngClass]="'budget-info'">
     <div [ngClass]="'budget-cluster'">
-        <p [ngClass]="'budget-elem'"> {{limit}} </p>
-        <p [ngClass]="'budget-label'"> Monthly Limit </p>
+        <p [ngClass]="'budget-elem'"> {{formatMoney(available)}} </p>
+        <p [ngClass]="'budget-label'"> Available </p>
     </div>
     <div [ngClass]="'budget-cluster'">
-        <p [ngClass]="'budget-elem'"> {{remaining}} </p>
-        <p [ngClass]="'budget-label'"> Remaining </p>
+        <p [ngClass]="'budget-elem'"> {{formatMoney(received)}} </p>
+        <p [ngClass]="'budget-label'"> Used </p>
     </div>
 </div>

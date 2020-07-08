@@ -14,16 +14,17 @@
 }
 
 .link {
-    font-family: 'Sofia Pro Regular';
+    font-family: 'Proxima Nova Medium';
     font-size: 18px;
     text-decoration: none;
     color: black;
     margin-left: 10px;
+    line-height: 24px;
 }
 
 .account {
     margin: auto;
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Regular';
     font-size: 15px;
     text-decoration: none;
     color: black;
@@ -32,7 +33,7 @@
 }
 
 .title {
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Regular';
     font-size: 15px;
     margin: auto;
     margin-left: 10px;

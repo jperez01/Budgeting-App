@@ -1,0 +1,14 @@
+<div [ngClass]="'dropdown-group'">
+    <select [ngClass]="'item-dropdown'" (change)="collectMonth($event)">
+        <option *ngFor="let month of possibleMonths" [value]="month" [selected]="checkSelection(currentMonth, month)">{{month}}</option>
+    </select>
+    <select [ngClass]="'item-dropdown'"  (change)="collectDay($event)">
+        <option *ngFor="let day of possibleDays" [value]="day" [selected]="checkSelection(currentDay, day)">{{day}}</option>
+        <option *ngIf="isLeapYear || has30Days || has31Days" [value]="29" [selected]="checkSelection(currentDay, 29)">29</option>
+        <option *ngIf="has30Days" [value]="30" [selected]="checkSelection(currentDay, 30)">30</option>
+        <option *ngIf="has31Days" [value]="31" [selected]="checkSelection(currentDay, 31)">31</option>
+    </select>
+    <select [ngClass]="'item-dropdown'"  (change)="collectYear($event)">
+        <option *ngFor="let year of possibleYears" [value]="year" [selected]="checkSelection(currentYear, year)">{{year}}</option>
+    </select>
+</div>

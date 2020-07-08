@@ -236,3 +236,8 @@
     font-size: 18px;
     border-radius: 5px;
 }
+
+.date-picker {
+    pointer-events: auto;
+    margin-right: 1%;
+}

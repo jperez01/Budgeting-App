@@ -12,7 +12,7 @@
 }
 
 .balance {
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Light';
     font-size: 30px;
     margin-top: 5px;
     margin-bottom: 20px;
@@ -22,10 +22,10 @@
 }
 .info-title {
     margin: 10px 0px;
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Regular';
 }
 
 .info-content {
     margin: 5px 0px;
-    font-family: 'Sofia Pro Regular';
+    font-family: 'Proxima Nova Medium';
 }

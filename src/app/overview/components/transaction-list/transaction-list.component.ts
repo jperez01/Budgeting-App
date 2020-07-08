@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Transaction from '../../models/transaction';
+import { BudgetingInfoService } from '../../../state/budgeting-info.service';
 
 @Component({
   selector: 'app-transaction-list',
@@ -9,43 +10,10 @@ import Transaction from '../../models/transaction';
 export class TransactionListComponent implements OnInit {
   transactions:Transaction[];
 
-  constructor() { }
+  constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
-    this.transactions = [
-      {
-        id: 1,
-        name: "Starbucks",
-        picurl: "",
-        amount: 1232,
-        taken: true,
-        date: 'December 15, 2019'
-      },
-      {
-        id: 2,
-        name: "McDonalds",
-        picurl: "",
-        amount: 10,
-        taken: false,
-        date: 'February 15, 2019'
-      },
-      {
-        id: 2,
-        name: "McDonalds",
-        picurl: "",
-        amount: 10,
-        taken: false,
-        date: 'February 15, 2019'
-      },
-      {
-        id: 2,
-        name: "McDonalds",
-        picurl: "",
-        amount: 10,
-        taken: false,
-        date: 'February 15, 2019'
-      }
-    ]
+    this.transactions = this.infoService.getTransactions();
   }
 
 }

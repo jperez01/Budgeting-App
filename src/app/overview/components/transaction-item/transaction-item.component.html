@@ -1,11 +1,10 @@
 <div [ngClass]="'transaction'">
-    <img [ngClass]="'item-image'" src="https://cdn2.iconfinder.com/data/icons/travel-181/64/17-travel-512.png"/>
     <div>
-        <p [ngClass]="'trans-name'">
-            {{ transaction.name }}
-        </p>
+        <h3 [ngClass]="'trans-name'">
+            {{ transaction.description }}
+        </h3>
         <p [ngClass]="'trans-date'">
-            {{ transaction.date }}
+            {{ date }}
         </p>
     </div>
     <p [ngClass]="'item-cost'">

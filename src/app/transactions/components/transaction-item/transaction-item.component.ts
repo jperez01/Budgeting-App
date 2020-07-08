@@ -58,7 +58,6 @@ export class TransactionItemComponent implements OnInit {
     this.oldAccountIndex = null;
     this.oldGroupIndex = null;
     this.oldItemIndex = null;
-    console.log(this.budgetNames);
   }
 
   confirmChanges(): void {
@@ -163,7 +162,7 @@ export class TransactionItemComponent implements OnInit {
   collectAccount(event: any): void {
     if (event.target.value.localeCompare('default') !== 0) {
       let str = event.target.value;
-      let account = str.substring(str.indexOf(' '));
+      let account = str.substring(str.indexOf(' ') + 1);
       if (account.localeCompare('') !== 0) {
         this.newAccount = account;
         this.accountIndex = str.substring(0, str.indexOf(' '));
@@ -178,8 +177,8 @@ export class TransactionItemComponent implements OnInit {
   }
 
   collectDate(event: any): void {
-    if (event.target.value.localeCompare('') !== 0) {
-      this.newDate = event.target.value;
+    if (event.localeCompare('') !== 0) {
+      this.newDate = event;
     } else {
       this.newDate = undefined;
     }
@@ -187,7 +186,6 @@ export class TransactionItemComponent implements OnInit {
 
   collectDefaultCategory(): void {
     let initialIndex = 0;
-    console.log(this.item.category);
     this.budgetNames.forEach(group => {
       group.items.forEach(item => {
         let innerIndex = 0;
@@ -204,7 +202,6 @@ export class TransactionItemComponent implements OnInit {
 
   collectOldCategory(): void {
     let initialIndex = 0;
-    console.log(this.item.category);
     this.budgetNames.forEach(group => {
       group.items.forEach(item => {
         let innerIndex = 0;
@@ -224,7 +221,7 @@ export class TransactionItemComponent implements OnInit {
       this.collectDefaultCategory();
     } else {
       let str = event.target.value;
-      let category = str.substring(str.indexOf(' '));
+      let category = str.substring(str.indexOf(' ') + 1);
       if (category.localeCompare('') !== 0) {
         this.groupIndex = str.substring(1 + str.indexOf(','), str.indexOf(' '));
         this.itemIndex = str.substring(0, str.indexOf(','));

@@ -3,6 +3,10 @@
     margin: 0px 24px;
 }
 
+.date-picker {
+    pointer-events: auto;
+    margin-right: 1%;
+}
 .item-dropdown {
     pointer-events: auto;
     font-family: 'Proxima Nova Medium';

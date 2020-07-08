@@ -4,6 +4,8 @@
     align-items: center;
     margin: 10px 20px;
     transition: background-color .1s;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
 .transaction:hover {
@@ -17,14 +19,15 @@
 }
 
 .trans-name {
-    font-family: 'Sofia Pro Regular';
+    font-family: 'Proxima Nova Regular';
     margin: 0;
     font-size: 16px;
     color: #4b525a;
+    margin-bottom: 3px;
 }
 
 .trans-date {
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Medium';
     margin: 0;
     font-size: 12px;
     color: #999eaa;

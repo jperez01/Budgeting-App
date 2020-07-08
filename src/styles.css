@@ -53,7 +53,7 @@
     color: white;
 }
 .item-name {
-    font-family: 'Sofia Pro Regular';
+    font-family: 'Proxima Nova Medium';
     margin: 0;
     font-size: 16px;
     color: #4b525a;
@@ -62,7 +62,7 @@
     margin: auto;
     margin-right: 10px;
     font-size: 16px;
-    font-family: 'Sofia Pro Regular';
+    font-family: 'Proxima Nova Medium';
 }
 
 .list-header {
@@ -78,7 +78,7 @@
 }
 
 .list-name {
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Regular';
     font-size: 24px;
     margin: 20px;
     margin-bottom: 10px;

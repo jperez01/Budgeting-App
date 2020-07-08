@@ -141,6 +141,7 @@ export class TransactionsMainComponent implements OnInit {
     this.infoService.setTransactions(this.transactions);
     this.checkForChanges(info);
     this.filterTransactions();
+    this.calculateTotalBalance();
   }
 
   addNewTransaction(): void {
@@ -160,6 +161,7 @@ export class TransactionsMainComponent implements OnInit {
         this.infoService.setTransactions(this.transactions);
         this.addingTransaction = false;
         this.resetNewInfo();
+        this.calculateTotalBalance();
       } else {
         console.log(this.newAccount);
         console.log(this.newCategory);
@@ -174,7 +176,7 @@ export class TransactionsMainComponent implements OnInit {
   collectAccount(event: any): void {
     if (event.target.value.localeCompare('') !== 0) {
       let str = event.target.value;
-      let account = str.substring(str.indexOf(' '));
+      let account = str.substring(str.indexOf(' ') + 1);
       this.newAccount = account;
       this.accountIndex = str.substring(0, str.indexOf(' '));
       console.log(this.newAccount);
@@ -185,8 +187,9 @@ export class TransactionsMainComponent implements OnInit {
   }
 
   collectDate(event: any): void {
-    if (event.target.value.localeCompare('') !== 0) {
-      this.newDate = event.target.value;
+    console.log(event);
+    if (event.localeCompare('') !== 0) {
+      this.newDate = event;
     } else {
       this.newDate = undefined;
     }
@@ -195,7 +198,7 @@ export class TransactionsMainComponent implements OnInit {
   collectCategory(event: any): void {
     if (event.target.value.localeCompare('') !== 0) {
       let str = event.target.value;
-      let category = str.substring(str.indexOf(' '));
+      let category = str.substring(str.indexOf(' ') + 1);
       if (category.localeCompare('') !== 0) {
         this.groupIndex = str.substring(1 + str.indexOf(','), str.indexOf(' '));
         this.itemIndex = str.substring(0, str.indexOf(','));

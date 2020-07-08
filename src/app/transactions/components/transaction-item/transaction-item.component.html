@@ -17,7 +17,7 @@
             <option *ngFor="let account of accountNames; let i = index" [value]="i + ' ' + account">{{account}}</option>
         </select>
         <p *ngIf="filtered"  [ngClass]="'item-account'">{{item.account}}</p>
-        <input [ngClass]="'item-input'" value={{date_string}} (change)="collectDate($event)">
+        <app-trans-date-picker [ngClass]="'date-picker'" (datepicker)="collectDate($event)" [defaultDate]="item.date"></app-trans-date-picker>
         <select [ngClass]="'category-dropdown'" (change)="collectCategory($event)">
             <option label="Default" [value]="'default'">Default</option>
             <optgroup *ngFor="let group of budgetNames;let i = index" label="{{group.title}}">

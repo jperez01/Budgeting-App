@@ -1,0 +1,13 @@
+.item-dropdown {
+    pointer-events: auto;
+    font-family: 'Proxima Nova Medium';
+    font-size: 18px;
+    border-radius: 5px;
+    margin: 0 1% 0 0;
+    height: 30px;
+}
+
+.dropdown-group {
+    display: flex;
+    flex-direction: row;
+}

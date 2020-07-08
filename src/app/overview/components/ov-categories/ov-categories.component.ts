@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Category from '../../models/category';
 import Icons from '../../../shared/icons/icons';
+import { BudgetingInfoService } from '../../../state/budgeting-info.service';
 
 @Component({
   selector: 'app-ov-categories',
@@ -8,44 +9,26 @@ import Icons from '../../../shared/icons/icons';
   styleUrls: ['./ov-categories.component.css']
 })
 export class OvCategoriesComponent implements OnInit {
+  budgetInfo:any[];
   categories:Category[];
   icons:Icons;
-  constructor() { }
+  constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
+    this.budgetInfo = this.infoService.getBudget();
     this.icons = new Icons();
-    this.categories = [
-      {
-        url: this.icons.findIconImg(1),
-        color: this.icons.findColor(1),
-        name: "Food",
-        amount: 0
-      },
-      {
-        url: this.icons.findIconImg(2),
-        color: this.icons.findColor(2),
-        name: "Transportation",
-        amount: 0
-      },
-      {
-        url: this.icons.findIconImg(4),
-        color: this.icons.findColor(4),
-        name: "Utilities",
-        amount: 20
-      },
-      {
-        url: this.icons.findIconImg(3),
-        color: this.icons.findColor(3),
-        name: "Movies",
-        amount: 200
-      },
-      {
-        url: this.icons.findIconImg(0),
-        color: this.icons.findColor(0),
-        name: "Miscellaneous",
-        amount: 20
+    this.categories = [];
+    let index = 0;
+    this.budgetInfo.forEach(group => {
+      let category = {
+        url: this.icons.findIconImg(index),
+        color: this.icons.findColor(index),
+        name: group.title,
+        amount: group.total_budgeted - group.total_received
       }
-    ]
+      this.categories.push(category);
+      index++;
+    })
   }
 
 }

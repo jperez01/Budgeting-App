@@ -12,7 +12,9 @@ export class OvAccountComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.balance = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(this.account.balance);
   }
 
+  formatMoney(number:number): string {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(number);
+  }
 }

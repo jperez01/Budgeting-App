@@ -1,5 +1,5 @@
 .name {
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Medium';
     font-size: 15px;
     text-decoration: none;
     color: black;
@@ -7,8 +7,9 @@
 }
 
 .balance {
-    font-family: 'Sofia Pro Light';
-    margin: 10px 5px 10px auto;
+    font-family: 'Proxima Nova Regular';
+    margin: auto;
+    margin-right: 5px;
 }
 
 .account {

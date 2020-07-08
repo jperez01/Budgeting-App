@@ -99,15 +99,15 @@ export class BudgetingInfoService {
   changeBudgetInfo(groupIndex, itemIndex, difference) {
     let trimmedDiff = Math.round(difference * 1e2) / 1e2;
     let newBudget = this.budget[groupIndex].items[itemIndex];
-    newBudget.received += trimmedDiff;
-    this.budget[groupIndex].total_received += trimmedDiff;
+    newBudget.received -= trimmedDiff;
+    this.budget[groupIndex].total_received -= trimmedDiff;
   }
 
   changeOldBudgetInfo(groupIndex, itemIndex, difference) {
     let trimmedDiff = Math.round(difference * 1e2) / 1e2;
     let newBudget = this.budget[groupIndex].items[itemIndex];
-    newBudget.received -= trimmedDiff;
-    this.budget[groupIndex].total_received -= trimmedDiff;
+    newBudget.received += trimmedDiff;
+    this.budget[groupIndex].total_received += trimmedDiff;
   }
   changeBudgetNames(): void {
     this.budgetNames = [];

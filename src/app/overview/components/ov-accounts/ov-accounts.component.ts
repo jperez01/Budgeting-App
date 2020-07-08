@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Account from '../../models/account';
+import { BudgetingInfoService } from '../../../state/budgeting-info.service';
 
 @Component({
   selector: 'app-ov-accounts',
@@ -10,22 +11,11 @@ export class OvAccountsComponent implements OnInit {
   accounts:Account[];
   currentAccount:Account;
   index:number;
-  constructor() { }
+  constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
     this.index = 0;
-    this.accounts = [
-      {
-        name: "Discover Card",
-        balance: 0,
-        type: "Credit Card"
-      },
-      {
-        name: "BOA Account",
-        balance: 0,
-        type: "Savings Account"
-      }
-    ];
+    this.accounts = this.infoService.getAccounts();
     this.currentAccount = this.accounts[this.index];
   }
   

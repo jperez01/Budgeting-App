@@ -4,6 +4,8 @@
     grid-template-rows: repeat(5, 17%);
     max-width: 340px;
     margin: 0px auto;
+    justify-items: center;
+    margin-bottom: 30px;
 }
 
 .calendar-header {
@@ -16,7 +18,7 @@
 .calendar-header-info {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     height: 40px;
     margin: 15px 10px 10px;
@@ -24,29 +26,32 @@
 
 .calendar-elem {
     display: flex;
-    font-family: 'Sofia Pro Light';
+    font-family: Proxima Nova;
     border-radius: 50px;
-    margin: 10px;
-    padding: 10px;
+    margin: 5px 0px;
+    padding: 5px;
     justify-content: center;
     align-items: center;
     text-align: center;
     line-height: 10px;
     font-size: 14px;
+    height: 20px;
+    width: 20px;
 }
 
 .calendar-elem:hover {
-    background: lightgray;
+    background: #1a73e8;
+    color: white;
 }
 
 .calendar-weekday {
     margin: 0px auto;
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Light';
     color: #b7bac1;
 }
 
 .calendar-month {
-    font-family: 'Sofia Pro Light';
+    font-family: 'Proxima Nova Light';
     font-size: 24px;
     margin: 5px 5px 5px 5px;
 }
