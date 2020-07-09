@@ -42,14 +42,14 @@ export class TransDatePickerComponent implements OnInit {
     for (let i = 1; i < 29; i++) {
       this.possibleDays.push(i);
     }
-    let firstDate = this.currentMonth + '/' + this.currentDay + '/' + this.currentYear;
+    let firstDate = new Date(this.currentYear, this.currentMonth - 1, this.currentDay);
     this.datepicker.emit(firstDate);
     this.checkDayChanges();
   }
 
   sendDateUp(): void {
-    let dateString = this.currentMonth + '/' + this.currentDay + '/' + this.currentYear;
-    this.datepicker.emit(dateString);
+    let date = new Date(this.currentYear, this.currentMonth - 1, this.currentDay);
+    this.datepicker.emit(date);
   }
 
   checkSelection(currentValue, value): boolean {

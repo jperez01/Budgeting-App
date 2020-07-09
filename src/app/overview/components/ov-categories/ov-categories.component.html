@@ -1,7 +1,6 @@
 <div [ngClass]="'cat-list'">
     <div [ngClass]="'list-header'">
         <h4 [ngClass]="'list-name'"> Top Categories</h4>
-        <h4 [ngClass]="'list-all'"> See All </h4>
     </div>
     <app-ov-category-item *ngFor="let category of categories" [category]="category">
     </app-ov-category-item>

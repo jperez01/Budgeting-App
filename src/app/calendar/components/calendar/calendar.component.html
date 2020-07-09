@@ -1,0 +1,30 @@
+<div [ngClass]="'calendar-header'">
+    <button (click)="changeCalendarBackward()">Backward</button>
+    <p [ngClass]="'calendar-month'"> {{current_month}}</p>
+    <p [ngClass]="'calendar-year'"> {{current_year}}</p>
+    <button (click)="changeCalendarForward()">Forward</button>
+</div>
+<div [ngClass]="'row'">
+    <div [ngClass]="'full-calendar'">
+        <div [ngClass]="'calendar-days'">
+            <h4 [ngClass]="'calendar-weekday'"> Sun </h4>
+            <h4 [ngClass]="'calendar-weekday'"> Mon </h4>
+            <h4 [ngClass]="'calendar-weekday'"> Tues </h4>
+            <h4 [ngClass]="'calendar-weekday'"> Wed </h4>
+            <h4 [ngClass]="'calendar-weekday'"> Thus </h4>
+            <h4 [ngClass]="'calendar-weekday'"> Fri </h4>
+            <h4 [ngClass]="'calendar-weekday'"> Sat </h4>
+        </div>
+        <div [ngClass]="'calendar-grid'" *ngIf="!moreThan5Rows">
+            <p *ngFor="let num of blank_front"[ngClass]="'calendar-elem'">{{' '}}</p>
+            <app-calendar-day *ngFor="let num of month_days" [ngClass]="'calendar-elem'" [day]="num" [filtered_trans]="filtered_trans" [info]="info"></app-calendar-day>
+            <p *ngFor="let num of blank_back"[ngClass]="'calendar-elem'">{{' '}}</p>
+        </div>
+        <div [ngClass]="'calendar-grid-6'" *ngIf="moreThan5Rows">
+            <p *ngFor="let num of blank_front"[ngClass]="'calendar-elem'">{{' '}}</p>
+            <app-calendar-day *ngFor="let num of month_days" [ngClass]="'calendar-elem'" [day]="num" [filtered_trans]="filtered_trans" [info]="info"></app-calendar-day>
+            <p *ngFor="let num of blank_back"[ngClass]="'calendar-elem'">{{' '}}</p>
+        </div>
+    </div>
+    <app-chart [ngClass]="'calendar-chart'"></app-chart>
+</div>

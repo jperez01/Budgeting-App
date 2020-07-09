@@ -72,7 +72,7 @@ export class TransactionItemComponent implements OnInit {
         }
         let newTransaction = {
           account: this.newAccount,
-          date: new Date(this.newDate),
+          date: this.newDate,
           category: this.newCategory,
           description: this.newDescription,
           outflow: Number(this.newOutflow),
@@ -177,11 +177,7 @@ export class TransactionItemComponent implements OnInit {
   }
 
   collectDate(event: any): void {
-    if (event.localeCompare('') !== 0) {
-      this.newDate = event;
-    } else {
-      this.newDate = undefined;
-    }
+    this.newDate = event;
   }
 
   collectDefaultCategory(): void {

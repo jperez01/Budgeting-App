@@ -149,7 +149,7 @@ export class TransactionsMainComponent implements OnInit {
       && this.newDescription !== undefined && this.newInflow !== undefined && this.newOutflow !== undefined) {
         let newTransaction = {
           account: this.newAccount,
-          date: new Date(this.newDate),
+          date: this.newDate,
           category: this.newCategory,
           description: this.newDescription,
           outflow: Number(this.newOutflow),
@@ -187,12 +187,7 @@ export class TransactionsMainComponent implements OnInit {
   }
 
   collectDate(event: any): void {
-    console.log(event);
-    if (event.localeCompare('') !== 0) {
-      this.newDate = event;
-    } else {
-      this.newDate = undefined;
-    }
+    this.newDate = event;
   }
 
   collectCategory(event: any): void {
