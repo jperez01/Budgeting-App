@@ -1,1 +1,24 @@
-<p>chart works!</p>
+<div [ngClass]="'chart-full'">
+    <div [ngClass]="'chart'" [hidden]="currentTransaction !== null">
+        <canvas id="GroupChart"></canvas>
+    </div>
+    <div [ngClass]="'chart-buttons'" *ngIf="currentTransaction === null">
+        <button [ngClass]="'chart-button'" (click)="changeToOutflow()"> Outflow </button>
+        <button [ngClass]="'chart-button'" (click)="changeToInflow()"> Inflow </button>
+    </div>
+    <div *ngIf="currentTransaction === null" [ngClass]="'list'">
+        <div *ngFor="let transaction of allTransactions" [ngClass]="'list-item'">
+            <p [ngClass]="'list-item-elem'">{{transaction.description}}</p>
+            <p [ngClass]="'list-item-amount'" *ngIf="!lookingAtInflow">{{formatMoney(transaction.outflow)}}</p>
+            <p [ngClass]="'list-item-amount'" *ngIf="lookingAtInflow">{{formatMoney(transaction.inflow)}}</p>
+        </div>
+    </div>
+    <div [ngClass]="'trans'" *ngIf="currentTransaction !== null">
+        <button [ngClass]="'return'" (click)="currentTransaction = null"> Return to Chart </button>
+        <p [ngClass]="'trans-elem'"> Description: {{currentTransaction.description}}</p>
+        <p [ngClass]="'trans-elem'">Account: {{currentTransaction.account}}</p>
+        <p [ngClass]="'trans-elem'">Category: {{currentTransaction.category}}</p>
+        <p [ngClass]="'trans-elem'">Outflow: {{formatMoney(currentTransaction.outflow)}}</p>
+        <p [ngClass]="'trans-elem'">Inflow: {{formatMoney(currentTransaction.inflow)}}</p>
+    </div>
+</div>

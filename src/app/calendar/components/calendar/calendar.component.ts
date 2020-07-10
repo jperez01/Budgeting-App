@@ -9,6 +9,7 @@ import { BudgetingInfoService } from '../../../state/budgeting-info.service';
 })
 export class CalendarComponent implements OnInit {
   filtered_trans:any[];
+  filtered_trans_for_chart:any[];
   moreThan5Rows:boolean;
   info:DateInfo;
   current_month:string;
@@ -19,6 +20,7 @@ export class CalendarComponent implements OnInit {
   blank_back:any[];
   blank_front:any[];
   month_days:any[];
+  currentTrans:any;
 
   constructor(private infoService: BudgetingInfoService) { }
 
@@ -27,6 +29,7 @@ export class CalendarComponent implements OnInit {
     this.blank_back = [];
     this.blank_front = [];
     this.month_days = [];
+    this.currentTrans = null;
     this.current_month = this.info.getMonthAsString();
     this.current_year = this.info.getYear();
     this.days_in_month = this.info.findDaysInMonth();
@@ -63,7 +66,7 @@ export class CalendarComponent implements OnInit {
         this.filtered_trans.push(transaction);
       }
     });
-    console.log(this.filtered_trans);
+    this.filtered_trans_for_chart = this.filtered_trans.slice();
   }
 
   checkTransactions(num:number): any[] {
@@ -123,5 +126,9 @@ export class CalendarComponent implements OnInit {
     this.current_year = this.info.getYear();
     this.findBlankSpacesBackward();
     this.filterTransactions();
+  }
+
+  changeCurrentTrans(event): void {
+    this.currentTrans = event;
   }
 }

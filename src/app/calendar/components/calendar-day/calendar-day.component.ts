@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-calendar-day',
@@ -9,6 +9,7 @@ export class CalendarDayComponent implements OnInit {
   @Input() day:number;
   @Input() filtered_trans:any[];
   @Input() info:any;
+  @Output() sendTransUp: EventEmitter<any> = new EventEmitter<any>();
   usable_trans:any[];
   constructor() { }
 
@@ -28,5 +29,9 @@ export class CalendarDayComponent implements OnInit {
       index++;
     });
     this.usable_trans = trans;
+  }
+
+  sendTransactionUp(transaction:any):void {
+    this.sendTransUp.emit(transaction);
   }
 }

@@ -14,3 +14,18 @@
     background: #1a73e8;
     color: white;
 }
+
+.day-transaction {
+    background-color: green;
+    border-radius: 5px;
+    font-family: 'Proxima Nova Medium';
+    font-size: 14px;
+    padding: 2px 5px;
+    margin: 1% 2% 1% 2%;
+    color: white;
+    cursor: pointer;
+}
+
+.day-transaction:hover {
+    filter: brightness(95%);
+}

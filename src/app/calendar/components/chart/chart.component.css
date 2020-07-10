@@ -1,0 +1,89 @@
+.chart {
+    height: 150px;
+    width: 70%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.chart-full {
+    margin-right: 1vw;
+}
+
+.chart-buttons {
+    display: flex;
+    justify-content: center;
+    padding: 5px 0px;
+    border-bottom: 2px solid rgb(213, 217, 219);
+}
+
+.chart-button {
+    width: 40%;
+    font-family: 'Proxima Nova Medium';
+    color: #69757a;
+    font-size: 19px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0px 2px;
+    border-radius: 3px;
+    outline: none;
+}
+
+.chart-button:hover {
+    background-color: #55e675;
+}
+
+.trans {
+    margin-top: 1vw;
+    background-color: white;
+    box-shadow: 0 1px 3px 0 rgba(31,36,38,.1);
+    padding: 10px;
+    border-radius: .8rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.trans-elem {
+    font-family: 'Proxima Nova Medium';
+    font-size: 16px;
+    padding: 10px 0px;
+    margin: 0px;
+    border-bottom: .5px solid #dadce0;
+}
+
+.return {
+    background-color: white;
+    color: #0091d9;
+    border: none;
+    border-bottom: .5px solid #dadce0;
+    font-family: 'Proxima Nova Medium';
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    padding-bottom: 10px;
+}
+
+.return:hover {
+    color: #006fa6;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.list-item {
+    display: flex;
+    border-bottom: 1px solid rgb(213, 217, 219);
+    width: 95%;
+}
+.list-item-elem {
+    font-family: 'Proxima Nova Medium';
+}
+.list-item-amount {
+    font-family: 'Proxima Nova Medium';
+    margin: auto;
+    margin-right: 10px;
+}

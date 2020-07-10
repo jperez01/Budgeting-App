@@ -53,7 +53,7 @@ export const initialInfo = {
     transactions: [
         {
             account: 'John Savings',
-            date: new Date(),
+            date: new Date(2020, 6, 9),
             category: 'Groceries',
             description: 'First Transaction',
             outflow: 10.20,
@@ -61,7 +61,7 @@ export const initialInfo = {
         },
         {
             account: 'American Express',
-            date: new Date(),
+            date: new Date(2020, 6, 9),
             category: 'Student Loan',
             description: 'Second Transaction',
             outflow: 500.00,
@@ -69,7 +69,7 @@ export const initialInfo = {
         },
         {
             account: 'John Savings',
-            date: new Date(),
+            date: new Date(2020, 6, 8),
             category: 'Mortgage',
             description: 'Third Transaction',
             outflow: 0.00,

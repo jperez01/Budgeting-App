@@ -17,14 +17,16 @@
         </div>
         <div [ngClass]="'calendar-grid'" *ngIf="!moreThan5Rows">
             <p *ngFor="let num of blank_front"[ngClass]="'calendar-elem'">{{' '}}</p>
-            <app-calendar-day *ngFor="let num of month_days" [ngClass]="'calendar-elem'" [day]="num" [filtered_trans]="filtered_trans" [info]="info"></app-calendar-day>
+            <app-calendar-day *ngFor="let num of month_days" [ngClass]="'calendar-elem'" [day]="num" [filtered_trans]="filtered_trans"
+                (sendTransUp)="changeCurrentTrans($event)" [info]="info"></app-calendar-day>
             <p *ngFor="let num of blank_back"[ngClass]="'calendar-elem'">{{' '}}</p>
         </div>
         <div [ngClass]="'calendar-grid-6'" *ngIf="moreThan5Rows">
             <p *ngFor="let num of blank_front"[ngClass]="'calendar-elem'">{{' '}}</p>
-            <app-calendar-day *ngFor="let num of month_days" [ngClass]="'calendar-elem'" [day]="num" [filtered_trans]="filtered_trans" [info]="info"></app-calendar-day>
+            <app-calendar-day *ngFor="let num of month_days" [ngClass]="'calendar-elem'" [day]="num" [filtered_trans]="filtered_trans"
+                (sendTransUp)="changeCurrentTrans($event)" [info]="info"></app-calendar-day>
             <p *ngFor="let num of blank_back"[ngClass]="'calendar-elem'">{{' '}}</p>
         </div>
     </div>
-    <app-chart [ngClass]="'calendar-chart'"></app-chart>
+    <app-chart [ngClass]="'calendar-chart'" [currentTransaction]="currentTrans" [allTransactions]="filtered_trans_for_chart"></app-chart>
 </div>
