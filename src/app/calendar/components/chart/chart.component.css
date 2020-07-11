@@ -35,6 +35,23 @@
     background-color: #55e675;
 }
 
+.chart-outflow {
+    width: 40%;
+    font-family: 'Proxima Nova Medium';
+    color: #69757a;
+    font-size: 19px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0px 2px;
+    border-radius: 3px;
+    outline: none;
+}
+
+.chart-outflow:hover {
+    background-color: #ff000073;
+}
+
 .trans {
     margin-top: 1vw;
     background-color: white;
@@ -74,16 +91,35 @@
     flex-direction: column;
     align-items: center;
 }
+
 .list-item {
     display: flex;
     border-bottom: 1px solid rgb(213, 217, 219);
     width: 95%;
+    padding: 0 2.5%;
+    cursor: pointer;
+    transition: background-color .1s;
 }
+
+.list-item:hover {
+    background-color: #e8eaf0;
+}
+
 .list-item-elem {
     font-family: 'Proxima Nova Medium';
+    max-width: 60%;
 }
-.list-item-amount {
+
+.list-item-outflow {
     font-family: 'Proxima Nova Medium';
     margin: auto;
     margin-right: 10px;
+    max-width: 40%;
+}
+
+.list-item-inflow {
+    font-family: 'Proxima Nova Medium';
+    margin: auto;
+    margin-right: 10px;
+    max-width: 40%;
 }

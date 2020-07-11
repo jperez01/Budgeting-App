@@ -6,6 +6,8 @@
 .date-picker {
     pointer-events: auto;
     margin-right: 1%;
+    width: 13%;
+    padding: 0px .5%;
 }
 .item-dropdown {
     pointer-events: auto;

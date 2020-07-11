@@ -29,6 +29,7 @@ export class CalendarDayComponent implements OnInit {
       index++;
     });
     this.usable_trans = trans;
+    console.log(this.usable_trans);
   }
 
   sendTransactionUp(transaction:any):void {

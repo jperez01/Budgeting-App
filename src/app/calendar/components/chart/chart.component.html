@@ -3,14 +3,15 @@
         <canvas id="GroupChart"></canvas>
     </div>
     <div [ngClass]="'chart-buttons'" *ngIf="currentTransaction === null">
-        <button [ngClass]="'chart-button'" (click)="changeToOutflow()"> Outflow </button>
+        <button [ngClass]="'chart-outflow'" (click)="changeToOutflow()"> Outflow </button>
         <button [ngClass]="'chart-button'" (click)="changeToInflow()"> Inflow </button>
     </div>
     <div *ngIf="currentTransaction === null" [ngClass]="'list'">
-        <div *ngFor="let transaction of allTransactions" [ngClass]="'list-item'">
-            <p [ngClass]="'list-item-elem'">{{transaction.description}}</p>
-            <p [ngClass]="'list-item-amount'" *ngIf="!lookingAtInflow">{{formatMoney(transaction.outflow)}}</p>
-            <p [ngClass]="'list-item-amount'" *ngIf="lookingAtInflow">{{formatMoney(transaction.inflow)}}</p>
+        <div *ngFor="let transaction of allTransactions; let i = index" [ngClass]="'list-item'" (click)="currentTransaction = transaction">
+            <p [ngClass]="'list-item-elem'" *ngIf="!lookingAtInflow" [ngStyle]="{'color': color_outflow[i]}">{{transaction.description}}</p>
+            <p [ngClass]="'list-item-elem'" *ngIf="lookingAtInflow" [ngStyle]="{'color': color_inflow[i]}">{{transaction.description}}</p>
+            <p [ngClass]="'list-item-outflow'" *ngIf="!lookingAtInflow">{{formatMoney(transaction.outflow)}}</p>
+            <p [ngClass]="'list-item-inflow'" *ngIf="lookingAtInflow">{{formatMoney(transaction.inflow)}}</p>
         </div>
     </div>
     <div [ngClass]="'trans'" *ngIf="currentTransaction !== null">

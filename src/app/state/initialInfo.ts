@@ -57,23 +57,23 @@ export const initialInfo = {
             category: 'Groceries',
             description: 'First Transaction',
             outflow: 10.20,
-            inflow: 0.00
+            inflow: 100.00
         },
         {
             account: 'American Express',
             date: new Date(2020, 6, 9),
             category: 'Student Loan',
             description: 'Second Transaction',
-            outflow: 500.00,
-            inflow: 0.00
+            outflow: 50.00,
+            inflow: 23.00
         },
         {
             account: 'John Savings',
             date: new Date(2020, 6, 8),
             category: 'Mortgage',
             description: 'Third Transaction',
-            outflow: 0.00,
-            inflow: 1000.00
+            outflow: 130.00,
+            inflow: 100.00
         }
     ]
 }

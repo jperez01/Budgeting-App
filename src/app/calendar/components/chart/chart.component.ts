@@ -9,6 +9,8 @@ import * as Chart from 'chart.js';
 export class ChartComponent implements OnInit {
   @Input() currentTransaction:any;
   @Input() allTransactions:any[];
+  color_outflow:string[];
+  color_inflow:string[];
   graph_labels:string[];
   outflow_values:number[];
   inflow_values:number[];
@@ -20,8 +22,12 @@ export class ChartComponent implements OnInit {
     this.graph_labels = [];
     this.inflow_values = [];
     this.outflow_values = [];
+    this.color_outflow = [];
+    this.color_inflow = [];
     this.collectValuesAndNames();
-    this.createGraph(this.outflow_values);
+    this.getRandomColorInflow();
+    this.getRandomColorOutflow();
+    this.createGraph(this.outflow_values, this.color_outflow);
   }
 
   collectValuesAndNames(): void {
@@ -38,26 +44,48 @@ export class ChartComponent implements OnInit {
 
   changeToOutflow(): void {
     if (this.lookingAtInflow === true) {
-      this.createGraph(this.outflow_values);
+      this.createGraph(this.outflow_values, this.color_outflow);
       this.lookingAtInflow = false;
     }
   }
 
   changeToInflow(): void {
     if (this.lookingAtInflow === false) {
-      this.createGraph(this.inflow_values);
+      this.createGraph(this.inflow_values, this.color_inflow);
       this.lookingAtInflow = true;
     }
   }
 
-  createGraph(values): void {
+  getRandomColorOutflow():void {
+    let times = this.outflow_values.length;
+    let starter = 'hsl(0, 100%,';
+    let changing_value = 10;
+    this.color_outflow = [];
+    for (let i = 0; i < times; i++) {
+      this.color_outflow.push(starter + (20 + changing_value) + '%)');
+      changing_value += 10;
+    }
+  }
+
+  getRandomColorInflow(): void {
+    let times = this.inflow_values.length;
+    let starter = 'hsl(120, 60%,';
+    let changing_value = 10;
+    this.color_inflow = [];
+    for (let i = 0; i < times; i++) {
+      this.color_inflow.push(starter + (10 + changing_value) + '%)');
+      changing_value += 10;
+    }
+  }
+
+  createGraph(values, colors): void {
     var newChart = new Chart('GroupChart', {
       type: 'pie',
       data: {
         labels: this.graph_labels,
         datasets: [{
           label: "Groups",
-          backgroundColor: ["red", "green"],
+          backgroundColor: colors,
           data: values,
         }]
     },
