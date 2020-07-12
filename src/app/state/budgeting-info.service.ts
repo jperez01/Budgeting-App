@@ -77,11 +77,17 @@ export class BudgetingInfoService {
     this.accounts = newAccounts;
   }
 
+  addAccount(account:Account) {
+    this.accounts.push(account);
+    this.accountNames.push(account.name);
+  }
+
   changeAccountInfo(index, difference) {
     let oldAccount = this.accounts[index];
     let newAccount = {
       name: oldAccount.name,
-      balance: oldAccount.balance
+      balance: oldAccount.balance,
+      type: oldAccount.type
     }
     newAccount.balance += difference;
     this.accounts[index] = newAccount;
@@ -91,7 +97,8 @@ export class BudgetingInfoService {
     let oldAccount = this.accounts[index];
     let newAccount = {
       name: oldAccount.name,
-      balance: oldAccount.balance
+      balance: oldAccount.balance,
+      type: oldAccount.type
     }
     newAccount.balance -= difference;
     this.accounts[index] = newAccount;
@@ -109,6 +116,7 @@ export class BudgetingInfoService {
     newBudget.received += trimmedDiff;
     this.budget[groupIndex].total_received += trimmedDiff;
   }
+
   changeBudgetNames(): void {
     this.budgetNames = [];
     this.budget.forEach(group => {

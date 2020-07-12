@@ -2,11 +2,13 @@ export const initialInfo = {
     accounts: [
     {
         name: 'American Express',
-        balance: 1000
+        balance: 1000,
+        type: 'Credit Card'
     },
     {
         name: 'John Savings',
-        balance: 200
+        balance: 200,
+        type: 'Savings'
     }
     ],
     budget: [
@@ -53,7 +55,7 @@ export const initialInfo = {
     transactions: [
         {
             account: 'John Savings',
-            date: new Date(2020, 6, 9),
+            date: new Date(2020, 6, 7),
             category: 'Groceries',
             description: 'First Transaction',
             outflow: 10.20,

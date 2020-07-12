@@ -15,16 +15,16 @@ export class OvCategoriesComponent implements OnInit {
   constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
+    let itemNames = this.infoService.getBudgetNames();
+    console.log(itemNames[0]);
     this.budgetInfo = this.infoService.getBudget();
-    this.icons = new Icons();
     this.categories = [];
     let index = 0;
     this.budgetInfo.forEach(group => {
       let category = {
-        url: this.icons.findIconImg(index),
-        color: this.icons.findColor(index),
         name: group.title,
-        amount: group.total_budgeted - group.total_received
+        amount: group.total_budgeted - group.total_received,
+        items: itemNames[index].items
       }
       this.categories.push(category);
       index++;

@@ -8,12 +8,22 @@ import Account from '../../models/account';
 })
 export class OvAccountComponent implements OnInit {
   @Input() account: Account;
-  balance:string;
+  color:string;
   constructor() { }
 
   ngOnInit(): void {
+    this.checkBalance();
   }
 
+  checkBalance(): void {
+    if (this.account.balance > 0) {
+      this.color = 'green';
+    } else if (this.account.balance < 0) {
+      this.color = 'red';
+    } else {
+      this.color = 'black';
+    }
+  }
   formatMoney(number:number): string {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(number);
   }

@@ -1,9 +1,8 @@
 .accounts-dashboard {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
     margin-top: 20px;
+    margin: auto 10px;
 }
 
 .cursor-icon {

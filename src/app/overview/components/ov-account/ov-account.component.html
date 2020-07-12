@@ -1,12 +1,7 @@
 <div [ngClass]="'account'">
-    <div>
-        <h4 [ngClass]="'info-content'"> Balance </h4>
-        <h4 [ngClass]="'balance'"> {{formatMoney(account.balance)}} </h4>
+    <div [ngClass]="account-info">
+        <h3 [ngClass]="'account-name'">{{account.name}}</h3>
+        <h4 [ngClass]="'account-type'">{{account.type}}</h4>
     </div>
-    <div [ngClass]="'account-info'">
-        <div [ngClass]="'info-group'">
-            <h4 [ngClass]="'info-title'"> Name </h4>
-            <h4 [ngClass]="'info-content'"> {{account.name}} </h4>
-        </div>
-    </div>
+    <p [ngClass]="'account-balance'" [ngStyle]="{'color': color}">{{formatMoney(account.balance)}}</p>
 </div>

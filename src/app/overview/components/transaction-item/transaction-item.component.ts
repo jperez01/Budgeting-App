@@ -10,12 +10,24 @@ export class TransactionItemComponent implements OnInit {
   @Input() transaction: Transaction;
   cost:string;
   date:string;
+  color:string;
   constructor() { }
 
   ngOnInit(): void {
     let difference = this.transaction.inflow - this.transaction.outflow;
     this.cost = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(difference);
     this.date = this.getFormattedDate(this.transaction.date);
+    this.checkBalance(difference);
+  }
+
+  checkBalance(difference): void {
+    if (difference > 0) {
+      this.color = 'green';
+    } else if (difference < 0) {
+      this.color = 'red';
+    } else {
+      this.color = 'black';
+    }
   }
 
   getFormattedDate(date: Date): string {

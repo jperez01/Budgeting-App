@@ -26,4 +26,19 @@
         <h4 [ngClass]="'title'"> Accounts </h4>
         <app-header-account *ngFor="let account of accounts" [account]="account"></app-header-account>
     </div>
+    <p *ngIf="!addingAccount" (click)="addingAccount = !addingAccount" [ngClass]="'action-button'"> Add Account </p>
+    <div *ngIf="addingAccount" [ngClass]="'adding-info'">
+            <input [ngClass]="'adding-name'" placeholder="Name" (change)="collectName($event)">
+            <input [ngClass]="'adding-balance'" placeholder="Balance" (change)="collectBalance($event)">
+            <select [ngClass]="'adding-type'" (click)="collectType($event)">
+                <option>Choose One</option>
+                <option>Savings</option>
+                <option>Checking</option>
+                <option>Credit Card</option>
+            </select>
+        <div [ngClass]="'new-item-buttons'">
+            <button [ngClass]="'new-item-button'" (click)="addNewAccount()"> Save </button>
+            <button [ngClass]="'new-item-button'" (click)="addingAccount = !addingAccount"> Cancel </button>
+        </div>
+    </div>
 </nav>

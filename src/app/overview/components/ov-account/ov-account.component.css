@@ -1,31 +1,38 @@
 .account {
-    min-width: 265px;
-    padding: 10px;
-    background-image: url('https://image.ibb.co/bVnMrc/g3095.png'),
-    linear-gradient(to right bottom, blue,  lightblue);
-    border-radius: 10px;
-    box-shadow: 10px 10px 25px -22px rgba(0,0,0,0.75);
-}
-.account-info {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    margin: 5px 20px;
+    padding: 5px 10px;
+    transition: background-color .1s;
+    border-radius: .2rem;
 }
 
-.balance {
-    font-family: 'Proxima Nova Light';
-    font-size: 30px;
-    margin-top: 5px;
-    margin-bottom: 20px;
+.account:hover {
+    background-color: #e8eaf0;
 }
-.info-group {
-    margin-right: 50px;
+
+.account-info {
+    display: flex;
+    flex-direction: column;
 }
-.info-title {
-    margin: 10px 0px;
+
+.account-type {
     font-family: 'Proxima Nova Regular';
+    color: #999eaa;
+    margin: 0;
+    font-size: 12px;
 }
 
-.info-content {
-    margin: 5px 0px;
+.account-name {
+    font-family: 'Proxima Nova Regular';
+    margin: 0;
+    margin-bottom: 2px;
+    font-size: 17px;
+}
+
+.account-balance {
     font-family: 'Proxima Nova Medium';
+    margin: auto;
+    margin-right: 10px;
 }

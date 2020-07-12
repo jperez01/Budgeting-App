@@ -61,3 +61,70 @@
 .dashboard-link:hover {
     background-color: lightgray;
 }
+
+.action-button {
+    font-family: 'Proxima Nova SemiBold';
+    color: #0091d9;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 0px 0px 0px 25px;
+}
+
+.action-button:hover {
+    color: #006fa6;
+}
+
+.adding-info {
+    background-color: #0091d946;
+    padding: 10px 25px 0px 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.adding-name {
+    font-family: 'Proxima Nova Medium';
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.adding-balance {
+    font-family: 'Proxima Nova Medium';
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.adding-type {
+    outline: none;
+    font-family: 'Proxima Nova Medium';
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.new-item-buttons {
+    height: 20px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0px 24px;
+    padding: 0px 10px 8px 0px;
+}
+
+.new-item-button {
+    font-family: 'Proxima Nova SemiBold';
+    font-size: 16px;
+    color: white;
+    background-color: rgb(0, 156, 194);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    padding: 0px 10px;
+    margin-left: 10px;
+}
+
+.new-item-button:hover {
+    background-color: rgb(1, 110, 138);
+}

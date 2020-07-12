@@ -1,7 +1,7 @@
 <div [ngClass]="'cat-item'">
-    <div [ngClass]="'item-image'" [ngStyle]="{'background-color': category.color}">
-        <i [ngClass]="'item-icon'" class="{{category.url}}"></i>
+    <div [ngClass]="'cat-info'">
+        <h3 [ngClass]="'cat-name'"> {{category.name}} </h3>
+        <h4 [ngClass]="'cat-items'">{{allItems}}</h4>
     </div>
-    <p [ngClass]="'item-name'"> {{category.name}} </p>
-    <p [ngClass]="'item-cost'"> {{cost}} </p>
+    <p [ngClass]="'item-cost'" [ngStyle]="{'color': color}"> {{cost}} </p>
 </div>
