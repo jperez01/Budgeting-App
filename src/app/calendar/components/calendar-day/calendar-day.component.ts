@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
+import { BudgetingInfoService } from '../../../state/budgeting-info.service';
 @Component({
   selector: 'app-calendar-day',
   templateUrl: './calendar-day.component.html',
@@ -11,10 +11,14 @@ export class CalendarDayComponent implements OnInit {
   @Input() info:any;
   @Output() sendTransUp: EventEmitter<any> = new EventEmitter<any>();
   usable_trans:any[];
-  constructor() { }
+  constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
     this.checkTransactions(this.day);
+    this.infoService.filtered_transactions.subscribe(transactions => {
+      this.filtered_trans = transactions;
+      this.checkTransactions(this.day);
+    })
   }
 
   checkTransactions(num:number): void {
@@ -24,12 +28,10 @@ export class CalendarDayComponent implements OnInit {
     this.filtered_trans.forEach(transaction => {
       if (date.getTime() === transaction.date.getTime()) {
         trans.push(transaction);
-        this.filtered_trans.splice(index, 1);
       }
       index++;
     });
     this.usable_trans = trans;
-    console.log(this.usable_trans);
   }
 
   sendTransactionUp(transaction:any):void {

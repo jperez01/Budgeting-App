@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BudgetGroup } from '../shared/models/BudgetGroup';
 import { Account } from '../shared/models/Account';
 import { Transaction } from '../shared/models/Transaction';
+import { Subject } from 'rxjs';
 import { initialInfo } from './initialInfo';
 
 @Injectable({
@@ -14,6 +15,7 @@ export class BudgetingInfoService {
   accounts:Account[];
   budgetNames:any[];
   accountNames:any[];
+  filtered_transactions:Subject<any>;
 
   constructor() {
     this.budget = initialInfo.budget;
@@ -21,6 +23,7 @@ export class BudgetingInfoService {
     this.accounts = initialInfo.accounts;
     this.accountNames = [];
     this.budgetNames = [];
+    this.filtered_transactions = new Subject<Transaction[]>();
     this.budget.forEach(group => {
       let itemsNames = [];
       group.items.forEach(item => {
@@ -35,6 +38,10 @@ export class BudgetingInfoService {
       this.accountNames.push(account.name);
     });
    }
+
+  emitFilteredTrans(value: Transaction[]): void {
+    this.filtered_transactions.next(value);
+  }
 
   getAll() {
     return {

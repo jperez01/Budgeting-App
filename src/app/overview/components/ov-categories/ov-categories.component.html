@@ -2,6 +2,8 @@
     <div [ngClass]="'list-header'">
         <h4 [ngClass]="'list-name'"> Top Categories</h4>
     </div>
-    <app-ov-category-item *ngFor="let category of categories" [category]="category">
-    </app-ov-category-item>
+    <div [ngClass]="'categories-list'">
+        <app-ov-category-item *ngFor="let category of categories" [category]="category">
+        </app-ov-category-item>
+    </div>
 </div>

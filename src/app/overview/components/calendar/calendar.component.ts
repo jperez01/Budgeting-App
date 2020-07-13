@@ -37,7 +37,12 @@ export class CalendarComponent implements OnInit {
 
   findBlankSpacesInitial(): void {
     let first_occur = this.info.getCurrentDay() % 7;
-    this.blankspacesfront = Math.abs(first_occur - this.info.getWeekday()) + 1;
+    if (first_occur > this.info.getWeekday()) {
+      let offset_value = first_occur - (this.info.getWeekday() + 1);
+      this.blankspacesfront = 7 - offset_value;
+    } else {
+      this.blankspacesfront = Math.abs(first_occur - this.info.getWeekday()) + 1;
+    }
     if (this.blankspacesfront + this.days_in_month > 35) {
       this.blankspacesback = 42 - (this.blankspacesfront + this.days_in_month);
     } else {

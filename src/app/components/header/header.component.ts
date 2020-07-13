@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
       let newAccount = {
         name: this.newName,
         type: this.newType,
-        balance: this.newBalance
+        balance: Number(this.newBalance)
       }
       this.infoService.addAccount(newAccount);
       this.newBalance = null;

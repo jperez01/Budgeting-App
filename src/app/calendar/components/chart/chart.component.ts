@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import * as Chart from 'chart.js';
+import { BudgetingInfoService } from '../../../state/budgeting-info.service';
 
 @Component({
   selector: 'app-chart',
@@ -15,7 +16,7 @@ export class ChartComponent implements OnInit {
   outflow_values:number[];
   inflow_values:number[];
   lookingAtInflow:boolean;
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef, private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
     this.lookingAtInflow = false;
@@ -28,6 +29,16 @@ export class ChartComponent implements OnInit {
     this.getRandomColorInflow();
     this.getRandomColorOutflow();
     this.createGraph(this.outflow_values, this.color_outflow);
+    this.infoService.filtered_transactions.subscribe(transactions => {
+      this.allTransactions = transactions;
+      this.graph_labels = [];
+      this.inflow_values = [];
+      this.outflow_values = [];
+      this.collectValuesAndNames();
+      this.getRandomColorInflow();
+      this.getRandomColorOutflow();
+      this.createGraph(this.outflow_values, this.color_outflow);
+    })
   }
 
   collectValuesAndNames(): void {

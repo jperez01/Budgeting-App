@@ -39,7 +39,7 @@ export class OvBudgetComponent implements OnInit {
     var myChart = new Chart('BudgetChart', {
       type: 'pie',
     data: {
-      labels: ["Spent", "Remaining"],
+      labels: ["Used", "Available"],
       datasets: [{
         label: "Population (millions)",
         backgroundColor: ["red", "green"],

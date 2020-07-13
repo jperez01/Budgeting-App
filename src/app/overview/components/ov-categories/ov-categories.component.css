@@ -1,3 +1,8 @@
 .cat-list {
     margin: 10px;
 }
+
+.categories-list {
+    max-height: 350px;
+    overflow-y: auto;
+}

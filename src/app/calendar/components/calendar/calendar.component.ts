@@ -46,7 +46,12 @@ export class CalendarComponent implements OnInit {
 
   findBlankSpacesInitial(): void {
     let first_occur = this.info.getCurrentDay() % 7;
-    this.blanks_front = Math.abs(first_occur - this.info.getWeekday()) + 1;
+    if (first_occur > this.info.getWeekday()) {
+      let offset_value = first_occur - (this.info.getWeekday() + 1);
+      this.blanks_front = 7 - offset_value;
+    } else {
+      this.blanks_front = Math.abs(first_occur - this.info.getWeekday()) + 1;
+    }
     if (this.blanks_front + this.days_in_month > 35) {
       this.blanks_back = 42 - (this.blanks_front + this.days_in_month);
       this.moreThan5Rows = true;
@@ -67,10 +72,10 @@ export class CalendarComponent implements OnInit {
       }
     });
     this.filtered_trans_for_chart = this.filtered_trans.slice();
+    this.infoService.emitFilteredTrans(this.filtered_trans);
   }
 
   checkTransactions(num:number): any[] {
-    console.log(num);
     let trans = [];
     let date = new Date(this.info.getYear(), this.info.getMonth(), num);
     let index = 0;
@@ -80,7 +85,6 @@ export class CalendarComponent implements OnInit {
       }
       index++;
     });
-    console.log(trans);
     return trans;
   }
 
@@ -129,6 +133,14 @@ export class CalendarComponent implements OnInit {
   }
 
   changeCurrentTrans(event): void {
-    this.currentTrans = event;
+    let newTrans = {
+      account: event.account,
+      category: event.category,
+      date: event.date,
+      description: event.description,
+      inflow: event.inflow,
+      outflow: event.outflow
+    }
+    this.currentTrans = newTrans;
   }
 }
