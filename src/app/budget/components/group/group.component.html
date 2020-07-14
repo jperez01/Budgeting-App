@@ -2,15 +2,15 @@
     <div [ngClass]="'group-info'">
         <p [ngClass]="'group-name'">{{group.title}}</p>
         <p [ngClass]="'group-amount'">Budgeted</p>
-        <p [ngClass]="'group-amount'">Received</p>
+        <p [ngClass]="'group-amount'">Used</p>
         <p [ngClass]="'group-amount'">Available</p>
     </div>
     <app-group-item  (changedValue)="bubbleValue($event)" *ngFor="let item of items; let i = index"
         [item]="item" [groupName]="group.title" [itemIndex]="i" [groupIndex]="groupIndex"></app-group-item>
     <div *ngIf="addingItem" [ngClass]="'item'" [ngStyle]="{'background-color': '#0091d946'}">
         <div [ngClass]="'item-row'">
-            <input (blur)="collectName($event)" [ngClass]="'item-name'" value="Default">
-            <input (blur)="collectBudgeted($event)" [ngClass]="'item-amount'" value="0.00">
+            <input (change)="collectName($event)" [ngClass]="'item-name'" placeholder="Default">
+            <input (change)="collectBudgeted($event)" [ngClass]="'item-amount'" value="0.00">
             <p [ngClass]="'item-received'">0.00</p>
         </div>
         <div [ngClass]="'new-item-buttons'">
@@ -23,6 +23,6 @@
         <p *ngIf="!addingItem" [ngClass]="'add-item'" (click)="this.addingItem = !this.addingItem"> Add Item </p>
         <p [ngClass]="'total-value'"> {{formatMoney(group.total_budgeted)}} </p>
         <p [ngClass]="'total-value'"> {{formatMoney(group.total_received)}}</p>
-        <p [ngClass]="'total-value'"> {{formatMoney(group.total_budgeted - group.total_received)}} </p>
+        <p [ngClass]="'total-value'" [ngStyle]="{'color': color}"> {{formatMoney(group.total_budgeted - group.total_received)}} </p>
     </div>
 </div>

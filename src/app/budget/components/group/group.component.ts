@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { BudgetingInfoService } from '../../../state/budgeting-info.service';
 
 @Component({
   selector: 'app-group',
@@ -15,7 +16,9 @@ export class GroupComponent implements OnInit {
   newBudgeted:number;
   newReceived:number;
   newName:string;
-  constructor() { 
+  color:string;
+
+  constructor(private infoService: BudgetingInfoService) { 
     this.addingItem = false;
   }
 
@@ -23,10 +26,24 @@ export class GroupComponent implements OnInit {
     this.items = this.group.items;
     this.newBudgeted = 0.00;
     this.newReceived = 0.00;
+    this.checkAvailableStyle();
+    this.infoService.emit_budget.subscribe(() => {
+      this.checkAvailableStyle();
+    })
   }
 
   formatMoney(value: any): string {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+  }
+
+  checkAvailableStyle(): void {
+    if (this.group.total_budgeted - this.group.total_received > 0) {
+      this.color = 'green';
+    } else if (this.group.total_budgeted - this.group.total_received < 0) {
+      this.color = 'red';
+    } else {
+      this.color = 'black';
+    }
   }
 
   cancelChanges(): void {
@@ -50,7 +67,6 @@ export class GroupComponent implements OnInit {
       this.addGroupItem.emit(newInfo);
       this.addingItem = false;
       this.newBudgeted = undefined;
-      this.newReceived = undefined;
       this.newName = undefined;
     }
   }
@@ -63,16 +79,9 @@ export class GroupComponent implements OnInit {
     }
   }
 
-  collectReceived(event: any): void {
-    if (!isNaN(event.target.value % 1)) {
-      this.newReceived = event.target.value;
-    } else {
-      this.newReceived = undefined;
-    }
-  }
 
   collectName(event: any): void {
-    if (event.target.value.localeCompare('') !== 0 && event.target.value.localeCompare('Default') !== 0) {
+    if (event.target.value.localeCompare('') !== 0) {
       this.newName = event.target.value;
     } else {
       this.newName = undefined;

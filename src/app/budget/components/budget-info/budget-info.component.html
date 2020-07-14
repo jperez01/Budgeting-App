@@ -9,12 +9,12 @@
 </div>
 <div [ngClass]="'buttons'">
     <button [ngClass]="'category'" (click)="changeToBudgeted()"> Budgeted </button>
-    <button [ngClass]="'category'" (click)="changeToReceived()"> Used </button>
-    <button [ngClass]="'category'" (click)="changeToAvailable()"> Available </button>
+    <button [ngClass]="'used-category'" (click)="changeToReceived()"> Used </button>
+    <button [ngClass]="'available-category'" (click)="changeToAvailable()"> Available </button>
 </div>
 <div [ngClass]="'groups'">
-    <div *ngFor="let group of groups" [ngClass]="'group'">
-        <p [ngClass]="'group-title'">{{group.title}}</p>
+    <div *ngFor="let group of groups;let i = index" [ngClass]="'group'">
+        <p [ngClass]="'group-title'" [ngStyle]="{'color': graph_colors[i]}">{{group.title}}</p>
         <div *ngIf="budgeted" [ngClass]="'group-numbers'">
             <p [ngClass]="'group-total'">{{formatCurrency(group.total_budgeted)}}</p>
             <p [ngClass]="'group-percentage'"> {{
@@ -28,9 +28,9 @@
                 }} </p>
         </div>
         <div *ngIf="available" [ngClass]="'group-numbers'">
-            <p [ngClass]="'group-total'">{{formatCurrency(group.total_budgeted + group.total_received)}}</p>
+            <p [ngClass]="'group-total'">{{formatCurrency(group.total_budgeted - group.total_received)}}</p>
             <p [ngClass]="'group-percentage'">{{
-                createPercentage(group.total_received + group.total_budgeted, whole_available)
+                createPercentage(group.total_received - group.total_budgeted, whole_available)
                 }} </p>
         </div>
     </div>

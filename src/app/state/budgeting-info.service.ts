@@ -16,6 +16,7 @@ export class BudgetingInfoService {
   budgetNames:any[];
   accountNames:any[];
   filtered_transactions:Subject<any>;
+  emit_budget:Subject<any>;
 
   constructor() {
     this.budget = initialInfo.budget;
@@ -24,6 +25,7 @@ export class BudgetingInfoService {
     this.accountNames = [];
     this.budgetNames = [];
     this.filtered_transactions = new Subject<Transaction[]>();
+    this.emit_budget = new Subject<Transaction[]>();
     this.budget.forEach(group => {
       let itemsNames = [];
       group.items.forEach(item => {
@@ -41,6 +43,10 @@ export class BudgetingInfoService {
 
   emitFilteredTrans(value: Transaction[]): void {
     this.filtered_transactions.next(value);
+  }
+
+  emitNewBudget(): void {
+    this.emit_budget.next(this.budget);
   }
 
   getAll() {
@@ -74,6 +80,7 @@ export class BudgetingInfoService {
     this.budget = newBudget;
     this.changeAccountNames();
     this.changeBudgetNames();
+    this.emitNewBudget();
   }
 
   setTransactions(newTransactions:Transaction[]) {

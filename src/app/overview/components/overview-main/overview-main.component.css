@@ -7,3 +7,13 @@
     margin: 40px;
     margin-top: 20px;
 }
+
+.overview-title {
+    font-family: 'Proxima Nova Bold';
+    font-size: 32px;
+    text-align: center;
+    margin: 20px 20px 0px 20px;
+    padding-bottom: 10px;
+    color: #495257;
+    border-bottom: 1px solid #b6bec2;
+}

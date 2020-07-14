@@ -20,6 +20,7 @@ export class GroupItemComponent implements OnInit {
   storedValue:any;
   background:string;
   oldItem:any;
+  color:string;
 
   constructor(private infoService: BudgetingInfoService) {
     this.changingValue = false;
@@ -32,6 +33,8 @@ export class GroupItemComponent implements OnInit {
     this.available = this.item.budgeted - this.item.received;
     this.background = '#0091d946';
     this.oldItem = null;
+    this.color = null;
+    this.checkAvailableStyle();
   }
 
   changeStyle(): void {
@@ -40,6 +43,16 @@ export class GroupItemComponent implements OnInit {
       name: this.name,
       budgeted: this.budgeted,
       received: this.received
+    }
+  }
+
+  checkAvailableStyle(): void {
+    if (this.available > 0) {
+      this.color = 'green';
+    } else if (this.available < 0) {
+      this.color = 'red';
+    } else {
+      this.color = 'black';
     }
   }
 

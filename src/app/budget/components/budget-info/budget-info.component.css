@@ -37,11 +37,53 @@
 }
 
 .category:hover {
-    background-color: #48ce65;
+    background-color: #55e675;
 }
 
 .category:focus {
-    background-color: #48ce65;
+    background-color: #55e675;
+}
+
+.used-category {
+    width: 30%;
+    font-family: 'Proxima Nova Medium';
+    color: #69757a;
+    font-size: 19px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0px 2px;
+    border-radius: 3px;
+    outline: none;
+}
+
+.used-category:hover {
+    background-color: #ff000073;
+}
+
+.used-category:focus {
+    background-color: #ff000073;
+}
+
+.available-category {
+    width: 30%;
+    font-family: 'Proxima Nova Medium';
+    color: #69757a;
+    font-size: 19px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0px 2px;
+    border-radius: 3px;
+    outline: none;
+}
+
+.available-category:hover {
+    background-color: #97b9f7;
+}
+
+.available-category:focus {
+    background-color: #97b9f7;
 }
 
 .buttons {
