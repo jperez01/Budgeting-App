@@ -42,14 +42,35 @@ export class OvBudgetComponent implements OnInit {
       labels: ["Used", "Available"],
       datasets: [{
         label: "Population (millions)",
-        backgroundColor: ["red", "green"],
+        backgroundColor: ["rgb(255, 0, 0)", "rgb(31, 122, 31)"],
         data: [this.received, this.available]
       }]
     },
     options: {
-      cutoutPercentage: 75,
+      cutoutPercentage: 80,
       legend: {
         display: false
+      },
+      tooltips: {
+        bodyFontFamily: 'Proxima Nova Regular',
+        bodyFontSize: 16,
+        backgroundColor: '#4b525a',
+        callbacks: {
+          labelColor: function(tooltipItem, chart) {
+            let info = chart.data.datasets[0]['backgroundColor'][tooltipItem.datasetIndex];
+            return {
+              backgroundColor: info,
+              borderColor: ''
+            }
+          },
+          title: function(tooltipItem, data) {
+            return '';
+          },
+          label: function(tooltipItem, data) {
+            return '$' + data['datasets'][0]['data'][tooltipItem['index']];
+          }
+        },
+        displayColors: false
       }
     }
     });

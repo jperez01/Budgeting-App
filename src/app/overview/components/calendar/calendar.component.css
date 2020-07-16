@@ -44,6 +44,40 @@
     color: white;
 }
 
+.calendar-elem-with-trans {
+    display: flex;
+    flex-direction: column;
+    font-family: Proxima Nova;
+    border-radius: 50px;
+    margin: 5px 0px;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 10px;
+    font-size: 14px;
+    height: 20px;
+    width: 20px;
+}
+
+.calendar-elem-with-trans:hover {
+    background: #1a73e8;
+    color: white;
+}
+
+.calendar-elem-dot {
+    margin: 0;
+    padding: 0;
+    font-size: 25px;
+    height: 5px;
+    line-height: .1px;
+}
+
+.calendar-elem-number {
+    margin: 0;
+    padding: 0;
+}
+
 .calendar-weekday {
     margin: 0px auto;
     font-family: 'Proxima Nova Light';

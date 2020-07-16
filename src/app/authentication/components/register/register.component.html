@@ -1,0 +1,17 @@
+<div [ngClass]="'gray-bkgr'">
+    <div [ngClass]="'login-form'">
+        <h4 [ngClass]="'login-title'">Register</h4>
+        <form>
+            <label [ngClass]="'login-label'">Email</label><br>
+            <input (change)="collectEmail($event)" [ngClass]="'login-input'"><br>
+            <label [ngClass]="'login-label'">Username</label><br>
+            <input (change)="collectUsername($event)" [ngClass]="'login-input'"><br>
+            <label [ngClass]="'login-label'">Password</label><br>
+            <input (change)="collectPassword($event)" [ngClass]="'login-input'"><br>
+        </form>
+        <button (click)="register()" [ngClass]="'login-button'"> Register </button>
+        <a [ngClass]="'login-link'" routerLink="/authentication/login" routerLinkActive="">
+            Login
+        </a>
+    </div>
+</div>

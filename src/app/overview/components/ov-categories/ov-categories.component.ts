@@ -16,7 +16,6 @@ export class OvCategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     let itemNames = this.infoService.getBudgetNames();
-    console.log(itemNames[0]);
     this.budgetInfo = this.infoService.getBudget();
     this.categories = [];
     let index = 0;

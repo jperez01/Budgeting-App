@@ -6,6 +6,7 @@ import { BudgetingInfoService } from './state/budgeting-info.service';
 import { OverviewModule } from './overview/overview.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { CalendarModule} from './calendar/calendar.module';
+import { AuthenticationModule } from './authentication/authentication.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -27,6 +28,7 @@ import { reducer } from './reducers/index';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    AuthenticationModule,
     ChartsModule,
     CalendarModule,
     OverviewModule,

@@ -1,8 +1,12 @@
 <div [ngClass]="'calendar-header'">
-    <button (click)="changeCalendarBackward()">Backward</button>
+    <button (click)="changeCalendarBackward()" [ngClass]="'calendar-button'">
+        <i class="fas fa-chevron-left" [ngClass]="'calendar-button-icon'"></i>
+    </button>
     <p [ngClass]="'calendar-month'"> {{current_month}}</p>
     <p [ngClass]="'calendar-year'"> {{current_year}}</p>
-    <button (click)="changeCalendarForward()">Forward</button>
+    <button (click)="changeCalendarForward()" [ngClass]="'calendar-button'">
+        <i class="fas fa-chevron-right" [ngClass]="'calendar-button-icon'"></i>
+    </button>
 </div>
 <div [ngClass]="'row'">
     <div [ngClass]="'full-calendar'">

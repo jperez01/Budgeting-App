@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,9 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  name: string = 'budgeting';
-
-  changeName(name:string):void {
-    this.name = name;
+  url:string;
+  constructor(public router: Router) {
+    this.url = router.url;
   }
 }
