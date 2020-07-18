@@ -4,12 +4,14 @@ import { Account } from '../shared/models/Account';
 import { Transaction } from '../shared/models/Transaction';
 import { Subject } from 'rxjs';
 import { initialInfo } from './initialInfo';
+import FetchMethods from './fetch-methods';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class BudgetingInfoService {
+  fetchService:FetchMethods;
   budget:BudgetGroup[];
   transactions:Transaction[];
   accounts:Account[];
@@ -17,8 +19,13 @@ export class BudgetingInfoService {
   accountNames:any[];
   filtered_transactions:Subject<any>;
   emit_budget:Subject<any>;
+  username:string;
+  email:string;
+  password:string;
+  user_id:number;
 
   constructor() {
+    this.fetchService = new FetchMethods();
     this.budget = initialInfo.budget;
     this.transactions = initialInfo.transactions;
     this.accounts = initialInfo.accounts;
@@ -39,6 +46,38 @@ export class BudgetingInfoService {
     this.accounts.forEach(account => {
       this.accountNames.push(account.name);
     });
+   }
+
+   createBudgetNames(): void {
+    this.budgetNames = [];
+    this.budget.forEach(group => {
+      let itemsNames = [];
+      group.items.forEach(item => {
+        itemsNames.push(item.name);
+      })
+      this.budgetNames.push({
+        title: group.title,
+        items: itemsNames
+      });
+    });
+   }
+
+   createAccountNames(): void {
+     this.accountNames = [];
+    this.accounts.forEach(account => {
+      this.accountNames.push(account.name);
+    });
+   }
+
+   setUpLoginInfo(info): void {
+    this.email = info.email;
+    this.username = info.username;
+    this.password = info.password;
+    this.fetchService.getGroups(this.user_id);
+    this.fetchService.getTransactions(this.user_id);
+    this.user_id = info.user_id;
+    this.createBudgetNames();
+    this.createAccountNames();
    }
 
   emitFilteredTrans(value: Transaction[]): void {
