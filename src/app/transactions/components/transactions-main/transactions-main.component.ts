@@ -138,7 +138,7 @@ export class TransactionsMainComponent implements OnInit {
 
   changeTransaction(info: any): void {
     this.transactions[info.index] = info.transaction;
-    this.infoService.setTransactions(this.transactions);
+    this.infoService.setTransactions(this.transactions, info.index, false);
     this.checkForChanges(info);
     this.filterTransactions();
     this.calculateTotalBalance();
@@ -158,7 +158,7 @@ export class TransactionsMainComponent implements OnInit {
         let difference = newTransaction.inflow - newTransaction.outflow;
         this.checkforChangesNewTrans(difference);
         this.transactions.unshift(newTransaction);
-        this.infoService.setTransactions(this.transactions);
+        this.infoService.setTransactions(this.transactions, 0, true);
         this.addingTransaction = false;
         this.resetNewInfo();
         this.calculateTotalBalance();

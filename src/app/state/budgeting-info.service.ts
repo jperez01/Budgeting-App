@@ -73,11 +73,35 @@ export class BudgetingInfoService {
     this.email = info.email;
     this.username = info.username;
     this.password = info.password;
-    this.fetchService.getGroups(this.user_id);
-    this.fetchService.getTransactions(this.user_id);
     this.user_id = info.user_id;
-    this.createBudgetNames();
-    this.createAccountNames();
+    this.fetchService.getGroups(this.user_id).then(result => {
+      let groups = result;
+      let group_index = 0;
+      groups.forEach(group => {
+        let newGroup = {
+          title: group.title,
+          items: [],
+          group_id: group.group_id,
+          total_received: group.total_received,
+          total_budgeted: group.total_budgeted
+        };
+        this.fetchService.getItems(group.group_id).then(result => {
+          newGroup.items = result;
+          this.budget.push(newGroup);
+          if (group_index == groups.length - 1) {
+            this.createBudgetNames();
+          }
+        });
+        group_index++;
+      });
+    });
+    this.fetchService.getTransactions(this.user_id).then(result => {
+      this.transactions = result;
+    })
+    this.fetchService.getAccounts(this.user_id).then(result => {
+      this.accounts = result;
+      this.createAccountNames();
+    })
    }
 
   emitFilteredTrans(value: Transaction[]): void {
@@ -122,17 +146,37 @@ export class BudgetingInfoService {
     this.emitNewBudget();
   }
 
-  setTransactions(newTransactions:Transaction[]) {
-    this.transactions = newTransactions;
+  setTransactions(newTransactions:any[], changedIndex: number, isNew: boolean) {
+    let changedTransaction:any = newTransactions[changedIndex];
+    changedTransaction.user_id = this.user_id;
+    if (isNew) {
+      this.fetchService.createTransaction(changedTransaction).then(result => {
+        newTransactions[changedIndex].trans_id = result;
+        this.transactions = newTransactions;
+      });
+    } else {
+      this.fetchService.updateTransaction(changedTransaction);
+      this.transactions = newTransactions;
+    }
   }
 
   setAccounts(newAccounts:Account[]) {
     this.accounts = newAccounts;
   }
 
-  addAccount(account:Account) {
-    this.accounts.push(account);
-    this.accountNames.push(account.name);
+  addAccount(account: Account) {
+    let newAccount = {
+      user_id: this.user_id,
+      name: account.name,
+      balance: account.balance,
+      type: account.type,
+      acc_id: 0
+    };
+    this.fetchService.createAccount(newAccount).then(result => {
+      newAccount.acc_id = result;
+      this.accounts.push(newAccount);
+      this.accountNames.push(newAccount.name);
+    })
   }
 
   changeAccountInfo(index, difference) {
@@ -140,10 +184,20 @@ export class BudgetingInfoService {
     let newAccount = {
       name: oldAccount.name,
       balance: oldAccount.balance,
-      type: oldAccount.type
-    }
+      type: oldAccount.type,
+      acc_id: oldAccount.acc_id
+    };
     newAccount.balance += difference;
     this.accounts[index] = newAccount;
+
+    let info = {
+      name: oldAccount.name,
+      balance: newAccount.balance,
+      type: oldAccount.type,
+      acc_id: oldAccount.acc_id,
+      user_id: this.user_id
+    }
+    this.fetchService.updateAccount(info);
   }
 
   changeOldAccountInfo(index, difference) {
@@ -155,19 +209,53 @@ export class BudgetingInfoService {
     }
     newAccount.balance -= difference;
     this.accounts[index] = newAccount;
+    
+    let info = {
+      name: oldAccount.name,
+      balance: newAccount.balance,
+      type: oldAccount.type,
+      acc_id: oldAccount.acc_id,
+      user_id: this.user_id
+    }
+    this.fetchService.updateAccount(info);
   }
+
   changeBudgetInfo(groupIndex, itemIndex, difference) {
     let trimmedDiff = Math.round(difference * 1e2) / 1e2;
     let newBudget = this.budget[groupIndex].items[itemIndex];
     newBudget.received -= trimmedDiff;
+
+    let newItem = JSON.parse(JSON.stringify(newBudget));
+    newItem.user_id = this.user_id;
+    this.fetchService.updateItem(newItem);
+
     this.budget[groupIndex].total_received -= trimmedDiff;
+    let newBudgetGroup = {
+      title: this.budget[groupIndex].title,
+      total_budgeted: this.budget[groupIndex].total_budgeted,
+      total_received: this.budget[groupIndex].total_received,
+      user_id: this.user_id
+    };
+    this.fetchService.updateGroup(newBudgetGroup);
   }
 
   changeOldBudgetInfo(groupIndex, itemIndex, difference) {
     let trimmedDiff = Math.round(difference * 1e2) / 1e2;
     let newBudget = this.budget[groupIndex].items[itemIndex];
+
     newBudget.received += trimmedDiff;
+    let newItem = JSON.parse(JSON.stringify(newBudget));
+    newItem.user_id = this.user_id;
+    this.fetchService.updateItem(newItem);
+
     this.budget[groupIndex].total_received += trimmedDiff;
+    let newBudgetGroup = {
+      title: this.budget[groupIndex].title,
+      total_budgeted: this.budget[groupIndex].total_budgeted,
+      total_received: this.budget[groupIndex].total_received,
+      user_id: this.user_id
+    };
+    this.fetchService.updateGroup(newBudgetGroup);
   }
 
   changeBudgetNames(): void {
@@ -196,6 +284,15 @@ export class BudgetingInfoService {
     this.transactions.forEach(transaction => {
       if (comparer.compare(transaction.category, oldName) === 0) {
         transaction.category = newName;
+        let newTransaction = {
+          account: transaction.account,
+          date: transaction.date,
+          category: transaction.category,
+          description: transaction.description,
+          outflow: transaction.outflow,
+          inflow: transaction.inflow
+        }
+        this.fetchService.updateTransaction(newTransaction);
       }
     })
   }
