@@ -64,18 +64,19 @@ export class GroupItemComponent implements OnInit {
     if (this.name.localeCompare(this.item.name) !== 0) {
       this.infoService.changeTransactionsWithName(this.item.name, this.name);
     }
-      let newItem = {
-        name: this.name,
-        budgeted: parseFloat(this.budgeted),
-        received: parseFloat(this.received)
-      }
-      let info = {
-        itemIndex: this.itemIndex,
-        groupIndex: this.groupIndex,
-        item: newItem
-      };
-      this.changedValue.emit(info);
-      this.available = this.budgeted - this.received;
+    let newItem = {
+      name: this.name,
+      budgeted: parseFloat(this.budgeted),
+      received: parseFloat(this.received),
+      item_id: this.item.item_id
+    }
+    let info = {
+      itemIndex: this.itemIndex,
+      groupIndex: this.groupIndex,
+      item: newItem
+    };
+    this.changedValue.emit(info);
+    this.available = this.budgeted - this.received;
   }
 
   collectName(event: any): void {

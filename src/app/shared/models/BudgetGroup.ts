@@ -5,4 +5,5 @@ export interface BudgetGroup {
     items:BudgetItem[];
     total_budgeted:number;
     total_received:number;
+    group_id:number;
 }

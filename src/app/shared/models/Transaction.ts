@@ -5,4 +5,5 @@ export interface Transaction {
     description: string;
     outflow: number;
     inflow: number;
+    trans_id:number;
 }

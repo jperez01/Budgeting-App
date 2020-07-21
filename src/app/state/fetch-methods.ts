@@ -28,13 +28,15 @@ export default class FetchMethods {
         });
     }
 
-    createGroup(info): void {
-        fetch(`${this.groups_string}/create`, {
+    createGroup(info): Promise<any> {
+        return fetch(`${this.groups_string}/create`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(info)
         }).then(res => res.json())
-        .then(info => console.log(info));
+        .then(info => {
+            return info;
+        });
     }
 
     updateGroup(info): void {
@@ -112,13 +114,15 @@ export default class FetchMethods {
         });
     }
 
-    createItem(info): void {
-        fetch(`${this.items_string}/create`, {
+    createItem(info) {
+        return fetch(`${this.items_string}/create`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(info)
         }).then(res => res.json())
-        .then(result => console.log(result));
+        .then(result => {
+            return result;
+        });
     }
 
     updateItem(info): void {
