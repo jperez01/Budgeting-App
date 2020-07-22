@@ -67,7 +67,7 @@ export class CalendarComponent implements OnInit {
     let min_date = new Date(this.info.getYear(), this.info.getMonth(), 1);
     let max_date = new Date(this.info.getYear(), this.info.getMonth(), this.info.getEndDay());
     transactions.forEach(transaction => {
-      if (this.info.inRange(transaction.date, min_date, max_date)) {
+      if (this.info.inRange(new Date(transaction.date), min_date, max_date)) {
         this.filtered_trans.push(transaction);
       }
     });
@@ -80,7 +80,7 @@ export class CalendarComponent implements OnInit {
     let date = new Date(this.info.getYear(), this.info.getMonth(), num);
     let index = 0;
     this.filtered_trans.forEach(transaction => {
-      if (date.getTime() === transaction.date.getTime()) {
+      if (date.getTime() === new Date(transaction.date).getTime()) {
         trans.push(transaction);
       }
       index++;

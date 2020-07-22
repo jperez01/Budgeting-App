@@ -111,11 +111,12 @@ export class TransactionsMainComponent implements OnInit {
       this.infoService.changeBudgetInfo(grpIndex, itmIndex, difference);
     }
   }
+
   calculateTotalBalance(): void {
     if (this.name.localeCompare('All') === 0) {
       let total = 0;
       this.accounts.forEach(account => {
-        total += account.balance;
+        total += Number(account.balance);
       })
       this.total_balance = total;
     } else {

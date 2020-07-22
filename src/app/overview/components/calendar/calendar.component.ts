@@ -61,11 +61,13 @@ export class CalendarComponent implements OnInit {
     let min_date = new Date(this.info.getYear(), this.info.getMonth(), 1);
     let max_date = new Date(this.info.getYear(), this.info.getMonth(), this.info.getEndDay());
     transactions.forEach(transaction => {
+      transaction.date = new Date(transaction.date);
       if (this.info.inRange(transaction.date, min_date, max_date)) {
         this.filtered_trans.push(transaction);
       }
     });
     this.filtered_trans.forEach(transaction => {
+      transaction.date = new Date(transaction.date);
       this.has_transactions[transaction.date.getDate() - 1] = true;
     });
     for (let i = 0; i < this.info.findDaysInMonth(); i++) {

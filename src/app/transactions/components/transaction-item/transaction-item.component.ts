@@ -36,12 +36,13 @@ export class TransactionItemComponent implements OnInit {
   constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
-
     this.sentItem = false;
     this.background = '';
     this.line = '1px solid #b6bec2';
     this.changingValue = false;
-    this.date_string = this.getFormattedDate(this.item.date);
+    this.date_string = this.getFormattedDate(new Date(this.item.date));
+    this.item.outflow = Number(this.item.outflow);
+    this.item.inflow = Number(this.item.inflow);
     this.outflow = this.item.outflow.toFixed(2);
     this.inflow = this.item.inflow.toFixed(2);
     this.newAccount = this.item.account;
@@ -64,6 +65,7 @@ export class TransactionItemComponent implements OnInit {
     if (this.newAccount !== undefined && this.newCategory !== undefined && this.newDate !== undefined
       && this.newDescription !== undefined && this.newInflow !== undefined && this.newOutflow !== undefined
       && this.itemIndex !== undefined && this.accountIndex !== undefined && this.groupIndex !== undefined) {
+        console.log(this.item);
         if (this.itemIndex === null && this.groupIndex === null) {
           this.collectDefaultCategory();
         }
@@ -117,7 +119,6 @@ export class TransactionItemComponent implements OnInit {
 
   cancelChange(): void {
     this.changingValue = false;
-    this.background = '';
     this.line = '1px solid #b6bec2';
   }
 
@@ -199,14 +200,16 @@ export class TransactionItemComponent implements OnInit {
   collectOldCategory(): void {
     let initialIndex = 0;
     this.budgetNames.forEach(group => {
+      let innerIndex = 0;
       group.items.forEach(item => {
-        let innerIndex = 0;
         if (this.item.category.localeCompare(item) === 0) {
+          console.log(item);
+          console.log(initialIndex);
+          console.log(innerIndex);
           this.oldGroupIndex = initialIndex;
           this.oldItemIndex = innerIndex;
-        } else {
-          innerIndex++;
         }
+        innerIndex++;
       })
       initialIndex++;
     });

@@ -76,7 +76,6 @@ export class BudgetingInfoService {
     this.user_id = info.user_id;
     this.fetchService.getGroups(this.user_id).then(result => {
       let groups = result;
-      let group_index = 0;
       groups.forEach(group => {
         let newGroup = {
           title: group.title,
@@ -88,11 +87,15 @@ export class BudgetingInfoService {
         this.fetchService.getItems(group.group_id).then(result => {
           newGroup.items = result;
           this.budget.push(newGroup);
-          if (group_index == groups.length - 1) {
-            this.createBudgetNames();
-          }
+          let itemNames = [];
+          newGroup.items.forEach(item => {
+            itemNames.push(item.name);
+          });
+          this.budgetNames.push({
+            title: group.title,
+            items: itemNames
+          });
         });
-        group_index++;
       });
     });
     this.fetchService.getTransactions(this.user_id).then(result => {
@@ -228,7 +231,7 @@ export class BudgetingInfoService {
     let oldAccount = this.accounts[index];
     let newAccount = {
       name: oldAccount.name,
-      balance: oldAccount.balance,
+      balance: Number(oldAccount.balance),
       type: oldAccount.type,
       acc_id: oldAccount.acc_id
     };
@@ -246,8 +249,8 @@ export class BudgetingInfoService {
   }
 
   changeOldAccountInfo(index, difference) {
-    /** 
-     * let newAccount = {
+    let oldAccount = this.accounts[index];
+     let newAccount = {
       name: oldAccount.name,
       balance: oldAccount.balance,
       type: oldAccount.type,
@@ -255,13 +258,10 @@ export class BudgetingInfoService {
     }
     newAccount.balance -= difference;
     this.accounts[index] = newAccount;
-    */
-    this.accounts[index].balance -= difference;
-    let oldAccount = this.accounts[index];
     
     let info = {
       name: oldAccount.name,
-      balance: oldAccount.balance,
+      balance: newAccount.balance,
       type: oldAccount.type,
       acc_id: oldAccount.acc_id,
       user_id: this.user_id
@@ -272,18 +272,18 @@ export class BudgetingInfoService {
   changeBudgetInfo(groupIndex, itemIndex, difference) {
     let trimmedDiff = Math.round(difference * 1e2) / 1e2;
     let newBudget = this.budget[groupIndex].items[itemIndex];
-    newBudget.received -= trimmedDiff;
+    newBudget.received = Number(newBudget.received) - trimmedDiff;
 
     let newItem = JSON.parse(JSON.stringify(newBudget));
     newItem.user_id = this.user_id;
     this.fetchService.updateItem(newItem);
 
-    this.budget[groupIndex].total_received -= trimmedDiff;
+    this.budget[groupIndex].total_received = Number(this.budget[groupIndex].total_received) - trimmedDiff;
     let newBudgetGroup = {
       title: this.budget[groupIndex].title,
       total_budgeted: this.budget[groupIndex].total_budgeted,
       total_received: this.budget[groupIndex].total_received,
-      user_id: this.user_id
+      group_id: this.budget[groupIndex].group_id
     };
     this.fetchService.updateGroup(newBudgetGroup);
   }
@@ -292,17 +292,17 @@ export class BudgetingInfoService {
     let trimmedDiff = Math.round(difference * 1e2) / 1e2;
     let newBudget = this.budget[groupIndex].items[itemIndex];
 
-    newBudget.received += trimmedDiff;
+    newBudget.received = Number(newBudget.received) + trimmedDiff;
     let newItem = JSON.parse(JSON.stringify(newBudget));
     newItem.user_id = this.user_id;
     this.fetchService.updateItem(newItem);
 
-    this.budget[groupIndex].total_received += trimmedDiff;
+    this.budget[groupIndex].total_received = Number(this.budget[groupIndex].total_received) + trimmedDiff;
     let newBudgetGroup = {
       title: this.budget[groupIndex].title,
       total_budgeted: this.budget[groupIndex].total_budgeted,
       total_received: this.budget[groupIndex].total_received,
-      user_id: this.user_id
+      group_id: this.budget[groupIndex].group_id
     };
     this.fetchService.updateGroup(newBudgetGroup);
   }
@@ -339,7 +339,8 @@ export class BudgetingInfoService {
           category: transaction.category,
           description: transaction.description,
           outflow: transaction.outflow,
-          inflow: transaction.inflow
+          inflow: transaction.inflow,
+          user_id: this.user_id
         }
         this.fetchService.updateTransaction(newTransaction);
       }

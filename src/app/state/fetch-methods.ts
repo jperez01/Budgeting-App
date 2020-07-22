@@ -45,7 +45,7 @@ export default class FetchMethods {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(info)
         }).then(res => res.json())
-        .then(result => console.log(result));
+        .then(result => console.log(''));
     }
 
     deleteGroup(group_id: number): void {
@@ -84,7 +84,7 @@ export default class FetchMethods {
 
     updateTransaction(info): void {
         fetch(`${this.trans_string}/update`, {
-            method: 'POST',
+            method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(info)
         }).then(res => res.json())
@@ -131,7 +131,7 @@ export default class FetchMethods {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(info)
         }).then(res => res.json())
-        .then(result => console.log(result));
+        .then(result => console.log(''));
     }
 
     deleteItem(item_id: number): void {
@@ -174,6 +174,6 @@ export default class FetchMethods {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(info)
         }).then(res => res.json())
-        .then(result => console.log(result));
+        .then(result => console.log(''));
     }
 }
