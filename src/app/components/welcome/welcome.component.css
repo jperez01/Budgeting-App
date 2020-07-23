@@ -1,0 +1,81 @@
+.welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.welcome-info {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome-title {
+    font-family: 'Proxima Nova Bold';
+    font-size: 32px;
+    margin: 15px 0px;
+}
+
+.welcome-paragraph {
+    font-family: 'Proxima Nova Medium';
+    font-size: 18px;
+    width: 60%;
+}
+
+.welcome-heading {
+    font-family: 'Proxima Nova Bold';
+    font-size: 24px;
+    margin: 10px 0px;
+}
+
+.welcome-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.list-item {
+    font-family: 'Proxima Nova Medium';
+    font-size: 16px;
+}
+
+.link-heading {
+    font-family: 'Proxima Nova Medium';
+    font-size: 18px;
+    line-height: 30px;
+    height: 30px;
+    margin: 5px 0px;
+}
+
+.link {
+    font-family: 'Proxima Nova Medium';
+    font-size: 18px;
+    line-height: 30px;
+    margin: auto 0px;
+    margin-left: 10px;
+    height: 30px;
+}
+
+.welcome-buttons {
+    margin-top: 10px;
+}
+
+.welcome-button {
+    width: 100px;
+    height: 35px;
+    font-family: 'Proxima Nova Bold';
+    font-size: 16px;
+    background-color: rgb(0, 156, 194);
+    border: none;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0px 10px;
+}
+
+.welcome-button:hover {
+    background-color: rgb(1, 110, 138);
+}

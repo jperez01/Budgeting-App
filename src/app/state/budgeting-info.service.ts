@@ -19,6 +19,7 @@ export class BudgetingInfoService {
   accountNames:any[];
   filtered_transactions:Subject<any>;
   emit_budget:Subject<any>;
+  login_success:Subject<any>;
   username:string;
   email:string;
   password:string;
@@ -33,19 +34,7 @@ export class BudgetingInfoService {
     this.budgetNames = [];
     this.filtered_transactions = new Subject<Transaction[]>();
     this.emit_budget = new Subject<Transaction[]>();
-    this.budget.forEach(group => {
-      let itemsNames = [];
-      group.items.forEach(item => {
-        itemsNames.push(item.name);
-      })
-      this.budgetNames.push({
-        title: group.title,
-        items: itemsNames
-      });
-    });
-    this.accounts.forEach(account => {
-      this.accountNames.push(account.name);
-    });
+    this.login_success = new Subject<boolean>();
    }
 
    createBudgetNames(): void {
@@ -74,6 +63,7 @@ export class BudgetingInfoService {
     this.username = info.username;
     this.password = info.password;
     this.user_id = info.user_id;
+    this.login_success.next(true);
     this.fetchService.getGroups(this.user_id).then(result => {
       let groups = result;
       groups.forEach(group => {
@@ -161,7 +151,6 @@ export class BudgetingInfoService {
 
   addGroup(info): void {
     info.user_id = this.user_id;
-    console.log(info);
     this.fetchService.createGroup(info).then(result => {
       info.group_id = result[0].group_id;
       this.budget.push(info);

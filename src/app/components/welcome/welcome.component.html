@@ -1,0 +1,30 @@
+<div [ngClass]="'welcome'">
+    <div [ngClass]="'welcome-info'">
+        <h4 [ngClass]="'welcome-title'"> Budgeting App</h4>
+        <p [ngClass]="'welcome-paragraph'"> Welcome to my budgeting app. This was made as a project for my portfolio to learn Angular and practice with Postgres.
+            Try out the app and send an issue request through github if you see any glaring problems. I would also like feedback on how
+            to improve the visual design and also the structuring of the app's code.
+        </p>
+        <h4 [ngClass]="'welcome-heading'"> Features </h4>
+        <ol>
+            <li [ngClass]="'list-item'">Can create an account to store all of your data</li>
+            <li [ngClass]="'list-item'">Can create budgeting groups and items to organize your expense</li>
+            <li [ngClass]="'list-item'">Can create accounts for all of your money sources and transactions to show where the money goes</li>
+            <li [ngClass]="'list-item'">Has built in calendar to see all transactions for the month and how they contribute to the total</li>
+        </ol>
+        <h4 [ngClass]="'welcome-heading'"> Links </h4>
+        <div [ngClass]="'welcome-link'">
+            <h4 [ngClass]="'link-heading'"> Github Repo: </h4>
+            <a [ngClass]="'link'"> Placeholder </a>
+        </div>
+        <div [ngClass]="'welcome-link'">
+            <h4 [ngClass]="'link-heading'"> Personal Portfolio: </h4>
+            <a [ngClass]="'link'"> Placeholder </a>
+        </div>
+    </div>
+    
+    <div [ngClass]="'welcome-buttons'">
+        <button [ngClass]="'welcome-button'" routerLink="/authentication/login"> Login </button>
+        <button [ngClass]="'welcome-button'" routerLink="/authentication/register"> Register </button>
+    </div>
+</div>

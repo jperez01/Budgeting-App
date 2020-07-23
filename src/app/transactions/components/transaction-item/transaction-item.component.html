@@ -8,7 +8,7 @@
         <input [ngClass]="'item-input'" value={{formatMoney(outflow)}} (change)="collectOutflow($event)">
         <input [ngClass]="'item-input'" value={{formatMoney(inflow)}} (change)="collectInflow($event)">
     </div>
-    <div [ngClass]="'border-line'" [ngStyle]="{'border-bottom': line}"></div>
+    <div [ngClass]="'border-line'"></div>
 </div>
 <div *ngIf="changingValue" [ngClass]="'item-background'" [ngStyle]="{'background-color': background}">
     <div [ngClass]="'item'">

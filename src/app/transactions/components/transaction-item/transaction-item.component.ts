@@ -16,7 +16,6 @@ export class TransactionItemComponent implements OnInit {
   inflow:number;
   changingValue:boolean;
   background:string;
-  line:string;
   sentItem:boolean;
   newAccount:string;
   newDate:string;
@@ -37,8 +36,7 @@ export class TransactionItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.sentItem = false;
-    this.background = '';
-    this.line = '1px solid #b6bec2';
+    this.background = '#0091d946';
     this.changingValue = false;
     this.date_string = this.getFormattedDate(new Date(this.item.date));
     this.item.outflow = Number(this.item.outflow);
@@ -61,11 +59,14 @@ export class TransactionItemComponent implements OnInit {
     this.oldItemIndex = null;
   }
 
-  confirmChanges(): void {
-    if (this.newAccount !== undefined && this.newCategory !== undefined && this.newDate !== undefined
+  checkForValidInputValues(): boolean {
+    return this.newAccount !== undefined && this.newCategory !== undefined && this.newDate !== undefined
       && this.newDescription !== undefined && this.newInflow !== undefined && this.newOutflow !== undefined
-      && this.itemIndex !== undefined && this.accountIndex !== undefined && this.groupIndex !== undefined) {
-        console.log(this.item);
+      && this.itemIndex !== undefined && this.accountIndex !== undefined && this.groupIndex !== undefined;
+  }
+
+  confirmChanges(): void {
+    if (this.checkForValidInputValues()) {
         if (this.itemIndex === null && this.groupIndex === null) {
           this.collectDefaultCategory();
         }
@@ -119,13 +120,10 @@ export class TransactionItemComponent implements OnInit {
 
   cancelChange(): void {
     this.changingValue = false;
-    this.line = '1px solid #b6bec2';
   }
 
   changeStyle(): void {
-      this.background = '#0091d946';
-      this.line = 'none';
-      this.changingValue = true;
+    this.changingValue = true;
   }
 
   getFormattedDate(date: Date): string {
