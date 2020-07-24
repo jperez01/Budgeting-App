@@ -41,8 +41,8 @@ export class BudgetInfoComponent implements OnInit {
     this.whole_available = 0;
     this.graph_values = [];
     this.groups.forEach(group => {
-      this.whole_budgeted += group.total_budgeted;
-      this.whole_received += group.total_received;
+      this.whole_budgeted += Number(group.total_budgeted);
+      this.whole_received += Number(group.total_received);
       this.graph_labels.push(group.title);
       this.graph_values.push(group.total_budgeted);
     });

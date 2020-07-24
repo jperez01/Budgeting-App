@@ -5,7 +5,7 @@
         <p [ngClass]="'group-amount'">Used</p>
         <p [ngClass]="'group-amount'">Available</p>
     </div>
-    <app-group-item  (changedValue)="bubbleValue($event)" *ngFor="let item of items; let i = index"
+    <app-group-item  (changedValue)="bubbleValue($event)" *ngFor="let item of items; let i = index" (deleteItem)="bubbleDelete($event)"
         [item]="item" [groupName]="group.title" [itemIndex]="i" [groupIndex]="groupIndex"></app-group-item>
     <div *ngIf="addingItem" [ngClass]="'item'" [ngStyle]="{'background-color': '#0091d946'}">
         <div [ngClass]="'item-row'">

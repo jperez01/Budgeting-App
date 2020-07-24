@@ -29,8 +29,8 @@ export class OvBudgetComponent implements OnInit {
 
   calculateTotals(): void {
     this.budgetInfo.forEach(group => {
-      this.budgeted += group.total_budgeted;
-      this.received += group.total_received;
+      this.budgeted += Number(group.total_budgeted);
+      this.received += Number(group.total_received);
     })
     this.available = this.budgeted - this.received;
   }

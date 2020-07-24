@@ -15,7 +15,15 @@
         <p id="available" [ngClass]="'group-amount'" [ngStyle]="{'color': color}">{{formatMoney(available)}}</p>
     </div>
     <div [ngClass]="'new-item-buttons'">
-        <button [ngClass]="'new-item-button'" (click)="sendValue($event)"> Save </button>
-        <button [ngClass]="'new-item-button'" (click)="cancelChanges()"> Cancel </button>
+        <div *ngIf="!deletingItem">
+            <button [ngClass]="'new-item-button'" (click)="deletingItem = !deletingItem"> Delete </button>
+            <button [ngClass]="'new-item-button'" (click)="sendValue($event)"> Save </button>
+            <button [ngClass]="'new-item-button'" (click)="cancelChanges()"> Cancel </button>
+        </div>
+        <div *ngIf="deletingItem" [ngClass]="'delete-buttons'">
+            <p [ngClass]="'delete-phrase'"> Are you sure? </p>
+            <button [ngClass]="'new-item-button'" (click)="confirmDelete()"> Yes </button>
+            <button [ngClass]="'new-item-button'" (click)="deletingItem = !deletingItem"> No </button>
+        </div>
     </div>
 </div>

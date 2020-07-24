@@ -196,6 +196,11 @@ export class BudgetingInfoService {
     }
   }
 
+  deleteTransaction(oldTransaction: any, index: number): void {
+    this.transactions.splice(index, 1);
+    this.fetchService.deleteTransaction(oldTransaction.trans_id);
+  }
+
   setAccounts(newAccounts:Account[]) {
     this.accounts = newAccounts;
   }

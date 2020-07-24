@@ -78,6 +78,16 @@ export class TransactionsMainComponent implements OnInit {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
   }
 
+  deleteTransaction(info): void {
+    let transaction = this.transactions[info.index];
+    this.infoService.changeOldBudgetInfo(info.groupIndex, info.itemIndex, info.difference);
+    this.infoService.changeOldAccountInfo(info.accountIndex, info.difference);
+    this.infoService.deleteTransaction(transaction, info.index);
+    this.transactions = this.infoService.getTransactions();
+    this.accounts = this.infoService.getAccounts();
+    this.calculateTotalBalance();
+  }
+
   checkForChanges(info): void {
     if (info.accountIndex !== null) {
       let accIndex = Number(info.accountIndex);

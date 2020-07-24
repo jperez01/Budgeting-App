@@ -16,9 +16,13 @@ export class BudgetMainComponent implements OnInit {
   groups:any;
   addingGroup:boolean;
   newName:string;
+  transactions:any[];
+  deletingItem:boolean;
   constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
+    this.transactions = [];
+    this.deletingItem = false;
     this.newName = undefined;
     this.addingGroup = false;
     this.info = new DateInfo();
@@ -38,6 +42,16 @@ export class BudgetMainComponent implements OnInit {
     this.groups = this.groups.slice();
   }
 
+  deleteItem(info: any): void {
+    console.log(info);
+    this.transactions = [];
+    this.infoService.getTransactions().forEach(transaction => {
+      if (transaction.category.localeCompare(info.name) === 0) {
+        this.transactions.push(transaction);
+      }
+    });
+    this.deletingItem = true;
+  }
   addItem(info: any): void {
     let newItem = {
       name: info.name,

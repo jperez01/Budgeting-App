@@ -10,6 +10,7 @@ export class GroupComponent implements OnInit {
   @Input() group;
   @Input() groupIndex;
   @Output() valueBubble: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteBubble: EventEmitter<any> = new EventEmitter<any>();
   @Output() addGroupItem: EventEmitter<any> = new EventEmitter<any>();
   items: any;
   addingItem:boolean;
@@ -54,6 +55,10 @@ export class GroupComponent implements OnInit {
 
   bubbleValue(event: any): void {
     this.valueBubble.emit(event);
+  }
+  
+  bubbleDelete(event: any): void {
+    this.deleteBubble.emit(event);
   }
 
   sendValueUp(): void {

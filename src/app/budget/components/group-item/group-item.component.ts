@@ -12,6 +12,7 @@ export class GroupItemComponent implements OnInit {
   @Input() groupIndex:any;
   @Input() itemIndex:any;
   @Output() changedValue: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteItem: EventEmitter<any> = new EventEmitter<any>();
   changingValue:boolean;
   available:number;
   name:string;
@@ -21,12 +22,14 @@ export class GroupItemComponent implements OnInit {
   background:string;
   oldItem:any;
   color:string;
+  deletingItem:boolean;
 
   constructor(private infoService: BudgetingInfoService) {
     this.changingValue = false;
   }
 
   ngOnInit(): void {
+    this.deletingItem = false;
     this.budgeted = this.item.budgeted
     this.received = this.item.received;
     this.name = this.item.name;
@@ -58,6 +61,16 @@ export class GroupItemComponent implements OnInit {
 
   formatMoney(value: any): string {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+  }
+
+  confirmDelete(): void {
+    let deleteItem = {
+      item_id: this.item.item_id,
+      itemIndex: this.itemIndex,
+      groupIndex: this.groupIndex,
+      name: this.item.name
+    }
+    this.deleteItem.emit(deleteItem);
   }
   
   sendValue(event: any): void {

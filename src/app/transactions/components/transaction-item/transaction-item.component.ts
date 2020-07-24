@@ -11,6 +11,7 @@ export class TransactionItemComponent implements OnInit {
   @Input() index:any;
   @Input() filtered:boolean;
   @Output() sendTransaction: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteTransaction: EventEmitter<any> = new EventEmitter<any>();
   date_string:string;
   outflow:number;
   inflow:number;
@@ -29,12 +30,13 @@ export class TransactionItemComponent implements OnInit {
   oldGroupIndex:number;
   oldItemIndex:number;
   oldAccountIndex:number;
-  styleChange:any;
+  deletingItem:boolean;
   budgetNames:any[];
   accountNames:any[];
   constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
+    this.deletingItem = false;
     this.sentItem = false;
     this.background = '#0091d946';
     this.changingValue = false;
@@ -63,6 +65,19 @@ export class TransactionItemComponent implements OnInit {
     return this.newAccount !== undefined && this.newCategory !== undefined && this.newDate !== undefined
       && this.newDescription !== undefined && this.newInflow !== undefined && this.newOutflow !== undefined
       && this.itemIndex !== undefined && this.accountIndex !== undefined && this.groupIndex !== undefined;
+  }
+
+  confirmDelete(): void {
+    this.collectDefaultCategory();
+    this.collectDefaultAccount();
+    let sentObject = {
+      index: this.index,
+      itemIndex: this.itemIndex,
+      groupIndex: this.groupIndex,
+      accountIndex: this.accountIndex,
+      difference: this.inflow - this.outflow
+    }
+    this.deleteTransaction.emit(sentObject);
   }
 
   confirmChanges(): void {
@@ -182,15 +197,15 @@ export class TransactionItemComponent implements OnInit {
   collectDefaultCategory(): void {
     let initialIndex = 0;
     this.budgetNames.forEach(group => {
+      let innerIndex = 0;
       group.items.forEach(item => {
-        let innerIndex = 0;
         if (this.item.category.localeCompare(item) === 0) {
           this.groupIndex = initialIndex;
           this.itemIndex = innerIndex;
         } else {
           innerIndex++;
         }
-      })
+      });
       initialIndex++;
     });
   }
@@ -201,9 +216,6 @@ export class TransactionItemComponent implements OnInit {
       let innerIndex = 0;
       group.items.forEach(item => {
         if (this.item.category.localeCompare(item) === 0) {
-          console.log(item);
-          console.log(initialIndex);
-          console.log(innerIndex);
           this.oldGroupIndex = initialIndex;
           this.oldItemIndex = innerIndex;
         }
