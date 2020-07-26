@@ -1,6 +1,19 @@
 <div [ngClass]="'gray-background'">
     <div [ngClass]="'delete-info'" *ngIf="deletingItem">
-        <p> Hello</p>
+        <div [ngClass]="'delete-window'">
+            <h3 [ngClass]="'delete-title'"> Recategorize Transactions </h3>
+            <p [ngClass]="'delete-phrase'"> Before you can delete this item, you need to recategorize certain transactions to another category.</p>
+            <select [ngClass]="'category-dropdown'" (change)="collectCategory($event)">
+                <option label="Default" [value]="'default'"> Choose One </option>
+                <optgroup *ngFor="let group of budgetNames;let i = index" label="{{group.title}}">
+                    <option *ngFor="let item of group.items; let in = index" label="{{item}}" [value]="in + ',' + i + ' '+ item">{{item}}</option>
+                </optgroup>
+            </select>
+            <div>
+                <button [ngClass]="'delete-button'" (click)="confirmDeletion()" [ngStyle]="{'margin-left': '0px'}"> Confirm </button>
+                <button [ngClass]="'delete-button'" (click)="cancelDeletion()"> Cancel </button>
+            </div>
+        </div>
     </div>
     <div [ngClass]="'budget-header'">
         <div [ngClass]="'budget-header-summary'">

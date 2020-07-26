@@ -17,7 +17,14 @@ export class BudgetMainComponent implements OnInit {
   addingGroup:boolean;
   newName:string;
   transactions:any[];
+  budgetNames:any[];
   deletingItem:boolean;
+  groupIndex:string;
+  itemIndex:string;
+  oldGroupIndex:number;
+  oldItemIndex:number;
+  newCategory:string;
+  deletedCategory:string;
   constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
@@ -31,6 +38,10 @@ export class BudgetMainComponent implements OnInit {
     this.sign = false;
     this.groups = this.infoService.getBudget();
     this.calculateTotalBudget();
+    this.newCategory = null;
+    this.itemIndex = null;
+    this.groupIndex = null;
+    this.budgetNames = this.infoService.getBudgetNames();
   }
 
   updateBudgetInfo(info: any): void {
@@ -43,15 +54,64 @@ export class BudgetMainComponent implements OnInit {
   }
 
   deleteItem(info: any): void {
-    console.log(info);
+    this.oldGroupIndex = info.groupIndex;
+    this.oldItemIndex = info.itemIndex;
+    this.deletedCategory = info.name;
     this.transactions = [];
+    let index = 0;
     this.infoService.getTransactions().forEach(transaction => {
       if (transaction.category.localeCompare(info.name) === 0) {
-        this.transactions.push(transaction);
+        this.transactions.push({
+          transaction: transaction,
+          index: index
+        });
       }
+      index++;
     });
     this.deletingItem = true;
   }
+
+  confirmDeletion(): void {
+    if (this.newCategory !== null && this.itemIndex !== null && this.groupIndex !== null) {
+      this.transactions.forEach(info => {
+        this.infoService.changeTransactionCategory(info.transaction, info.id, this.newCategory);
+        let difference = Number(info.transaction.inflow) - Number(info.transaction.outflow);
+        this.infoService.changeBudgetInfo(this.groupIndex, this.itemIndex, difference);
+      });
+      this.infoService.deleteItemFromGroup(this.oldGroupIndex, this.oldItemIndex);
+      this.groups = this.infoService.getBudget();
+      this.budgetNames = this.infoService.getBudgetNames();
+      this.calculateTotalBudget();
+      this.deletingItem = false;
+    }
+  }
+
+  cancelDeletion(): void {
+    this.deletingItem = false;
+    this.transactions = [];
+    this.newCategory = null;
+    this.itemIndex = null;
+    this.groupIndex = null;
+  }
+
+  collectCategory(event: any): void {
+    if (event.target.value.localeCompare('default') === 0) {
+      this.newCategory = null;
+    } else {
+      let str = event.target.value;
+      let category = str.substring(str.indexOf(' ') + 1);
+      if (category.localeCompare(this.deletedCategory) !== 0) {
+        this.groupIndex = str.substring(1 + str.indexOf(','), str.indexOf(' '));
+        this.itemIndex = str.substring(0, str.indexOf(','));
+        this.newCategory = category;
+      } else {
+        this.newCategory = null;
+        this.itemIndex = null;
+        this.groupIndex = null;
+      }
+    }
+  }
+
   addItem(info: any): void {
     let newItem = {
       name: info.name,
@@ -106,9 +166,11 @@ export class BudgetMainComponent implements OnInit {
   changeTotalBudget(change: number): void {
     this.total_budget += change;
   }
+
   calculateTotalBudget(): void {
     let budgeted_total = 0;
     let received_total = 0;
+    console.log(this.groups);
     this.groups.forEach(group => {
       budgeted_total += Number(group.total_budgeted);
       received_total += Number(group.total_received);

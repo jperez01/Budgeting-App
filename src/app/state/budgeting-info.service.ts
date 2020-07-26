@@ -178,6 +178,7 @@ export class BudgetingInfoService {
         total_budgeted: changedGroup.total_budgeted,
         total_received: changedGroup.total_received
       }
+      this.changeBudgetNames();
       this.fetchService.updateGroup(newGroupInfo);
     });
   }
@@ -187,13 +188,21 @@ export class BudgetingInfoService {
     changedTransaction.user_id = this.user_id;
     if (isNew) {
       this.fetchService.createTransaction(changedTransaction).then(result => {
-        newTransactions[changedIndex].trans_id = result;
+        newTransactions[changedIndex].trans_id = result[0];
         this.transactions = newTransactions;
       });
     } else {
       this.fetchService.updateTransaction(changedTransaction);
       this.transactions = newTransactions;
     }
+  }
+
+  changeTransactionCategory(transaction, index, category) {
+    transaction.category = category;
+    this.transactions[index] = transaction;
+    transaction.user_id = this.user_id;
+    console.log(transaction);
+    this.fetchService.updateTransaction(transaction);
   }
 
   deleteTransaction(oldTransaction: any, index: number): void {
@@ -263,7 +272,26 @@ export class BudgetingInfoService {
     this.fetchService.updateAccount(info);
   }
 
-  changeBudgetInfo(groupIndex, itemIndex, difference) {
+  deleteItemFromGroup(groupIndex, itemIndex) {
+    let oldItem = this.budget[groupIndex].items[itemIndex];
+    let oldGroup = this.budget[groupIndex];
+    let new_total_budgeted = Number(oldGroup.total_budgeted) - Number(oldItem.budgeted);
+    let new_total_received = Number(oldGroup.total_received) - Number(oldItem.received);
+    oldGroup.total_budgeted = new_total_budgeted;
+    oldGroup.total_received = new_total_received;
+    let newGroup = {
+      title: oldGroup.title,
+      total_budgeted: oldGroup.total_budgeted,
+      total_received: oldGroup.total_received,
+      group_id: oldGroup.group_id
+    };
+    this.budget[groupIndex].items.splice(itemIndex, 1);
+    this.fetchService.updateGroup(newGroup);
+    this.fetchService.deleteItem(oldItem.item_id);
+    this.changeBudgetNames();
+  }
+
+  changeBudgetInfo(groupIndex, itemIndex, difference:number) {
     let trimmedDiff = Math.round(difference * 1e2) / 1e2;
     let newBudget = this.budget[groupIndex].items[itemIndex];
     newBudget.received = Number(newBudget.received) - trimmedDiff;
