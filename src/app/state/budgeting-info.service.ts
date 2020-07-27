@@ -180,6 +180,7 @@ export class BudgetingInfoService {
       }
       this.changeBudgetNames();
       this.fetchService.updateGroup(newGroupInfo);
+      this.emitNewBudget();
     });
   }
 
@@ -188,8 +189,11 @@ export class BudgetingInfoService {
     changedTransaction.user_id = this.user_id;
     if (isNew) {
       this.fetchService.createTransaction(changedTransaction).then(result => {
-        newTransactions[changedIndex].trans_id = result[0];
+        console.log(result);
+        newTransactions[changedIndex].trans_id = result[0].trans_id;
         this.transactions = newTransactions;
+        console.log(this.transactions);
+        console.log(changedTransaction);
       });
     } else {
       this.fetchService.updateTransaction(changedTransaction);
@@ -270,6 +274,14 @@ export class BudgetingInfoService {
       user_id: this.user_id
     }
     this.fetchService.updateAccount(info);
+  }
+
+  deleteGroup(groupIndex:number): void {
+    let oldGroup = this.budget[groupIndex];
+    this.budget.splice(groupIndex, 1);
+    this.fetchService.deleteGroup(oldGroup.group_id);
+    this.changeBudgetNames();
+    this.emitNewBudget();
   }
 
   deleteItemFromGroup(groupIndex, itemIndex) {

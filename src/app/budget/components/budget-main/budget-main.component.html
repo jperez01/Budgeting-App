@@ -30,7 +30,7 @@
     </div>
     <div [ngClass]="'budget-info'">
         <div [ngClass]="'list'">
-            <app-group (addGroupItem)="addItem($event)" (valueBubble)="updateBudgetInfo($event)" (deleteBubble)="deleteItem($event)"
+            <app-group (addGroupItem)="addItem($event)" (valueBubble)="updateBudgetInfo($event)" (deleteBubble)="deleteItem($event)" (deleteGroup)="deleteGroup($event)"
             *ngFor="let group of groups; let i = index" [group]="group" [ngClass]="'group'" [groupIndex]="i">
             </app-group>
             <div *ngIf="!addingGroup" [ngClass]="'group-box'">
@@ -43,7 +43,10 @@
                     <p [ngClass]="'group-amount'">Received</p>
                     <p [ngClass]="'group-amount'">Available</p>
                 </div>
-                <p [ngClass]="'add-group2'" (click)="addGroup()"> Confirm</p>
+                <div [ngClass]="'add-info'">
+                    <p [ngClass]="'add-group2'" (click)="addGroup()"> Confirm</p>
+                    <p [ngClass]="'add-group2'" (click)="addingGroup = !addingGroup"> Cancel </p>
+                </div>
             </div>
         </div>
         <app-budget-info [ngClass]="'info'" [groups]="groups"></app-budget-info>

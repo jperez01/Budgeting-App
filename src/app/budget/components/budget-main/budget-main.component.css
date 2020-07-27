@@ -167,6 +167,11 @@
     margin: 0;
 }
 
+.add-info {
+    display: flex;
+    flex-direction: row;
+}
+
 .add-group {
     color: #0091d9;
     font-family: 'Proxima Nova SemiBold';
@@ -180,7 +185,7 @@
     color: #0091d9;
     font-family: 'Proxima Nova SemiBold';
     cursor: pointer;
-    width: 35%;
+    width: 100px;
     line-height: 28px;
 }
 

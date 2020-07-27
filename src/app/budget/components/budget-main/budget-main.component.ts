@@ -53,6 +53,12 @@ export class BudgetMainComponent implements OnInit {
     this.groups = this.groups.slice();
   }
 
+  deleteGroup(index:number ): void {
+    this.infoService.deleteGroup(index);
+    this.groups = this.infoService.getBudget();
+    this.calculateTotalBudget();
+  }
+
   deleteItem(info: any): void {
     this.oldGroupIndex = info.groupIndex;
     this.oldItemIndex = info.itemIndex;

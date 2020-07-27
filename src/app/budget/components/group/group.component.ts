@@ -12,18 +12,21 @@ export class GroupComponent implements OnInit {
   @Output() valueBubble: EventEmitter<any> = new EventEmitter<any>();
   @Output() deleteBubble: EventEmitter<any> = new EventEmitter<any>();
   @Output() addGroupItem: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteGroup: EventEmitter<any> = new EventEmitter<any>();
   items: any;
   addingItem:boolean;
   newBudgeted:number;
   newReceived:number;
   newName:string;
   color:string;
+  deletingGroup:boolean;
 
   constructor(private infoService: BudgetingInfoService) { 
     this.addingItem = false;
   }
 
   ngOnInit(): void {
+    this.deletingGroup = false;
     this.items = this.group.items;
     this.newBudgeted = 0.00;
     this.newReceived = 0.00;
@@ -56,9 +59,14 @@ export class GroupComponent implements OnInit {
   bubbleValue(event: any): void {
     this.valueBubble.emit(event);
   }
+
   
   bubbleDelete(event: any): void {
     this.deleteBubble.emit(event);
+  }
+
+  sendDeleteGroupInfo(): void {
+    this.deleteGroup.emit(this.groupIndex);
   }
 
   sendValueUp(): void {

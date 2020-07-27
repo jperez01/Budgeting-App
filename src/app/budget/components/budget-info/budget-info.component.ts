@@ -63,8 +63,8 @@ export class BudgetInfoComponent implements OnInit {
     this.graph_values = [];
     if (this.current_type.localeCompare('budgeted') === 0) {
       this.groups.forEach(group => {
-        this.whole_budgeted += group.total_budgeted;
-        this.whole_received += group.total_received;
+        this.whole_budgeted += Number(group.total_budgeted);
+        this.whole_received += Number(group.total_received);
         this.graph_labels.push(group.title);
         this.graph_values.push(group.total_budgeted);
       });
@@ -73,8 +73,8 @@ export class BudgetInfoComponent implements OnInit {
       this.getRandomColors(this.BUDGETED_COLOR_STARTER);
     } else if (this.current_type.localeCompare('received') === 0) {
       this.groups.forEach(group => {
-        this.whole_budgeted += group.total_budgeted;
-        this.whole_received += group.total_received;
+        this.whole_budgeted += Number(group.total_budgeted);
+        this.whole_received += Number(group.total_received);
         this.graph_labels.push(group.title);
         this.graph_values.push(group.total_received);
       });
@@ -83,8 +83,8 @@ export class BudgetInfoComponent implements OnInit {
       this.getRandomColors(this.USED_COLOR_STATER);
     } else {
       this.groups.forEach(group => {
-        this.whole_budgeted += group.total_budgeted;
-        this.whole_received += group.total_received;
+        this.whole_budgeted += Number(group.total_budgeted);
+        this.whole_received += Number(group.total_received);
         this.graph_labels.push(group.title);
         this.graph_values.push(group.total_budgeted - group.total_received);
       });
