@@ -198,6 +198,7 @@ export class TransactionsMainComponent implements OnInit {
   }
 
   collectDate(event: any): void {
+    console.log(event);
     this.newDate = event;
   }
 

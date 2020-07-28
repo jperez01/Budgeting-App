@@ -117,6 +117,13 @@ export class BudgetingInfoService {
     return this.budgetNames;
   }
 
+  getLoginInfo(): any {
+    return {
+      email: this.email,
+      username: this.username,
+      password: this.password
+    };
+  }
   getAccountNames() {
     return this.accountNames;
   }

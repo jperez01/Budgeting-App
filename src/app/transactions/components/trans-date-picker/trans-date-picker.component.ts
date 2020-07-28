@@ -20,8 +20,8 @@ export class TransDatePickerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.defaultDate = new Date(this.defaultDate);
     if (this.defaultDate !== null) {
+      this.defaultDate = new Date(this.defaultDate);
       this.currentDay = this.defaultDate.getDate();
       this.currentMonth = this.defaultDate.getMonth() + 1;
       this.currentYear = this.defaultDate.getFullYear();

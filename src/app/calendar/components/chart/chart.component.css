@@ -7,6 +7,27 @@
     position: relative;
 }
 
+.chart-info {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.chart-title {
+    color: #69757a;
+    font-family: 'Proxima Nova Light';
+    font-size: 19px;
+    margin: 0px;
+    text-align: center;
+}
+
+.chart-total {
+    font-family: 'Proxima Nova Medium';
+    font-size: 18px;
+    margin: 0px;
+}
+
 .chart-full {
     margin-right: 1vw;
     margin-top: 1vh;

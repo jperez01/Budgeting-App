@@ -15,6 +15,9 @@ export class ChartComponent implements OnInit {
   graph_labels:string[];
   outflow_values:number[];
   inflow_values:number[];
+  total_outflow:number;
+  total_inflow:number;
+  current_total:number;
   lookingAtInflow:boolean;
   constructor(private elementRef: ElementRef, private infoService: BudgetingInfoService) { }
 
@@ -29,6 +32,7 @@ export class ChartComponent implements OnInit {
     this.getRandomColorInflow();
     this.getRandomColorOutflow();
     this.createGraph(this.outflow_values, this.color_outflow);
+    this.current_total = this.total_outflow;
     this.infoService.filtered_transactions.subscribe(transactions => {
       this.allTransactions = transactions;
       this.graph_labels = [];
@@ -42,12 +46,16 @@ export class ChartComponent implements OnInit {
   }
 
   collectValuesAndNames(): void {
+    this.total_inflow = 0;
+    this.total_outflow = 0;
     this.allTransactions.forEach(transaction => {
+      this.total_inflow += Number(transaction.inflow);
+      this.total_outflow += Number(transaction.outflow);
       this.outflow_values.push(transaction.outflow);
       this.inflow_values.push(transaction.inflow);
       this.graph_labels.push(transaction.description);
-    })
-  }
+    });
+  };
 
   formatMoney(value: any): string {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
@@ -57,6 +65,7 @@ export class ChartComponent implements OnInit {
     if (this.lookingAtInflow === true) {
       this.createGraph(this.outflow_values, this.color_outflow);
       this.lookingAtInflow = false;
+      this.current_total = this.total_outflow;
     }
   }
 
@@ -64,6 +73,7 @@ export class ChartComponent implements OnInit {
     if (this.lookingAtInflow === false) {
       this.createGraph(this.inflow_values, this.color_inflow);
       this.lookingAtInflow = true;
+      this.current_total = this.total_inflow;
     }
   }
 

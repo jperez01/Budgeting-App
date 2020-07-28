@@ -79,6 +79,7 @@ export class CalendarComponent implements OnInit {
     let trans = [];
     let date = new Date(this.info.getYear(), this.info.getMonth(), num);
     let index = 0;
+    console.log(this.filtered_trans);
     this.filtered_trans.forEach(transaction => {
       if (date.getTime() === new Date(transaction.date).getTime()) {
         trans.push(transaction);

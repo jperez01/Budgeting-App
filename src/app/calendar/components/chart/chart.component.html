@@ -1,6 +1,10 @@
 <div [ngClass]="'chart-full'">
     <div [ngClass]="'chart'" [hidden]="currentTransaction !== null">
         <canvas id="GroupChart"></canvas>
+        <div [ngClass]="'chart-info'">
+            <h4 [ngClass]="'chart-title'">Total</h4>
+            <p [ngClass]="'chart-total'">{{formatMoney(current_total)}}</p>
+        </div>
     </div>
     <div [ngClass]="'chart-buttons'" *ngIf="currentTransaction === null">
         <button [ngClass]="'chart-outflow'" (click)="changeToOutflow()"> Outflow </button>

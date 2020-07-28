@@ -38,6 +38,13 @@
     margin: 0px 15px;
 }
 
+.trans-list {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    max-height: 64.5vh;
+}
+
 .transactions-list {
     background-color: white;
     box-shadow: 0 1px 3px 0 rgba(31,36,38,.1);

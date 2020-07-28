@@ -40,8 +40,10 @@
                 <button [ngClass]="'new-item-button'" (click)="addingTransaction = !addingTransaction"> Cancel </button>
             </div>
         </div>
-        <app-transaction-item *ngFor="let item of filtered_transactions; let i = index" [item]="item" [index]="i" [filtered]="filtered" (sendTransaction)="changeTransaction($event)" (deleteTransaction)="deleteTransaction($event)">
-        </app-transaction-item>
+        <div [ngClass]="'trans-list'">
+            <app-transaction-item *ngFor="let item of filtered_transactions; let i = index" [item]="item" [index]="i" [filtered]="filtered" (sendTransaction)="changeTransaction($event)" (deleteTransaction)="deleteTransaction($event)">
+            </app-transaction-item>
+        </div>
         <p (click)="addingTransaction = !addingTransaction" [ngClass]="'action-button'" [ngStyle]="{'padding-left': '24px'}"> Add Transaction </p>
     </div>
 </div>

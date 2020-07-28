@@ -26,7 +26,7 @@ export class CalendarDayComponent implements OnInit {
     let date = new Date(this.info.getYear(), this.info.getMonth(), num);
     let index = 0;
     this.filtered_trans.forEach(transaction => {
-      if (date.getTime() === transaction.date.getTime()) {
+      if (date.getTime() === new Date(transaction.date).getTime()) {
         trans.push(transaction);
       }
       index++;

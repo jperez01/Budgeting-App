@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BudgetingInfoService } from '../../state/budgeting-info.service';
 
 @Component({
   selector: 'app-settings',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings.component.css']
 })
 export class Settings implements OnInit {
-
-  constructor() { }
+  email:string;
+  username:string;
+  password:string;
+  constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
+    let info = this.infoService.getLoginInfo();
+    this.email = info.email;
+    this.username = info.username;
+    this.password = info.password;
   }
 
 }

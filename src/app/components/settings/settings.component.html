@@ -1,1 +1,19 @@
-<p>settings works!</p>
+<div [ngClass]="'gray-background'">
+    <h4 [ngClass]="'settings-title'">
+        Settings
+    </h4>
+    <div [ngClass]="'settings-box'">
+        <div [ngClass]="'settings-component'">
+            <h4 [ngClass]="'settings-label'"> Email: </h4>
+            <p [ngClass]="'settings-info'">{{email}}</p>
+        </div>
+        <div [ngClass]="'settings-component'">
+            <h4 [ngClass]="'settings-label'"> Username: </h4>
+            <p [ngClass]="'settings-info'">{{username}}</p>
+        </div>
+        <div [ngClass]="'settings-component'">
+            <h4 [ngClass]="'settings-label'"> Password: </h4>
+            <p [ngClass]="'settings-info'">{{password}}</p>
+        </div>
+    </div>
+</div>
