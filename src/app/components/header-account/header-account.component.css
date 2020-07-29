@@ -4,16 +4,83 @@
     text-decoration: none;
     color: black;
     line-height: 42px;
+    max-width: 120px;
+    overflow-x: hidden;
 }
 
 .balance {
     font-family: 'Proxima Nova Medium';
     margin: auto;
-    margin-right: 5px;
+    margin-right: 0px;
 }
 
 .account {
     display: flex;
     flex-direction: row;
     justify-items: center;
+}
+
+.account-trash {
+    line-height: 42px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.account-trash:hover {
+    color: #677484;
+}
+
+.account-input {
+    background-color: #0091d946;
+    padding: 10px 25px 0px 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-name {
+    font-family: 'Proxima Nova Medium';
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 16px;
+}
+
+.input-balance {
+    font-family: 'Proxima Nova Medium';
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.new-item-buttons {
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    margin: 0px 24px;
+    padding: 0px 10px 8px 0px;
+}
+
+.new-item-button {
+    font-family: 'Proxima Nova SemiBold';
+    font-size: 16px;
+    color: white;
+    background-color: rgb(0, 156, 194);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    padding: 0px 10px;
+    margin-left: 10px;
+}
+
+.new-item-button:hover {
+    background-color: rgb(1, 110, 138);
+}
+
+.adding-type {
+    outline: none;
+    font-family: 'Proxima Nova Medium';
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 5px;
 }

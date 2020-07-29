@@ -24,7 +24,7 @@
 
     <div [ngClass]="'links-group'">
         <h4 [ngClass]="'title'"> Accounts </h4>
-        <app-header-account *ngFor="let account of accounts" [account]="account"></app-header-account>
+        <app-header-account *ngFor="let account of accounts; let i = index" [account]="account" [index]="i"></app-header-account>
     </div>
     <p *ngIf="!addingAccount" (click)="addingAccount = !addingAccount" [ngClass]="'action-button'"> Add Account </p>
     <div *ngIf="addingAccount" [ngClass]="'adding-info'">

@@ -97,6 +97,22 @@ export class BudgetingInfoService {
     })
    }
 
+  changeLogin(info: any): void {
+    info.user_id = this.user_id;
+    this.fetchService.updateUser(info);
+    this.email = info.newEmail;
+    this.password = info.newPassword;
+    this.username = info.newUsername;
+  }
+
+  changeAccount(info: any): void {
+    let oldAccount = this.accounts[info.index];
+    info.acc_id = oldAccount.acc_id;
+    info.user_id = oldAccount.user_id;
+    this.accounts[info.index] = info;
+    this.fetchService.updateAccount(info);
+  }
+
   emitFilteredTrans(value: Transaction[]): void {
     this.filtered_transactions.next(value);
   }
@@ -123,6 +139,10 @@ export class BudgetingInfoService {
       username: this.username,
       password: this.password
     };
+  }
+
+  getUserId(): any {
+    return this.user_id;
   }
   getAccountNames() {
     return this.accountNames;
@@ -247,7 +267,8 @@ export class BudgetingInfoService {
       name: oldAccount.name,
       balance: Number(oldAccount.balance),
       type: oldAccount.type,
-      acc_id: oldAccount.acc_id
+      acc_id: oldAccount.acc_id,
+      user_id: oldAccount.user_id
     };
     newAccount.balance += difference;
     this.accounts[index] = newAccount;
@@ -268,7 +289,8 @@ export class BudgetingInfoService {
       name: oldAccount.name,
       balance: oldAccount.balance,
       type: oldAccount.type,
-      acc_id: oldAccount.acc_id
+      acc_id: oldAccount.acc_id,
+      user_id: oldAccount.user_id
     }
     newAccount.balance -= difference;
     this.accounts[index] = newAccount;

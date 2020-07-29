@@ -5,10 +5,11 @@
             <label [ngClass]="'login-label'">Username</label><br>
             <input (change)="collectUsername($event)" [ngClass]="'login-input'"><br>
             <label [ngClass]="'login-label'">Password</label><br>
-            <input (change)="collectPassword($event)" [ngClass]="'login-input'"><br>
+            <input type="password" (change)="collectPassword($event)" [ngClass]="'login-input'"><br>
         </form>
         <button (click)="login()"[ngClass]="'login-button'"> Login </button>
         <a [ngClass]="'login-link'" routerLink="/authentication/register" routerLinkActive="">
-        Register</a>
+        Register
+        </a>
     </div>
 </div>

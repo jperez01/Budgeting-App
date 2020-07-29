@@ -1,4 +1,19 @@
-<div [ngClass]="'account'">
+<div [ngClass]="'account'" *ngIf="!changingInfo">
+    <i class="fas fa-trash-alt" [ngClass]="'account-trash'"></i>
     <a [ngClass]="'name'" routerLink="/transactions/{{account.name}}" routerLinkActive=""> {{account.name}} </a>
-    <p [ngClass]="'balance'" [ngStyle]="{color: mycolor}"> {{balance}} </p>
+    <p [ngClass]="'balance'" [ngStyle]="{color: mycolor}" (click)="changingInfo = !changingInfo"> {{balance}} </p>
+</div>
+<div [ngClass]="'account-input'" *ngIf="changingInfo">
+    <input [ngClass]="'input-name'" value={{account.name}} (change)="collectName($event)">
+    <input [ngClass]="'input-balance'" [ngStyle]="{color: mycolor}" value={{account.balance}} (change)="collectBalance($event)">
+    <select [ngClass]="'adding-type'" (click)="collectType($event)">
+        <option>Choose One</option>
+        <option>Savings</option>
+        <option>Checking</option>
+        <option>Credit Card</option>
+    </select>
+    <div [ngClass]="'new-item-buttons'">
+        <button [ngClass]="'new-item-button'" (click)="changeAccount()"> Save </button>
+        <button [ngClass]="'new-item-button'" (click)="cancelChange()"> Cancel </button>
+    </div>
 </div>

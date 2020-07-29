@@ -5,12 +5,14 @@ export default class FetchMethods {
     items_string:string;
     trans_string:string;
     accounts_string:string;
+    user_string:string;
 
     constructor() {
         this.groups_string = 'http://localhost:5000/groups';
         this.items_string = 'http://localhost:5000/items';
         this.trans_string = 'http://localhost:5000/transactions';
         this.accounts_string = 'http://localhost:5000/accounts';
+        this.user_string = 'http://localhost:5000/login';
     }
 
     getGroups(user_id: number) {
@@ -170,6 +172,16 @@ export default class FetchMethods {
 
     updateAccount(info): void {
         fetch(`${this.accounts_string}/update`, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(info)
+        }).then(res => res.json())
+        .then(result => console.log(''));
+    }
+
+    updateUser(info): void {
+        console.log(info);
+        fetch(`${this.user_string}/update`, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(info)

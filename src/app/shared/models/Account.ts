@@ -3,4 +3,5 @@ export interface Account {
     balance:number;
     type:string;
     acc_id:number;
+    user_id:number;
 }

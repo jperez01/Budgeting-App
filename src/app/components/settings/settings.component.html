@@ -15,5 +15,26 @@
             <h4 [ngClass]="'settings-label'"> Password: </h4>
             <p [ngClass]="'settings-info'">{{password}}</p>
         </div>
+        <div [ngClass]="'settings-change'">
+            <h4 [ngClass]="'settings-change-title'">Change Email</h4>
+            <div [ngClass]="'settings-change-reaction'">
+                <input (change)="collectEmail($event)" [ngClass]="'settings-change-input'" placeholder="Email">
+                <button (click)="submitChange()" [ngClass]="'settings-change-button'"> Submit </button>
+            </div>
+        </div>
+        <div [ngClass]="'settings-change'">
+            <h4 [ngClass]="'settings-change-title'">Change Username</h4>
+            <div [ngClass]="'settings-change-reaction'">
+                <input (change)="collectUsername($event)" [ngClass]="'settings-change-input'" placeholder="Username">
+                <button (click)="submitChange()" [ngClass]="'settings-change-button'"> Submit </button>
+            </div>
+        </div>
+        <div [ngClass]="'settings-change'">
+            <h4 [ngClass]="'settings-change-title'">Change Password</h4>
+            <div [ngClass]="'settings-change-reaction'">
+                <input (change)="collectPassword($event)" [ngClass]="'settings-change-input'" placeholder="Password">
+                <button (click)="submitChange()" [ngClass]="'settings-change-button'"> Submit </button>
+            </div>
+        </div>
     </div>
 </div>
