@@ -10,23 +10,58 @@ export class HeaderAccountComponent implements OnInit {
   @Input() account;
   @Input() index;
   changingInfo:boolean;
+  deletingInfo:boolean;
   balance:string;
   mycolor:string;
   newName:string;
   newBalance:number;
   newType:string;
+  newAccountIndex:string;
+  accountNames:string[];
+  filtered_transactions:any[];
   constructor(private infoService: BudgetingInfoService) { }
 
   ngOnInit(): void {
     this.newName = null;
     this.newBalance = null;
+    this.newAccountIndex = null;
     this.changingInfo = false;
+    this.deletingInfo = false;
     if (this.account.balance < 0) {
       this.mycolor = 'red';
     } else {
       this.mycolor = 'green';
     }
     this.balance = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(this.account.balance);
+    this.accountNames = this.infoService.getAccountNames();
+    this.filtered_transactions = [];
+  }
+
+  setUpDelete(): void {
+    let transactions = this.infoService.getTransactions();
+    let index = 0;
+    transactions.forEach(transaction => {
+      if (transaction.account.localeCompare(this.account.name) === 0) {
+        this.filtered_transactions.push({
+          transaction: transaction,
+          index: index
+        });
+      }
+      index++;
+    });
+    this.deletingInfo = !this.deletingInfo;
+  }
+
+  deleteAccount(): void {
+    if (this.newAccountIndex !== null) {
+      this.filtered_transactions.forEach(info => {
+        let transaction = info.transaction;
+        let difference = transaction.inflow - transaction.outflow;
+        this.infoService.changeTransactionAccount(info.transaction, info.index, this.newAccountIndex);
+        this.infoService.changeAccountInfo(this.newAccountIndex, difference);
+      });
+      this.infoService.deleteAccount(this.index);
+    }
   }
 
   changeAccount(): void {
@@ -79,6 +114,14 @@ export class HeaderAccountComponent implements OnInit {
       this.newType = event.target.value;
     } else {
       this.newType = null;
+    }
+  }
+
+  collectAccount(event): void {
+    if (event.target.value.localeCompare('Choose One') !== 0) {
+      this.newAccountIndex = event.target.value;
+    } else {
+      this.newAccountIndex = null;
     }
   }
 }

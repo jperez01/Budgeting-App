@@ -179,6 +179,14 @@ export default class FetchMethods {
         .then(result => console.log(''));
     }
 
+    deleteAccount(acc_id): void {
+        fetch(`${this.accounts_string}/delete/${acc_id}`, {
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json'}
+        }).then(res => res.json())
+        .then(result => console.log(result));
+    }
+
     updateUser(info): void {
         console.log(info);
         fetch(`${this.user_string}/update`, {

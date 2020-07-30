@@ -20,27 +20,27 @@
             <p [ngClass]="'list-account'"> Outflow </p>
             <p [ngClass]="'list-account'"> Inflow </p>
         </div>
-        <div *ngIf="addingTransaction" [ngClass]="'new-item-full'">
-            <div [ngClass]="'new-item'">
-                <select (change)="collectAccount($event)" *ngIf="!filtered" [ngClass]="'new-item-dropdown'">
-                    <option *ngFor="let account of accountNames; let i = index" [value]="i + ' ' + account">{{account}}</option>
-                </select>
-                <app-trans-date-picker [ngClass]="'date-picker'" (datepicker)="collectDate($event)" [defaultDate]="null"></app-trans-date-picker>
-                <select [ngClass]="'new-category-dropdown'" (change)="collectCategory($event)">
-                    <optgroup *ngFor="let group of budgetNames;let i = index" label="{{group.title}}">
-                        <option *ngFor="let item of group.items; let in = index" label="{{item}}" [value]="in + ',' + i + ' '+ item">{{item}}</option>
-                    </optgroup>
-                </select>
-                <input [ngClass]="'item-description'" value='Description' (change)="collectDescription($event)">
-                <input [ngClass]="'item-input'" value='0.00' (change)="collectOutflow($event)">
-                <input [ngClass]="'item-input'" value='0.00' (change)="collectInflow($event)">
-            </div>
-            <div [ngClass]="'new-item-buttons'">
-                <button [ngClass]="'new-item-button'" (click)="addNewTransaction()"> Save </button>
-                <button [ngClass]="'new-item-button'" (click)="addingTransaction = !addingTransaction"> Cancel </button>
-            </div>
-        </div>
         <div [ngClass]="'trans-list'">
+            <div *ngIf="addingTransaction" [ngClass]="'new-item-full'">
+                <div [ngClass]="'new-item'">
+                    <select (change)="collectAccount($event)" *ngIf="!filtered" [ngClass]="'new-item-dropdown'">
+                        <option *ngFor="let account of accountNames; let i = index" [value]="i + ' ' + account">{{account}}</option>
+                    </select>
+                    <app-trans-date-picker [ngClass]="'date-picker'" (datepicker)="collectDate($event)" [defaultDate]="null"></app-trans-date-picker>
+                    <select [ngClass]="'new-category-dropdown'" (change)="collectCategory($event)">
+                        <optgroup *ngFor="let group of budgetNames;let i = index" label="{{group.title}}">
+                            <option *ngFor="let item of group.items; let in = index" label="{{item}}" [value]="in + ',' + i + ' '+ item">{{item}}</option>
+                        </optgroup>
+                    </select>
+                    <input [ngClass]="'item-description'" value='Description' (change)="collectDescription($event)">
+                    <input [ngClass]="'item-input'" value='0.00' (change)="collectOutflow($event)">
+                    <input [ngClass]="'item-input'" value='0.00' (change)="collectInflow($event)">
+                </div>
+                <div [ngClass]="'new-item-buttons'">
+                    <button [ngClass]="'new-item-button'" (click)="addNewTransaction()"> Save </button>
+                    <button [ngClass]="'new-item-button'" (click)="addingTransaction = !addingTransaction"> Cancel </button>
+                </div>
+            </div>
             <app-transaction-item *ngFor="let item of filtered_transactions; let i = index" [item]="item" [index]="i" [filtered]="filtered" (sendTransaction)="changeTransaction($event)" (deleteTransaction)="deleteTransaction($event)">
             </app-transaction-item>
         </div>

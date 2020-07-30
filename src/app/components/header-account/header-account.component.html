@@ -1,9 +1,9 @@
 <div [ngClass]="'account'" *ngIf="!changingInfo">
-    <i class="fas fa-trash-alt" [ngClass]="'account-trash'"></i>
+    <i class="fas fa-wrench" [ngClass]="'account-trash'" (click)="changingInfo = !changingInfo"></i>
     <a [ngClass]="'name'" routerLink="/transactions/{{account.name}}" routerLinkActive=""> {{account.name}} </a>
-    <p [ngClass]="'balance'" [ngStyle]="{color: mycolor}" (click)="changingInfo = !changingInfo"> {{balance}} </p>
+    <p [ngClass]="'balance'" [ngStyle]="{color: mycolor}"> {{balance}} </p>
 </div>
-<div [ngClass]="'account-input'" *ngIf="changingInfo">
+<div [ngClass]="'account-input'" *ngIf="changingInfo && !deletingInfo">
     <input [ngClass]="'input-name'" value={{account.name}} (change)="collectName($event)">
     <input [ngClass]="'input-balance'" [ngStyle]="{color: mycolor}" value={{account.balance}} (change)="collectBalance($event)">
     <select [ngClass]="'adding-type'" (click)="collectType($event)">
@@ -13,7 +13,19 @@
         <option>Credit Card</option>
     </select>
     <div [ngClass]="'new-item-buttons'">
+        <button [ngClass]="'new-item-button'" (click)="setUpDelete()"> Delete </button>
         <button [ngClass]="'new-item-button'" (click)="changeAccount()"> Save </button>
         <button [ngClass]="'new-item-button'" (click)="cancelChange()"> Cancel </button>
+    </div>
+</div>
+<div [ngClass]="'account-input'" *ngIf="deletingInfo">
+    <p [ngClass]="'deleting-phrase'"> Before deleting this account, you need to change the account of connected transactions. </p>
+    <select [ngClass]="'adding-type'" (click)="collectAccount($event)">
+        <option>Choose One</option>
+        <option *ngFor="let name of accountNames; let i = index" [value]="i">{{name}}</option>
+    </select>
+    <div [ngClass]="'new-item-buttons'">
+        <button [ngClass]="'new-item-button'" (click)="deleteAccount()"> Delete </button>
+        <button [ngClass]="'new-item-button'" (click)="deletingInfo = !deletingInfo"> Cancel </button>
     </div>
 </div>

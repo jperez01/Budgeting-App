@@ -5,6 +5,7 @@ import { Transaction } from '../shared/models/Transaction';
 import { Subject } from 'rxjs';
 import { initialInfo } from './initialInfo';
 import FetchMethods from './fetch-methods';
+import { TransactionOptionComponent } from '../transactions/components/transaction-option/transaction-option.component';
 
 @Injectable({
   providedIn: 'root'
@@ -228,6 +229,14 @@ export class BudgetingInfoService {
     }
   }
 
+  changeTransactionAccount(transaction, trans_index, account_index) {
+    let account = this.accounts[account_index];
+    transaction.account = account.name;
+    this.transactions[trans_index] = transaction;
+    transaction.user_id = this.user_id;
+    this.fetchService.updateTransaction(transaction);
+  }
+
   changeTransactionCategory(transaction, index, category) {
     transaction.category = category;
     this.transactions[index] = transaction;
@@ -259,6 +268,13 @@ export class BudgetingInfoService {
       this.accounts.push(newAccount);
       this.accountNames.push(newAccount.name);
     })
+  }
+
+  deleteAccount(index: number) {
+    let oldAccount = this.accounts[index];
+    this.accounts.splice(index, 1);
+    this.fetchService.deleteAccount(oldAccount.acc_id);
+    this.changeAccountNames();
   }
 
   changeAccountInfo(index, difference) {
