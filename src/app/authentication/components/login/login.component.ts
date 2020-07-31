@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
           console.log('Authentication failed');
         } else {
           this.infoService.setUpLoginInfo(info[0]);
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/welcome');
         }
       });
     }

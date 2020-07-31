@@ -16,6 +16,7 @@ import { HeaderAccountComponent } from './components/header-account/header-accou
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './reducers/index';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { InstructionsComponent } from './components/instructions/instructions.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     HeaderComponent,
     Settings,
     HeaderAccountComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    InstructionsComponent
   ],
   imports: [
     BrowserModule,

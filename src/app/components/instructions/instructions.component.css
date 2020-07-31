@@ -1,0 +1,37 @@
+.instructions-title {
+    font-family: 'Proxima Nova Bold';
+    font-size: 32px;
+    text-align: center;
+    margin: 20px 20px 0px 20px;
+    padding-bottom: 10px;
+    color: #495257;
+    border-bottom: 1px solid #b6bec2;
+}
+
+.instructions-box {
+    background-color: white;
+    box-shadow: 0 1px 3px 0 rgba(31,36,38,.1);
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    border-radius: .8rem;
+    padding: 20px;
+}
+
+.instructions-heading {
+    font-family: 'Proxima Nova Regular';
+    font-size: 16px;
+    margin: 10px 0px;
+}
+
+.instructions-phrase {
+    font-family: 'Proxima Nova SemiBold';
+    font-size: 18px;
+    margin: 10px 0px;
+}
+
+.instructions-list-item {
+    font-family: 'Proxima Nova Medium';
+    font-size: 18px;
+    margin: 4px 0px;
+}

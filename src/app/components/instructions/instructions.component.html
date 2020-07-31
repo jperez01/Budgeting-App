@@ -1,0 +1,46 @@
+<div [ngClass]="'gray-background'">
+    <h4 [ngClass]="'instructions-title'"> Instructions </h4>
+    <div [ngClass]="'instructions-box'">
+        <p [ngClass]="'instructions-phrase'">
+            Now that you've made an account, you can start to use the features of the app.
+            On your left are links to each of the various features of the app. Below are
+            brief descriptions for each link.
+        </p>
+        <ol>
+            <li [ngClass]="'instructions-list-item'">Dashboard - Shows a summary of other parts of the app for a quick overview</li>
+            <li [ngClass]="'instructions-list-item'">Budget - Lets you create groups and items inside them to organize where your money goes.</li>
+            <li [ngClass]="'instructions-list-item'">Transactions - Shows a list of transactions you can create that connect to your budget and accounts to show changes in the balance</li>
+            <li [ngClass]="'instructions-list-item'">Calendar - Shows a calendar for the current month along with its transactions and a graph to see how they compare to the total</li>
+            <li [ngClass]="'instructions-list-item'">Instructions - Shows you this area if you need a refresher on the instructions</li>
+            <li [ngClass]="'instructions-list-item'">Settings - Shows account info like email, username, and password and allows you to change them to other values</li>
+        </ol>
+
+        <p [ngClass]="'instructions-phrase'">To actually use the budgeting features effectively, I recommend to follow this guideline</p>
+        <ol>
+            <li [ngClass]="'instructions-list-item'">
+                Create accounts on the left hand side for all of your money sources.
+                You can then click the wrench icon to change any info whenever you want.
+            </li>
+            <li [ngClass]="'instructions-list-item'">
+                Create budgeting groups and items to organize your transactions.
+                When you create an item, you budget a certain amount of money in the budgeted column,
+                and all transactions go in the used column to show how much money is available.
+            </li>
+            <li [ngClass]="'instructions-list-item'">
+                Create a transaction by choosing various things like the account, budget item, date, and outflow/inflow
+                to have detailed information on all your expenses.
+            </li>
+            <li [ngClass]="'instructions-list-item'">
+                Look at the graphs in the calendar and budget page on the right hand side to see how
+                different transactions contribute to your overall total budget and how they compare to other
+                ones.
+            </li>
+            <li [ngClass]="'instructions-list-item'">
+                Delete or change any transactions and budget items you want by hovering over them and clicking
+                to show their input fields. Note, if you delete items and accounts linked to transactions, you will
+                have to change their respective fields to other values to not mess up your budget. Budget groups can only be
+                deleted once all of their items have been deleted.
+            </li>
+        </ol>
+    </div>
+</div>

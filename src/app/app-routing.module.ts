@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Settings } from './components/settings/settings.component';
 import { Routes, RouterModule } from '@angular/router';
+import { InstructionsComponent } from './components/instructions/instructions.component';
 
 const routes: Routes = [
   { path: 'settings', component: Settings },
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'authentication',
     loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
+  },
+  {
+    path: 'welcome',
+    component: InstructionsComponent
   },
   {
     path: '',
