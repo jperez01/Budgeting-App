@@ -10,11 +10,13 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   username:string;
   password:string;
+  failedAuth:boolean;
   constructor(private infoService: BudgetingInfoService, private router: Router) { }
 
   ngOnInit(): void {
     this.username = '';
     this.password = '';
+    this.failedAuth = false;
   }
 
   login(): void {
@@ -25,7 +27,7 @@ export class LoginComponent implements OnInit {
       }).then(res => res.json())
       .then(info => {
         if (info.length === 0) {
-          console.log('Authentication failed');
+          this.failedAuth = true;
         } else {
           this.infoService.setUpLoginInfo(info[0]);
           this.router.navigateByUrl('/welcome');

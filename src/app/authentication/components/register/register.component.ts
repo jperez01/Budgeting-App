@@ -11,12 +11,14 @@ export class RegisterComponent implements OnInit {
   username:string;
   password:string;
   email:string;
+  failedAuth:boolean;
   constructor(private infoService: BudgetingInfoService, private router: Router) { }
 
   ngOnInit(): void {
     this.username = '';
     this.password = '';
     this.email = '';
+    this.failedAuth = false;
   }
 
   register():void {
@@ -33,6 +35,8 @@ export class RegisterComponent implements OnInit {
       }).then(() => {
         this.router.navigateByUrl('/authentication/login');
       });
+    } else {
+      this.failedAuth = true;
     }
   }
 

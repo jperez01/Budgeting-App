@@ -1,6 +1,8 @@
 <div [ngClass]="'gray-bkgr'">
     <div [ngClass]="'login-form'">
-        <h4 [ngClass]="'login-title'">Register</h4>
+        <h4 *ngIf="!failedAuth" [ngClass]="'login-title'">Register</h4>
+        <h4 *ngIf="failedAuth" [ngClass]="'login-title-alt'">Register</h4>
+        <p *ngIf="failedAuth" [ngClass]="'login-error'"> One or more fields is missing </p>
         <form>
             <label [ngClass]="'login-label'">Email</label><br>
             <input (change)="collectEmail($event)" [ngClass]="'login-input'"><br>

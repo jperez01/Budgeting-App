@@ -84,7 +84,7 @@ export class ChartComponent implements OnInit {
     this.color_outflow = [];
     for (let i = 0; i < times; i++) {
       this.color_outflow.push(starter + (20 + changing_value) + '%)');
-      changing_value += 10;
+      changing_value += 5;
     }
   }
 
@@ -95,7 +95,7 @@ export class ChartComponent implements OnInit {
     this.color_inflow = [];
     for (let i = 0; i < times; i++) {
       this.color_inflow.push(starter + (10 + changing_value) + '%)');
-      changing_value += 10;
+      changing_value += 5;
     }
   }
 

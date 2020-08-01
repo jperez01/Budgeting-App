@@ -8,6 +8,16 @@
     margin-bottom: 30px;
 }
 
+.calendar-grid-alt {
+    display: grid;
+    grid-template-columns: repeat(7, 14.25%);
+    grid-template-rows: repeat(6, 15%);
+    max-width: 340px;
+    margin: 0px auto;
+    justify-items: center;
+    margin-bottom: 10px;
+}
+
 .calendar-header {
     display: grid;
     grid-template-columns: repeat(7, 14.25%);

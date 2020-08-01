@@ -18,6 +18,7 @@ export class CalendarComponent implements OnInit {
   blankfront;
   blankback;
   monthdays;
+  moreThan5rows:boolean;
 
   constructor() {
     this.blankspacesfront = 0;
@@ -43,9 +44,12 @@ export class CalendarComponent implements OnInit {
     this.blankspacesfront = Math.abs(first_occur - this.weekday) + 1;
     if (this.blankspacesfront + this.days_in_month > 35) {
       this.blankspacesback = 42 - (this.blankspacesfront + this.days_in_month);
+      this.moreThan5rows = true;
     } else {
       this.blankspacesback = 35 - (this.blankspacesfront + this.days_in_month);
+      this.moreThan5rows = false;
     }
+    console.log(this.moreThan5rows);
   }
 
   findDaysInMonth(): void {

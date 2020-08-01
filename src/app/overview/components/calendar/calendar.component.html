@@ -11,7 +11,20 @@
     <h4 [ngClass]="'calendar-weekday'"> Fri </h4>
     <h4 [ngClass]="'calendar-weekday'"> Sat </h4>
 </div>
-<div [ngClass]="'calendar-grid'">
+
+<div *ngIf="moreThan5Rows" [ngClass]="'calendar-grid-alt'">
+    <p *ngFor="let num of blankfront">{{' '}}</p>
+    <div *ngFor="let num of monthdays; let i = index">
+        <div *ngIf="has_transactions[i]" [ngClass]="'calendar-elem-with-trans'">
+            <p [ngClass]="'calendar-elem-number'"> {{num}} </p>
+            <p [ngClass]="'calendar-elem-dot'"> . </p>
+        </div>
+        <p [ngClass]="'calendar-elem'" *ngIf="!has_transactions[i]"> {{num}} </p>
+    </div>
+    <p *ngFor="let num of blankback">{{' '}}</p>
+</div>
+
+<div *ngIf="!moreThan5Rows" [ngClass]="'calendar-grid'">
     <p *ngFor="let num of blankfront">{{' '}}</p>
     <div *ngFor="let num of monthdays; let i = index">
         <div *ngIf="has_transactions[i]" [ngClass]="'calendar-elem-with-trans'">

@@ -1,6 +1,6 @@
 <p [ngClass]="'day'">
     {{day}}
 </p>
-<p [ngClass]="'day-transaction'" *ngFor="let transaction of usable_trans" (click)="sendTransactionUp(transaction)">
-    {{transaction.description}}
-</p >
+    <p [ngClass]="'day-transaction'" *ngFor="let transaction of usable_trans" (click)="sendTransactionUp(transaction)">
+        {{transaction.description}}
+    </p>

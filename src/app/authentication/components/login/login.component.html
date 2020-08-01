@@ -1,6 +1,8 @@
 <div [ngClass]="'gray-bkgr'">
     <div [ngClass]="'login-form'">
-        <h4 [ngClass]="'login-title'">Login</h4>
+        <h4 *ngIf="!failedAuth" [ngClass]="'login-title'">Login</h4>
+        <h4 *ngIf="failedAuth" [ngClass]="'login-title-change'">Login</h4>
+        <p *ngIf="failedAuth" [ngClass]="'login-error'"> Your username/password is incorrect </p>
         <form>
             <label [ngClass]="'login-label'">Username</label><br>
             <input (change)="collectUsername($event)" [ngClass]="'login-input'"><br>

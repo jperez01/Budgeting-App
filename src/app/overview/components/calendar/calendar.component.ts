@@ -18,6 +18,7 @@ export class CalendarComponent implements OnInit {
   days_in_month:number;
   filtered_trans:any[];
   has_transactions:boolean[];
+  moreThan5Rows:boolean;
   blankfront;
   blankback;
   monthdays;
@@ -49,8 +50,10 @@ export class CalendarComponent implements OnInit {
     }
     if (this.blankspacesfront + this.days_in_month > 35) {
       this.blankspacesback = 42 - (this.blankspacesfront + this.days_in_month);
+      this.moreThan5Rows = true;
     } else {
       this.blankspacesback = 35 - (this.blankspacesfront + this.days_in_month);
+      this.moreThan5Rows = false;
     }
   }
 
