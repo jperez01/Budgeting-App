@@ -3,14 +3,16 @@
         <h4 *ngIf="!failedAuth" [ngClass]="'login-title'">Register</h4>
         <h4 *ngIf="failedAuth" [ngClass]="'login-title-alt'">Register</h4>
         <p *ngIf="failedAuth" [ngClass]="'login-error'"> One or more fields is missing </p>
-        <form>
-            <label [ngClass]="'login-label'">Email</label><br>
-            <input (change)="collectEmail($event)" [ngClass]="'login-input'"><br>
-            <label [ngClass]="'login-label'">Username</label><br>
-            <input (change)="collectUsername($event)" [ngClass]="'login-input'"><br>
-            <label [ngClass]="'login-label'">Password</label><br>
-            <input (change)="collectPassword($event)" [ngClass]="'login-input'"><br>
-        </form>
+        <div (keyup.enter)="register()">
+            <form>
+                <label [ngClass]="'login-label'">Email</label><br>
+                <input (change)="collectEmail($event)" [ngClass]="'login-input'"><br>
+                <label [ngClass]="'login-label'">Username</label><br>
+                <input (change)="collectUsername($event)" [ngClass]="'login-input'"><br>
+                <label [ngClass]="'login-label'">Password</label><br>
+                <input (change)="collectPassword($event)" [ngClass]="'login-input'"><br>
+            </form>
+        </div>
         <button (click)="register()" [ngClass]="'login-button'"> Register </button>
         <a [ngClass]="'login-link'" routerLink="/authentication/login" routerLinkActive="">
             Login

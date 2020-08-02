@@ -25,14 +25,15 @@ export class BudgetMainComponent implements OnInit {
   oldItemIndex:number;
   newCategory:string;
   deletedCategory:string;
-  constructor(private infoService: BudgetingInfoService) { }
+  constructor(private infoService: BudgetingInfoService) {
+    this.info = new DateInfo();
+  }
 
   ngOnInit(): void {
     this.transactions = [];
     this.deletingItem = false;
     this.newName = undefined;
     this.addingGroup = false;
-    this.info = new DateInfo();
     this.current_month = this.info.getMonthAsString();
     this.current_year = this.info.getYear();
     this.sign = false;
@@ -44,7 +45,7 @@ export class BudgetMainComponent implements OnInit {
     this.budgetNames = this.infoService.getBudgetNames();
   }
 
-  updateBudgetInfo(info: any): void {
+  updateGroupAndItem(info: any): void {
     this.groups[info.groupIndex].items[info.itemIndex] = info.item;
     this.infoService.updateItem(info.item);
     this.updateGroupTotal(info.groupIndex);
@@ -53,7 +54,34 @@ export class BudgetMainComponent implements OnInit {
     this.groups = this.groups.slice();
   }
 
-  deleteGroup(index:number ): void {
+  addItem(info: any): void {
+    let newItem = {
+      name: info.name,
+      budgeted: Number(info.budgeted),
+      received: 0
+    };
+    this.infoService.addItemToGroup(info).then(() => {
+      this.groups = this.infoService.getBudget();
+      this.changeTotalBudget(newItem.budgeted);
+    });
+  }
+
+  addGroup(): void {
+    if (this.newName !== undefined) {
+      let newGroup = {
+        title: this.newName,
+        items: [],
+        total_budgeted: 0.00,
+        total_received: 0.00,
+        user_id: null
+      }
+      this.infoService.addGroup(newGroup);
+      this.newName = undefined;
+      this.addingGroup = false;
+    }
+  }
+
+  deleteGroup(index: number): void {
     this.infoService.deleteGroup(index);
     this.groups = this.infoService.getBudget();
     this.calculateTotalBudget();
@@ -100,6 +128,14 @@ export class BudgetMainComponent implements OnInit {
     this.groupIndex = null;
   }
 
+  collectGroupName(event: any): void {
+    if (event.target.value.localeCompare('') !== 0 && event.target.value.localeCompare('Default') !== 0) {
+      this.newName = event.target.value;
+    } else {
+      this.newName = undefined;
+    }
+  }
+
   collectCategory(event: any): void {
     if (event.target.value.localeCompare('default') === 0) {
       this.newCategory = null;
@@ -118,19 +154,6 @@ export class BudgetMainComponent implements OnInit {
     }
   }
 
-  addItem(info: any): void {
-    let newItem = {
-      name: info.name,
-      budgeted: Number(info.budgeted),
-      received: 0
-    };
-    this.infoService.addItemToGroup(info).then(() => {
-      this.groups = this.infoService.getBudget();
-      this.groups = this.groups.slice();
-      this.changeTotalBudget(newItem.budgeted);
-    });
-  }
-
   updateGroupTotal(index: number): void {
     let group = this.groups[index];
     let items = group.items;
@@ -145,30 +168,6 @@ export class BudgetMainComponent implements OnInit {
     this.infoService.updateGroup(group);
   }
 
-  collectGroupName(event: any): void {
-    if (event.target.value.localeCompare('') !== 0 && event.target.value.localeCompare('Default') !== 0) {
-      this.newName = event.target.value;
-    } else {
-      this.newName = undefined;
-    }
-  }
-
-  addGroup(): void {
-    if (this.newName !== undefined) {
-      let newGroup = {
-        title: this.newName,
-        items: [],
-        total_budgeted: 0.00,
-        total_received: 0.00,
-        user_id: null
-      }
-      this.infoService.addGroup(newGroup);
-      this.newName = undefined;
-      this.addingGroup = false;
-      this.infoService.setBudget(this.groups);
-    }
-  }
-
   changeTotalBudget(change: number): void {
     this.total_budget += change;
   }
@@ -176,7 +175,6 @@ export class BudgetMainComponent implements OnInit {
   calculateTotalBudget(): void {
     let budgeted_total = 0;
     let received_total = 0;
-    console.log(this.groups);
     this.groups.forEach(group => {
       budgeted_total += Number(group.total_budgeted);
       received_total += Number(group.total_received);

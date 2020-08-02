@@ -5,7 +5,6 @@ import { Transaction } from '../shared/models/Transaction';
 import { Subject } from 'rxjs';
 import { initialInfo } from './initialInfo';
 import FetchMethods from './fetch-methods';
-import { TransactionOptionComponent } from '../transactions/components/transaction-option/transaction-option.component';
 
 @Injectable({
   providedIn: 'root'
@@ -212,21 +211,18 @@ export class BudgetingInfoService {
     });
   }
 
-  setTransactions(newTransactions:any[], changedIndex: number, isNew: boolean) {
-    let changedTransaction:any = newTransactions[changedIndex];
+  addTransaction(transaction): void {
+    this.transactions.unshift(transaction);
+    transaction.user_id = this.user_id;
+    this.fetchService.createTransaction(transaction).then(result => {
+      this.transactions[0].trans_id = result[0].trans_id;
+    });
+  }
+
+  changeTransaction(changedTransaction, changedIndex:number): void {
     changedTransaction.user_id = this.user_id;
-    if (isNew) {
-      this.fetchService.createTransaction(changedTransaction).then(result => {
-        console.log(result);
-        newTransactions[changedIndex].trans_id = result[0].trans_id;
-        this.transactions = newTransactions;
-        console.log(this.transactions);
-        console.log(changedTransaction);
-      });
-    } else {
-      this.fetchService.updateTransaction(changedTransaction);
-      this.transactions = newTransactions;
-    }
+    this.fetchService.updateTransaction(changedTransaction);
+    this.transactions[changedIndex] = changedTransaction;
   }
 
   changeTransactionAccount(transaction, trans_index, account_index) {

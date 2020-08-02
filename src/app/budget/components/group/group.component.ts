@@ -9,8 +9,8 @@ import { BudgetingInfoService } from '../../../state/budgeting-info.service';
 export class GroupComponent implements OnInit {
   @Input() group;
   @Input() groupIndex;
-  @Output() valueBubble: EventEmitter<any> = new EventEmitter<any>();
-  @Output() deleteBubble: EventEmitter<any> = new EventEmitter<any>();
+  @Output() changeItemBubble: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteItemBubble: EventEmitter<any> = new EventEmitter<any>();
   @Output() addGroupItem: EventEmitter<any> = new EventEmitter<any>();
   @Output() deleteGroup: EventEmitter<any> = new EventEmitter<any>();
   items: any;
@@ -56,20 +56,20 @@ export class GroupComponent implements OnInit {
     this.newName = 'Default';
   }
 
-  bubbleValue(event: any): void {
-    this.valueBubble.emit(event);
+  bubbleChangeItem(event: any): void {
+    this.changeItemBubble.emit(event);
   }
 
   
-  bubbleDelete(event: any): void {
-    this.deleteBubble.emit(event);
+  bubbleDeleteItem(event: any): void {
+    this.deleteItemBubble.emit(event);
   }
 
   sendDeleteGroupInfo(): void {
     this.deleteGroup.emit(this.groupIndex);
   }
 
-  sendValueUp(): void {
+  sendChangedItemUp(): void {
     if (this.newBudgeted !== undefined && this.newReceived !== undefined && this.newName !== undefined) {
       let newInfo = {
         name: this.newName,

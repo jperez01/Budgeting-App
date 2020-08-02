@@ -5,7 +5,7 @@
         <p [ngClass]="'group-amount'">Used</p>
         <p [ngClass]="'group-amount'">Available</p>
     </div>
-    <app-group-item  (changedValue)="bubbleValue($event)" *ngFor="let item of items; let i = index" (deleteItem)="bubbleDelete($event)"
+    <app-group-item  (changeItem)="bubbleChangeItem($event)" *ngFor="let item of items; let i = index" (deleteItem)="bubbleDeleteItem($event)"
         [item]="item" [groupName]="group.title" [itemIndex]="i" [groupIndex]="groupIndex"></app-group-item>
     <div *ngIf="addingItem" [ngClass]="'item'" [ngStyle]="{'background-color': '#0091d946'}">
         <div [ngClass]="'item-row'">
@@ -14,12 +14,12 @@
             <p [ngClass]="'item-received'">0.00</p>
         </div>
         <div [ngClass]="'new-item-buttons'">
-            <button [ngClass]="'new-item-button'" (click)="sendValueUp()"> Save </button>
+            <button [ngClass]="'new-item-button'" (click)="sendChangedItemUp()"> Save </button>
             <button [ngClass]="'new-item-button'" (click)="cancelChanges()"> Cancel </button>
         </div>
     </div>
     <div [ngClass]="'group-info'">
-        <p *ngIf="addingItem" [ngClass]="'add-item'" (click)="sendValueUp()"> Save Item </p>
+        <p *ngIf="addingItem" [ngClass]="'add-item'" (click)="sendChangedItemUp()"> Save Item </p>
         <div *ngIf="deletingGroup" [ngClass]="'add-info'">
             <p [ngClass]="'delete-phrase'"> You sure? </p>
             <button [ngClass]="'delete-group-button'" (click)="sendDeleteGroupInfo()"> Delete </button>

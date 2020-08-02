@@ -148,16 +148,19 @@ export class TransactionsMainComponent implements OnInit {
   }
 
   changeTransaction(info: any): void {
-    this.transactions[info.index] = info.transaction;
-    this.infoService.setTransactions(this.transactions, info.index, false);
+    this.infoService.changeTransaction(info.transaction, info.index);
+    this.transactions = this.infoService.getTransactions();
     this.checkForChanges(info);
     this.filterTransactions();
     this.calculateTotalBalance();
   }
 
+  checkForValidInputValues(): boolean {
+    return this.newAccount !== undefined && this.newCategory !== undefined && this.newDate !== undefined
+    && this.newDescription !== undefined && this.newInflow !== undefined && this.newOutflow !== undefined;
+  }
   addNewTransaction(): void {
-    if (this.newAccount !== undefined && this.newCategory !== undefined && this.newDate !== undefined
-      && this.newDescription !== undefined && this.newInflow !== undefined && this.newOutflow !== undefined) {
+    if (this.checkForValidInputValues()) {
         let newTransaction = {
           account: this.newAccount,
           date: this.newDate,
@@ -168,8 +171,8 @@ export class TransactionsMainComponent implements OnInit {
         }
         let difference = newTransaction.inflow - newTransaction.outflow;
         this.checkforChangesNewTrans(difference);
-        this.transactions.unshift(newTransaction);
-        this.infoService.setTransactions(this.transactions, 0, true);
+        this.infoService.addTransaction(newTransaction);
+        this.transactions = this.infoService.getTransactions();
         this.addingTransaction = false;
         this.resetNewInfo();
         this.calculateTotalBalance();
@@ -190,15 +193,12 @@ export class TransactionsMainComponent implements OnInit {
       let account = str.substring(str.indexOf(' ') + 1);
       this.newAccount = account;
       this.accountIndex = str.substring(0, str.indexOf(' '));
-      console.log(this.newAccount);
-      console.log(this.accountIndex);
     } else {
       this.newAccount = undefined;
     }
   }
 
   collectDate(event: any): void {
-    console.log(event);
     this.newDate = event;
   }
 

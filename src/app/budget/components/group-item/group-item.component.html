@@ -1,8 +1,8 @@
 <div *ngIf="!changingValue"  [ngClass]="'item-background'" (click)="changeStyle()">
     <div [ngClass]="'group-item'">
         <input [ngClass]="'group-name'" value={{item.name}}>
-        <input (blur)="sendValue($event)" [ngClass]="'group-amount'" value={{formatMoney(item.budgeted)}}>
-        <input (blur)="sendValue($event)" [ngClass]="'group-amount'" value={{formatMoney(item.received)}}>
+        <input [ngClass]="'group-amount'" value={{formatMoney(item.budgeted)}}>
+        <input [ngClass]="'group-amount'" value={{formatMoney(item.received)}}>
         <p id="available" [ngClass]="'group-amount'" [ngStyle]="{'color': color}">{{formatMoney(available)}}</p>
     </div>
     <div [ngClass]="'border-line'"></div>
@@ -17,7 +17,7 @@
     <div [ngClass]="'new-item-buttons'">
         <div *ngIf="!deletingItem">
             <button [ngClass]="'new-item-button'" (click)="deletingItem = !deletingItem"> Delete </button>
-            <button [ngClass]="'new-item-button'" (click)="sendValue($event)"> Save </button>
+            <button [ngClass]="'new-item-button'" (click)="sendChangedItem()"> Save </button>
             <button [ngClass]="'new-item-button'" (click)="cancelChanges()"> Cancel </button>
         </div>
         <div *ngIf="deletingItem" [ngClass]="'delete-buttons'">

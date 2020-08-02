@@ -8,10 +8,10 @@ import { BudgetingInfoService } from '../../../state/budgeting-info.service';
 })
 export class GroupItemComponent implements OnInit {
   @Input() item:any;
-  @Input() groupName:any;
-  @Input() groupIndex:any;
-  @Input() itemIndex:any;
-  @Output() changedValue: EventEmitter<any> = new EventEmitter<any>();
+  @Input() groupName:string;
+  @Input() groupIndex:number;
+  @Input() itemIndex:number;
+  @Output() changeItem: EventEmitter<any> = new EventEmitter<any>();
   @Output() deleteItem: EventEmitter<any> = new EventEmitter<any>();
   changingValue:boolean;
   available:number;
@@ -25,10 +25,10 @@ export class GroupItemComponent implements OnInit {
   deletingItem:boolean;
 
   constructor(private infoService: BudgetingInfoService) {
-    this.changingValue = false;
   }
 
   ngOnInit(): void {
+    this.changingValue = false;
     this.deletingItem = false;
     this.budgeted = this.item.budgeted
     this.received = this.item.received;
@@ -37,7 +37,7 @@ export class GroupItemComponent implements OnInit {
     this.background = '#0091d946';
     this.oldItem = null;
     this.color = null;
-    this.checkAvailableStyle();
+    this.checkAvailableColor();
   }
 
   changeStyle(): void {
@@ -49,7 +49,7 @@ export class GroupItemComponent implements OnInit {
     }
   }
 
-  checkAvailableStyle(): void {
+  checkAvailableColor(): void {
     if (this.available > 0) {
       this.color = 'green';
     } else if (this.available < 0) {
@@ -73,7 +73,14 @@ export class GroupItemComponent implements OnInit {
     this.deleteItem.emit(deleteItem);
   }
   
-  sendValue(event: any): void {
+  cancelChanges(): void {
+    this.changingValue = false;
+    this.name = this.oldItem.name;
+    this.budgeted = this.oldItem.budgeted;
+    this.received = this.oldItem.received;
+  }
+  
+  sendChangedItem(): void {
     if (this.name.localeCompare(this.item.name) !== 0) {
       this.infoService.changeTransactionsWithName(this.item.name, this.name);
     }
@@ -88,7 +95,7 @@ export class GroupItemComponent implements OnInit {
       groupIndex: this.groupIndex,
       item: newItem
     };
-    this.changedValue.emit(info);
+    this.changeItem.emit(info);
     this.available = this.budgeted - this.received;
   }
 
@@ -102,12 +109,5 @@ export class GroupItemComponent implements OnInit {
     if (event.target.value.localeCompare('') !== 0) {
       this.budgeted = event.target.value;
     }
-  }
-
-  cancelChanges(): void {
-    this.changingValue = false;
-    this.name = this.oldItem.name;
-    this.budgeted = this.oldItem.budgeted;
-    this.received = this.oldItem.received;
   }
 }

@@ -15,6 +15,7 @@
             </div>
         </div>
     </div>
+
     <div [ngClass]="'budget-header'">
         <div [ngClass]="'budget-header-summary'">
             <p [ngClass]="'budget-month'"> {{current_month}}</p>
@@ -30,7 +31,7 @@
     </div>
     <div [ngClass]="'budget-info'">
         <div [ngClass]="'list'">
-            <app-group (addGroupItem)="addItem($event)" (valueBubble)="updateBudgetInfo($event)" (deleteBubble)="deleteItem($event)" (deleteGroup)="deleteGroup($event)"
+            <app-group (addGroupItem)="addItem($event)" (changeItemBubble)="updateGroupAndItem($event)" (deleteItemBubble)="deleteItem($event)" (deleteGroup)="deleteGroup($event)"
             *ngFor="let group of groups; let i = index" [group]="group" [ngClass]="'group'" [groupIndex]="i">
             </app-group>
             <div *ngIf="!addingGroup" [ngClass]="'group-box'">
