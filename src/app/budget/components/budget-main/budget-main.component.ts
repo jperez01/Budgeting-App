@@ -25,6 +25,7 @@ export class BudgetMainComponent implements OnInit {
   oldItemIndex:number;
   newCategory:string;
   deletedCategory:string;
+
   constructor(private infoService: BudgetingInfoService) {
     this.info = new DateInfo();
   }
@@ -43,15 +44,13 @@ export class BudgetMainComponent implements OnInit {
     this.itemIndex = null;
     this.groupIndex = null;
     this.budgetNames = this.infoService.getBudgetNames();
+    console.log(this.budgetNames);
   }
 
   updateGroupAndItem(info: any): void {
-    this.groups[info.groupIndex].items[info.itemIndex] = info.item;
-    this.infoService.updateItem(info.item);
-    this.updateGroupTotal(info.groupIndex);
+    this.infoService.updateItem(info.item, info.itemIndex, info.groupIndex);
+    this.groups = this.infoService.getBudget();
     this.calculateTotalBudget();
-    this.infoService.setBudget(this.groups);
-    this.groups = this.groups.slice();
   }
 
   addItem(info: any): void {
@@ -110,7 +109,7 @@ export class BudgetMainComponent implements OnInit {
       this.transactions.forEach(info => {
         this.infoService.changeTransactionCategory(info.transaction, info.id, this.newCategory);
         let difference = Number(info.transaction.inflow) - Number(info.transaction.outflow);
-        this.infoService.changeBudgetInfo(this.groupIndex, this.itemIndex, difference);
+        this.infoService.changeBudgetInfo(Number(this.groupIndex), this.itemIndex, difference);
       });
       this.infoService.deleteItemFromGroup(this.oldGroupIndex, this.oldItemIndex);
       this.groups = this.infoService.getBudget();
@@ -152,20 +151,6 @@ export class BudgetMainComponent implements OnInit {
         this.groupIndex = null;
       }
     }
-  }
-
-  updateGroupTotal(index: number): void {
-    let group = this.groups[index];
-    let items = group.items;
-    let newTotalBudget = 0;
-    let newTotalReceived = 0;
-    items.forEach(item => {
-      newTotalBudget += Number(item.budgeted);
-      newTotalReceived += Number(item.received);
-    });
-    group.total_budgeted = newTotalBudget;
-    group.total_received = newTotalReceived;
-    this.infoService.updateGroup(group);
   }
 
   changeTotalBudget(change: number): void {

@@ -57,8 +57,8 @@ export class HeaderAccountComponent implements OnInit {
       this.filtered_transactions.forEach(info => {
         let transaction = info.transaction;
         let difference = transaction.inflow - transaction.outflow;
-        this.infoService.changeTransactionAccount(info.transaction, info.index, this.newAccountIndex);
-        this.infoService.changeAccountInfo(this.newAccountIndex, difference);
+        this.infoService.changeTransactionAccount(info.transaction, info.index, Number(this.newAccountIndex));
+        this.infoService.changeAccountInfo(Number(this.newAccountIndex), difference);
       });
       this.infoService.deleteAccount(this.index);
     }

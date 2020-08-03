@@ -56,6 +56,15 @@ export class BudgetInfoComponent implements OnInit {
     this.createGraph();
   }
 
+  createPercentage(number, number2):string {
+    let num = 100 * Math.abs(number) / Math.abs(number2);
+    return num.toFixed(2) + '%';
+  }
+
+  formatCurrency(number):string {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(number);
+  }
+
   createInfo(): void {
     this.whole_budgeted = 0;
     this.whole_received = 0;
@@ -101,7 +110,7 @@ export class BudgetInfoComponent implements OnInit {
     this.graph_colors = [];
     for (let i = 0; i < times; i++) {
       this.graph_colors.push(starter + (20 + changing_value) + '%)');
-      changing_value += 10;
+      changing_value += 5;
     }
   }
 
@@ -165,14 +174,5 @@ export class BudgetInfoComponent implements OnInit {
       }
     }
     });
-  }
-
-  createPercentage(number, number2):string {
-    let num = 100 * Math.abs(number) / Math.abs(number2);
-    return num.toFixed(2) + '%';
-  }
-
-  formatCurrency(number):string {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(number);
   }
 }

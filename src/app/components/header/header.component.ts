@@ -20,9 +20,9 @@ export class HeaderComponent implements OnInit {
     this.newType = null;
     this.addingAccount = false;
     this.accounts = this.infoService.getAccounts();
-    setInterval(() => {
-      this.accounts = this.infoService.getAccounts();
-    }, 500);
+    this.infoService.emit_accounts.subscribe(accounts => {
+      this.accounts = accounts;
+    })
   }
 
   addNewAccount(): void {

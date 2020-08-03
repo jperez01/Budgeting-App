@@ -5,7 +5,8 @@
     color: black;
     line-height: 42px;
     max-width: 120px;
-    overflow-x: hidden;
+    overflow: hidden;
+    height: 42px;
 }
 
 .balance {
