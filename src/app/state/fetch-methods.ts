@@ -22,7 +22,6 @@ export default class FetchMethods {
         }).then(res => res.json())
         .then(info => {
             if (info.length !== 0) {
-                console.log(info);
                 return info;
             } else {
                 return [];
@@ -65,7 +64,6 @@ export default class FetchMethods {
         }).then(res => res.json())
         .then(info => {
             if (info.length !== 0) {
-                console.log(info);
                 return info;
             } else {
                 return [];
@@ -108,7 +106,6 @@ export default class FetchMethods {
         }).then(res => res.json())
         .then(info => {
             if (info.length !== 0) {
-                console.log(info);
                 return info;
             } else {
                 return [];
@@ -132,16 +129,14 @@ export default class FetchMethods {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(info)
-        }).then(res => res.json())
-        .then(result => console.log(''));
+        }).then(res => res.json());
     }
 
     deleteItem(item_id: number): void {
         fetch(`${this.items_string}/delete/${item_id}`, {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'}
-        }).then(res => res.json())
-        .then(result => console.log(result));
+        }).then(res => res.json());
     }
 
     getAccounts(user_id: number) {
@@ -151,7 +146,6 @@ export default class FetchMethods {
         }).then(res => res.json())
         .then(info => {
             if (info.length !== 0) {
-                console.log(info);
                 return info;
             } else {
                 return [];
@@ -175,20 +169,17 @@ export default class FetchMethods {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(info)
-        }).then(res => res.json())
-        .then(result => console.log(''));
+        }).then(res => res.json());
     }
 
     deleteAccount(acc_id): void {
         fetch(`${this.accounts_string}/delete/${acc_id}`, {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'}
-        }).then(res => res.json())
-        .then(result => console.log(result));
+        }).then(res => res.json());
     }
 
     updateUser(info): void {
-        console.log(info);
         fetch(`${this.user_string}/update`, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},

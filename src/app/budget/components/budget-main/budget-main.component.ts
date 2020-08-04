@@ -44,7 +44,6 @@ export class BudgetMainComponent implements OnInit {
     this.itemIndex = null;
     this.groupIndex = null;
     this.budgetNames = this.infoService.getBudgetNames();
-    console.log(this.budgetNames);
   }
 
   updateGroupAndItem(info: any): void {

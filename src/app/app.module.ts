@@ -13,8 +13,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { Settings } from './components/settings/settings.component';
 import { HeaderAccountComponent } from './components/header-account/header-account.component';
-import { StoreModule } from '@ngrx/store';
-import { reducer } from './reducers/index';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { InstructionsComponent } from './components/instructions/instructions.component';
 
@@ -36,10 +34,9 @@ import { InstructionsComponent } from './components/instructions/instructions.co
     ChartsModule,
     CalendarModule,
     OverviewModule,
-    TransactionsModule,
-    StoreModule.forRoot({info: reducer})
+    TransactionsModule
   ],
   providers: [BudgetingInfoService],
-  bootstrap: [AppComponent, BudgetingInfoService]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

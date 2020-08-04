@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
           this.failedAuth = true;
         } else {
           this.infoService.setUpLoginInfo(info[0]);
-          this.router.navigateByUrl('/welcome');
+          this.router.navigateByUrl('/instructions');
         }
       });
     }

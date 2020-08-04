@@ -104,7 +104,7 @@
     left: 0;
     margin-left: 260px;
     height: 100%;
-    width: fill;
+    width: stretch;
 }
 
 .white-box {

@@ -77,6 +77,16 @@ export default class dateInfo {
         }
     }
 
+    findDaysInCertainMonth(month:number): number {
+        if (month === 1) {
+            return 28;
+        } else if (month === 3 || month === 5 || month === 9 || month === 10) {
+            return 30;
+        } else {
+            return 31;
+        }
+    }
+
     getMonthAsString(): string {
         return this.all_months[this.current_month];
     }

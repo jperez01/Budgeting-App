@@ -30,7 +30,7 @@ export class OvExpensesComponent implements OnInit {
 
   findChartValues(): void {
     this.filtered_trans.forEach(transaction => {
-      this.chart_values[transaction.date.getDate() - this.start_of_week] += transaction.outflow;
+      this.chart_values[transaction.date.getDate() - this.start_of_week] += Number(transaction.outflow);
     })
   }
 

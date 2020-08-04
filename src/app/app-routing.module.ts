@@ -26,7 +26,7 @@ const routes: Routes = [
     loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
   },
   {
-    path: 'welcome',
+    path: 'instructions',
     component: InstructionsComponent
   },
   {

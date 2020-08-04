@@ -30,15 +30,22 @@ export class OvRevenueComponent implements OnInit {
 
   findChartValues(): void {
     this.filtered_trans.forEach(transaction => {
-      this.chart_values[transaction.date.getDate() - this.start_of_week] += transaction.inflow;
+      this.chart_values[transaction.date.getDate() - this.start_of_week] += Number(transaction.inflow);
     })
+  }
+
+  findStartAndEndDates(): any[] {
+    let min_date = new Date(this.info.getYear(), this.info.getMonth(), this.start_of_week);
+    let max_date = new Date(this.info.getYear(), this.info.getMonth(), this.start_of_week + 6);
+    return [min_date, max_date];
   }
 
   filterTransactions(): void {
     this.filtered_trans = [];
     let transactions = this.infoService.getTransactions();
-    let min_date = new Date(this.info.getYear(), this.info.getMonth(), this.start_of_week);
-    let max_date = new Date(this.info.getYear(), this.info.getMonth(), this.start_of_week + 6);
+    let dates = this.findStartAndEndDates();
+    let min_date = dates[0];
+    let max_date = dates[1];
     transactions.forEach(transaction => {
       if (this.info.inRange(transaction.date, min_date, max_date)) {
         this.filtered_trans.push(transaction);
