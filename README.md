@@ -16,7 +16,7 @@ Budgeting app where you can create an account and make groups and items to organ
 
 *Calendar Page*
 
-![Image of Profile](ttps://i.ibb.co/BfwQB1Q/rsz-budgeting3.jpg)
+![Image of Profile](https://i.ibb.co/BfwQB1Q/rsz-budgeting3.jpg)
 
 ## Technologies Used
 
