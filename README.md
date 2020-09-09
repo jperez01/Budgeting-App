@@ -1,27 +1,25 @@
-# Budgeting
+## Budgeting App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
+Full stack budgeting app like YNAB and Mint
 
-## Development server
+## Description
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Budgeting app where you can create an account and make groups and items to organize your expenses. You can also enter transactions that take money away from your accounts and then puts money into a used column to compare how much you budgeted versus how much you spent in total. You can also look at a calendar to show your expenses for each month. The data is automatically uploaded to a Postgres database connected through an Express server.
 
-## Code scaffolding
+*Main Posts Page*
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![Image of Home](https://i.ibb.co/MDfd8tM/rsz-budgeting1.jpg)
 
-## Build
+*Profile Page*
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+![Image of Profile](https://i.ibb.co/X560C5Y/rsz-1budgeting2.jpg)
 
-## Running unit tests
+## Technologies Used
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Angular
+- PostgreSQL
+- Nodejs
 
-## Running end-to-end tests
+## Demo Link
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+https://budgeting-app-project.herokuapp.com
